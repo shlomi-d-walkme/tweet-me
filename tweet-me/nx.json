@@ -33,6 +33,9 @@
     "api-interfaces": {
       "tags": []
     },
+    "follows": {
+      "tags": []
+    },
     "feed-materializer": {
       "tags": []
     },
