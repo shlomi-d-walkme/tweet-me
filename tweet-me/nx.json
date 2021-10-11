@@ -33,6 +33,9 @@
     "api-interfaces": {
       "tags": []
     },
+    "follows": {
+      "tags": []
+    },
     "tweet-me": {
       "tags": []
     },
