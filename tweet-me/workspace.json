@@ -109,9 +109,112 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
+
           "outputs": ["coverage/apps/follows"],
           "options": {
             "jestConfig": "apps/follows/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "feed-presentation": {
+      "root": "apps/feed-presentation",
+      "sourceRoot": "apps/feed-presentation/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/feed-presentation",
+            "main": "apps/feed-presentation/src/main.ts",
+            "tsConfig": "apps/feed-presentation/tsconfig.app.json",
+            "assets": ["apps/feed-presentation/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/feed-presentation/src/environments/environment.ts",
+                  "with": "apps/feed-presentation/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "feed-presentation:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/feed-presentation/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/feed-presentation"],
+          "options": {
+            "jestConfig": "apps/feed-presentation/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "feed-materializer": {
+      "root": "apps/feed-materializer",
+      "sourceRoot": "apps/feed-materializer/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/feed-materializer",
+            "main": "apps/feed-materializer/src/main.ts",
+            "tsConfig": "apps/feed-materializer/tsconfig.app.json",
+            "assets": ["apps/feed-materializer/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/feed-materializer/src/environments/environment.ts",
+                  "with": "apps/feed-materializer/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "feed-materializer:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/feed-materializer/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/feed-materializer"],
+          "options": {
+            "jestConfig": "apps/feed-materializer/jest.config.js",
             "passWithNoTests": true
           }
         }
