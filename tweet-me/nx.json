@@ -36,6 +36,9 @@
     "feed-materializer": {
       "tags": []
     },
+    "feed-presentation": {
+      "tags": []
+    },
     "tweet-me": {
       "tags": []
     },
