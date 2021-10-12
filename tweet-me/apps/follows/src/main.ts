@@ -14,18 +14,15 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
   .setTitle('follows API')
-  .setDescription('Following/followers information and actions')
+  .setDescription('Following/followers information and actions.')
   .setVersion('1.0')
-  .addTag('follows')
   .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  const globalPrefix = 'follows';
-  app.setGlobalPrefix(globalPrefix);
-  const port = process.env.PORT || 3333;
+  const port = process.env.PORT || 5555;
   await app.listen(port, () => {
-    Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);
+    Logger.log('Listening at http://localhost:' + port + '/');
   });
 }
 
