@@ -16,7 +16,6 @@ async function bootstrap() {
   .setTitle('follows API')
   .setDescription('Following/followers information and actions.')
   .setVersion('1.0')
-  .addTag('follows')
   .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
