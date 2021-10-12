@@ -2,13 +2,18 @@ import { Controller } from '@nestjs/common';
 import { Delete, Get, Post, Put, Param } from '@nestjs/common';
 import { ApiOkResponse } from '@nestjs/swagger';
 import { TweetsDto } from '../dto/tweets-dto';
+import { TweetsRepo } from '../repo/tweets.repo';
 
 @Controller('tweets')
 export class Tweets {
+
+    constructor(private repo: TweetsRepo){}
+
     @Get('/get/:profileId/')
     @ApiOkResponse({ status: 200, type: [TweetsDto], description: 'Returns tweets by user ids'})
     getTweets(@Param('profileId') profileId: string): TweetsDto[] {
         console.log("getTweets", profileId);
+        this.repo.getTweets(profileId);
         return [new TweetsDto()];
     }
 

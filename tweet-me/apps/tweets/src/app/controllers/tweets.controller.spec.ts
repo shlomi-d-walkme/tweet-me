@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Tweets } from './tweets.controller';
 
-describe('Tweets.Controller.TsController', () => {
+describe('Tweets Controller', () => {
   let controller: Tweets;
 
   beforeEach(async () => {
@@ -13,6 +13,8 @@ describe('Tweets.Controller.TsController', () => {
   });
 
   it('should be defined', () => {
+    console.log("start test");
+    controller.addTweet("1","My Tweet");
     expect(controller).toBeDefined();
   });
 });
