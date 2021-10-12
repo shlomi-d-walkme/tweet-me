@@ -66,19 +66,19 @@
         }
       }
     },
-    "follows": {
-      "root": "apps/follows",
-      "sourceRoot": "apps/follows/src",
+    "feed-materializer": {
+      "root": "apps/feed-materializer",
+      "sourceRoot": "apps/feed-materializer/src",
       "projectType": "application",
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/apps/follows",
-            "main": "apps/follows/src/main.ts",
-            "tsConfig": "apps/follows/tsconfig.app.json",
-            "assets": ["apps/follows/src/assets"]
+            "outputPath": "dist/apps/feed-materializer",
+            "main": "apps/feed-materializer/src/main.ts",
+            "tsConfig": "apps/feed-materializer/tsconfig.app.json",
+            "assets": ["apps/feed-materializer/src/assets"]
           },
           "configurations": {
             "production": {
@@ -87,8 +87,8 @@
               "inspect": false,
               "fileReplacements": [
                 {
-                  "replace": "apps/follows/src/environments/environment.ts",
-                  "with": "apps/follows/src/environments/environment.prod.ts"
+                  "replace": "apps/feed-materializer/src/environments/environment.ts",
+                  "with": "apps/feed-materializer/src/environments/environment.prod.ts"
                 }
               ]
             }
@@ -97,22 +97,21 @@
         "serve": {
           "executor": "@nrwl/node:execute",
           "options": {
-            "buildTarget": "follows:build"
+            "buildTarget": "feed-materializer:build"
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["apps/follows/**/*.ts"]
+            "lintFilePatterns": ["apps/feed-materializer/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-
-          "outputs": ["coverage/apps/follows"],
+          "outputs": ["coverage/apps/feed-materializer"],
           "options": {
-            "jestConfig": "apps/follows/jest.config.js",
+            "jestConfig": "apps/feed-materializer/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -169,19 +168,19 @@
         }
       }
     },
-    "feed-materializer": {
-      "root": "apps/feed-materializer",
-      "sourceRoot": "apps/feed-materializer/src",
+    "follows": {
+      "root": "apps/follows",
+      "sourceRoot": "apps/follows/src",
       "projectType": "application",
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/apps/feed-materializer",
-            "main": "apps/feed-materializer/src/main.ts",
-            "tsConfig": "apps/feed-materializer/tsconfig.app.json",
-            "assets": ["apps/feed-materializer/src/assets"]
+            "outputPath": "dist/apps/follows",
+            "main": "apps/follows/src/main.ts",
+            "tsConfig": "apps/follows/tsconfig.app.json",
+            "assets": ["apps/follows/src/assets"]
           },
           "configurations": {
             "production": {
@@ -190,8 +189,8 @@
               "inspect": false,
               "fileReplacements": [
                 {
-                  "replace": "apps/feed-materializer/src/environments/environment.ts",
-                  "with": "apps/feed-materializer/src/environments/environment.prod.ts"
+                  "replace": "apps/follows/src/environments/environment.ts",
+                  "with": "apps/follows/src/environments/environment.prod.ts"
                 }
               ]
             }
@@ -200,21 +199,21 @@
         "serve": {
           "executor": "@nrwl/node:execute",
           "options": {
-            "buildTarget": "feed-materializer:build"
+            "buildTarget": "follows:build"
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["apps/feed-materializer/**/*.ts"]
+            "lintFilePatterns": ["apps/follows/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/feed-materializer"],
+          "outputs": ["coverage/apps/follows"],
           "options": {
-            "jestConfig": "apps/feed-materializer/jest.config.js",
+            "jestConfig": "apps/follows/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -322,6 +321,57 @@
           "outputs": ["{options.outputFile}"],
           "options": {
             "lintFilePatterns": ["apps/tweet-me-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "tweets": {
+      "root": "apps/tweets",
+      "sourceRoot": "apps/tweets/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/tweets",
+            "main": "apps/tweets/src/main.ts",
+            "tsConfig": "apps/tweets/tsconfig.app.json",
+            "assets": ["apps/tweets/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/tweets/src/environments/environment.ts",
+                  "with": "apps/tweets/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "tweets:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/tweets/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/tweets"],
+          "options": {
+            "jestConfig": "apps/tweets/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }
