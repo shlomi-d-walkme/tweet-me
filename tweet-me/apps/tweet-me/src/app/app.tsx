@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Message } from '@tweet-me/api-interfaces';
+import {FeedComponent} from './feedComponent/feed.component';
 
 export const App = () => {
   const [m, setMessage] = useState<Message>({ message: '' });
@@ -20,6 +21,7 @@ export const App = () => {
           alt="TweetMe logo"
         />
       </div>
+      <FeedComponent></FeedComponent>
       <div>{m.message}</div>
     </>
   );
