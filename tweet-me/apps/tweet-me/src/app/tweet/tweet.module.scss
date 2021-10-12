@@ -1,0 +1,35 @@
+.tweetLayout {
+    font-family: Arial, sans-serif;
+   // border: solid;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    border-color: lightblue;
+    width: inherit;
+}
+
+.profileName{
+    font-weight: 500;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.time {
+    margin-left: 10px;
+    color: gray;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.text{
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.commentButton{
+    background: url(http://localhost:4200/assets/comment.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    min-width: 7px;
+    padding: 0 0 0 28px !important;
+}

@@ -1,8 +1,66 @@
 import { Injectable } from '@nestjs/common';
+import { Profile } from './entities/profile.entity';
+import uniqid from 'uniqid';
+import { ProfileDto } from './dto/profile.dts';
 
 @Injectable()
 export class AppService {
-  getData(): { message: string } {
-    return { message: 'Welcome to profile!' };
+
+  map:{[id:string]: Profile} = {};
+
+
+  register(profileDto: ProfileDto): { message: string } {
+    this.map[uniqid()] = Profile.convertToEntity(profileDto);
+    return { message: 'register!' };
+  }
+
+  getProfile(id: string): Profile {
+    return null;
+  }
+
+  getProfiles(): Profile[] {
+    return null;
+  }
+
+  getArt(){
+    return 
+    `                       _..gggggppppp.._                       
+                  _.gd$$$$$$$$$$$$$$$$$$bp._                  
+               .g$$$$$$P^^""j$$b""""^^T$$$$$$p.               
+            .g$$$P^T$$b    d$P T;       ""^^T$$$p.            
+          .d$$P^"  :$; \`  :$;                "^T$$b.          
+        .d$$P'      T$b.   T$b                  \`T$$b.        
+       d$$P'      .gg$$$$bpd$$$p.d$bpp.           \`T$$b       
+      d$$P      .d$$$$$$$$$$$$$$$$$$$$bp.           T$$b      
+     d$$P      d$$$$$$$$$$$$$$$$$$$$$$$$$b.          T$$b     
+    d$$P      d$$$$$$$$$$$$$$$$$$P^^T$$$$P            T$$b    
+   d$$P    '-'T$$$$$$$$$$$$$$$$$$bggpd$$$$b.           T$$b   
+  :$$$      .d$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$p._.g.     $$$;  
+  $$$;     d$$$$$$$$$$$$$$$$$$$$$$$P^"^T$$$$P^^T$$$;    :$$$  
+ :$$$     :$$$$$$$$$$$$$$:$$$$$$$$$_    "^T$bpd$$$$,     $$$; 
+ $$$;     :$$$$$$$$$$$$$$bT$$$$$P^^T$p.    \`T$$$$$$;     :$$$ 
+:$$$      :$$$$$$$$$$$$$$P \`^^^'    "^T$p.    lb\`TP       $$$;
+:$$$      $$$$$$$$$$$$$$$              \`T$$p._;$b         $$$;
+$$$;      $$$$$$$$$$$$$$;                \`T$$$$:Tb        :$$$
+$$$;      $$$$$$$$$$$$$$$                        Tb    _  :$$$
+:$$$     d$$$$$$$$$$$$$$$.                        $b.__Tb $$$;
+:$$$  .g$$$$$$$$$$$$$$$$$$$p...______...gp._      :$\`^^^' $$$;
+ $$$;  \`^^'T$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$p.    Tb._, :$$$ 
+ :$$$       T$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$b.   "^"  $$$; 
+  $$$;       \`$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$b      :$$$  
+  :$$$        $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$;     $$$;  
+   T$$b    _  :$$\`$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$;   d$$P   
+    T$$b   T$g$$; :$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  d$$P    
+     T$$b   \`^^'  :$$ "^T$$$$$$$$$$$$$$$$$$$$$$$$$$$ d$$P     
+      T$$b        $P     T$$$$$$$$$$$$$$$$$$$$$$$$$;d$$P      
+       T$$b.      '       $$$$$$$$$$$$$$$$$$$$$$$$$$$$P       
+        \\\`T$$$p.   bug    d$$$$$$$$$$$$$$$$$$$$$$$$$$P'        
+          \\\`T$$$$p..__..g$$$$$$$$$$$$$$$$$$$$$$$$$$P'          
+            "^$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$^"            
+               "^T$$$$$$$$$$$$$$$$$$$$$$$$$$P^"               
+                   """^^^T$$$$$$$$$$P^^^"""\`
+
+
+    `;
   }
 }
