@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import TweetComponent from './tweet.component';
+import Tweet from './tweet.component';
 
-describe('TweetComponent', () => {
+describe('Tweet', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<TweetComponent />);
+    const { baseElement } = render(<Tweet/>);
     expect(baseElement).toBeTruthy();
   });
 });

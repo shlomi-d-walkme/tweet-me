@@ -11,10 +11,13 @@
   },
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/swagger": "^5.1.0",
+    "ansi-html-community": "^0.0.8",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "core-js": "^3.6.5",
