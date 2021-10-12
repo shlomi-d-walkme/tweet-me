@@ -1,35 +1,49 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
-import { FollowProfileDto } from '../dto/follow-profile-dto';
 import { FollowersDto } from '../dto/followers-dto';
 import { FollowingDto } from '../dto/following-dto';
+import { FollowsRepo } from '../repo/follows.repo';
 
-@Controller('api')
+@Controller('api/profile')
 export class FollowsController {
 
-    @Get('followers-by-user/:profileId')
+    constructor(private repo: FollowsRepo){}
+
+    @Get('/:profileId/followers')
     @ApiResponse({ status: 200, type: FollowersDto, description: 'Returns followers by user ids' })
-    getFollowersByUser(@Param('profileId') profileId: number): FollowersDto {
-        const followers: FollowersDto = new FollowersDto();
-        return followers;
+    getFollowersByUser(@Param('profileId') profileId: string): FollowersDto {
+        console.log(`getFollowersByUser-profileId:${profileId}`);
+        const followers = this.repo.getFollowers(profileId);
+        const followersResult = new FollowersDto();
+        followersResult.followers = [...followers];
+        console.log(`getFollowersByUser-profileId:${profileId}-returns:${JSON.stringify(followersResult)}`);
+        return followersResult;
     }
 
-    @Get('following-by-user/:profileId')
+    @Get('/:profileId/following')
     @ApiResponse({ status: 200, type: FollowingDto, description: 'Returns following by user ids' })
-    getFollowingByUser(@Param('profileId') profileId: number): FollowingDto {
-        const following: FollowingDto = new FollowingDto();
-        return following;
+    getFollowingByUser(@Param('profileId') profileId: string): FollowingDto {
+        console.log(`getFollowingByUser-profileId:${profileId}`);
+        const following = this.repo.getFollowing(profileId);
+        const followingResult = new FollowingDto();
+        followingResult.following = [...following];
+        console.log(`getFollowersByUser-profileId:${profileId}-returns:${JSON.stringify(followingResult)}`);
+        return followingResult;
     }
 
-    @Post('follow')
+    @Post('/:profileId/follow')
     @ApiResponse({ status: 201, type: Boolean, description: 'Adds a follower' })
-    follow(@Body() followProfileDto: FollowProfileDto): boolean{
+    follow(@Param('profileId') profileId: string): boolean {
+        console.log(`follow-profileId:${profileId}`);
+        this.repo.addFollow(profileId, profileId); //TODO: get the user profile id
         return true;
     }
 
-    @Delete('unfollow')
+    @Delete('/:profileId/follow')
     @ApiResponse({ status: 204, type: Boolean, description: 'Remove a follower' })
-    unfollow(@Body() followProfileDto: FollowProfileDto) : boolean{
+    unfollow(@Param('profileId') profileId: string) : boolean {
+        console.log(`unfollow-profileId:${profileId}`);
+        this.repo.removeFollow(profileId, profileId); //TODO: get the user profile id
         return true;
     }
 }
