@@ -51,6 +51,9 @@
     "tweet-me-e2e": {
       "tags": [],
       "implicitDependencies": ["tweet-me"]
+    },
+    "tweets": {
+      "tags": []
     }
   }
 }
