@@ -1,14 +1,18 @@
 import { Controller } from '@nestjs/common';
 import { Body, Delete, Get, Post } from '@nestjs/common';
+import { ApiOkResponse } from '@nestjs/swagger';
+import { TweetsDto } from '../dto/tweets-dto';
 
 @Controller('tweets')
 export class Tweets {
     @Get()
-    getTweets() {
-        return '123';
+    @ApiOkResponse({type: [TweetsDto]})
+    getTweets(): TweetsDto[] {
+        return [new TweetsDto()];
     }
 
     @Post()
+    @ApiOkResponse({type: TweetsDto})
     addTweet() {
         return undefined;
     }
