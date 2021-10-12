@@ -13,11 +13,11 @@ export const App = () => {
   return (
     <>
       <div style={{ textAlign: 'center' }}>
-        <h1>Welcome to tweet-me!</h1>
+        <h1>Welcome to TweetMe!</h1>
         <img
           width="450"
-          src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
-          alt="Nx - Smart, Extensible Build Framework"
+          src="assets/logo.jpeg"
+          alt="TweetMe logo"
         />
       </div>
       <div>{m.message}</div>
