@@ -375,6 +375,57 @@
           }
         }
       }
+    },
+    "tweets": {
+      "root": "apps/tweets",
+      "sourceRoot": "apps/tweets/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/tweets",
+            "main": "apps/tweets/src/main.ts",
+            "tsConfig": "apps/tweets/tsconfig.app.json",
+            "assets": ["apps/tweets/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/tweets/src/environments/environment.ts",
+                  "with": "apps/tweets/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "tweets:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/tweets/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/tweets"],
+          "options": {
+            "jestConfig": "apps/tweets/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
