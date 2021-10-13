@@ -6,7 +6,7 @@ export interface FollowButtonProps {}
 export function FollowButton(props: FollowButtonProps) {
   return (
     <div>
-      <h1>Welcome to FollowButton!</h1>
+      <button>Follow</button>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import styles from './tweet.module.scss';
 import { Card, Button, Typography, CardActions, CardContent } from '@material-ui/core';
+import FollowButton from '../components/follow-button/follow-button';
 
 
 /* eslint-disable-next-line */
@@ -10,6 +11,7 @@ export function Tweet({profileName, text, comments, time}: TweetProps) {
     <Card variant="outlined" className={styles.tweetLayout}>
       <>
       <CardContent>
+      <FollowButton></FollowButton>
       <div><span className={styles.profileName}>{profileName}</span>-<span className={styles.time}>{time}</span></div>
       <Typography className={styles.text}>{text}</Typography>
       </CardContent>
