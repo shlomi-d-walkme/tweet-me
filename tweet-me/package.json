@@ -7,7 +7,8 @@
     "build": "nx build",
     "test": "nx test",
     "start:follows": "nx run follows:serve",
-    "openapi:feed-presentastion": "openapi-generator-cli generate -g typescript-fetch -i http://localhost:3333/api-json -o bla"
+    "openapi:feed-presentastion": "openapi-generator-cli generate -g typescript-fetch -i http://localhost:3333/api-json -o bla",
+    "openapi:follows": "openapi-generator-cli generate -g typescript-fetch -i http://localhost:5555/api-json -o follows"
   },
   "private": true,
   "dependencies": {
