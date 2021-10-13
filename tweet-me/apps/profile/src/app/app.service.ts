@@ -8,10 +8,10 @@ export class AppService {
 
   map:Profile[] = [];
 
-  register(profileDto: ProfileDto): { message: string } {
+  register(profileDto: ProfileDto): { id: string } {
     const id = uniqid();
     this.map.push(Profile.convertToEntity(id, profileDto));
-    return { message: 'register!' };
+    return { id };
   }
 
   getProfile(id: string): Profile {
