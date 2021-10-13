@@ -4,8 +4,9 @@ import { ProfileDto } from '../dto/profile.dts';
 
 export class Profile {
 
-    static convertToEntity(profileDto: ProfileDto){
+    static convertToEntity(id: string, profileDto: ProfileDto){
         const profile = new Profile();
+        profile.id = id;
         profile.creationDate=new Date().toUTCString();
         profile.email=profileDto.email;
         profile.firstName=profileDto.firstName;
@@ -14,6 +15,12 @@ export class Profile {
         profile.userName=profileDto.userName;
         return profile;
     }
+
+    @ApiProperty({
+      example: 'id',
+      description: 'user id',
+    })
+    id: string;
 
     @ApiProperty({
         example: 'userName',
