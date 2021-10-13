@@ -13,9 +13,9 @@ export class AppController {
   @ApiOperation({ summary: 'register a new twitter profile.', operationId: 'register' })
   @ApiResponse({ status: 201, description: 'profile created succsesfully.' })
   @HttpCode(201)
-  register(@Body() profileDto: ProfileDto) {
-     this.appService.register(profileDto);
-     return 'ok';
+  register(@Body() profileDto: ProfileDto) : { id: string } {
+     const prof = this.appService.register(profileDto);
+     return prof;
   }
 
   @Get('profiles')
