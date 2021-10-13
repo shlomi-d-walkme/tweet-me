@@ -9,7 +9,7 @@ interface followsRepo {
 
 @Injectable()
 export class FollowsRepo {
-    followsRepo: followsRepo = {};
+    private followsRepo: followsRepo = {};
 
     public addFollow(userProfileId: string, profileId: string): boolean {
         this.initFollowIfNeeded(profileId);
