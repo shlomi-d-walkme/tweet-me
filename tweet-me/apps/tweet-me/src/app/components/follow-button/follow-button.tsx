@@ -1,4 +1,4 @@
-import './follow-button.module.scss';
+import css from './follow-button.module.scss';
 
 /* eslint-disable-next-line */
 export interface FollowButtonProps {}
@@ -6,7 +6,7 @@ export interface FollowButtonProps {}
 export function FollowButton(props: FollowButtonProps) {
   return (
     <div>
-      <button>Follow</button>
+      <button className={css.followButton}>Follow</button>
     </div>
   );
 }
