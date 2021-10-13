@@ -20,22 +20,15 @@ export class FollowsRepo {
     }
 
     public removeFollow(userProfileId: string, profileId: string): void {
-        this.initFollowIfNeeded(profileId);
-        this.initFollowIfNeeded(userProfileId);
-
         this.followsRepo[profileId].followers.delete(profileId);
         this.followsRepo[userProfileId].following.delete(profileId);
     }
 
     public getFollowing(userProfileId: string): Set<string> {
-        this.initFollowIfNeeded(userProfileId);
-
         return this.followsRepo[userProfileId].followers;
     }
 
     public getFollowers(userProfileId: string): Set<string> {
-        this.initFollowIfNeeded(userProfileId);
-
         return this.followsRepo[userProfileId].followers;
     }
 
