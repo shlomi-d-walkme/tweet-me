@@ -19,11 +19,15 @@ describe('AppController', () => {
     it('a new profile is creatrd', () => {
       const appController = app.get<AppController>(AppController);
       const profileDts= new ProfileDto('test@email.com','bob','smith','pass','bob');
-
-      appController.register(profileDts);
-
+      let {id } = appController.register(profileDts);
       expect(appController.getProfiles().length).toEqual(1);
-      expect(appController.getProfile("")).toEqual(Profile.convertToEntity(profileDts));
+      const profile=appController.getProfile(id);
+      expect(profile.email).toEqual('test@email.com');
+      expect(profile.firstName).toEqual('bob');
+      expect(profile.id).toEqual(id);
+      expect(profile.lastName).toEqual('smith');
+      expect(profile.passward).toEqual('pass');
+      expect(profile.userName).toEqual('bob');
     });
   });
 
