@@ -6,11 +6,11 @@ import { ProfileDto } from './dto/profile.dts';
 @Injectable()
 export class AppService {
 
-  map:Profile[];
+  map:Profile[] = [];
 
   register(profileDto: ProfileDto): { message: string } {
     const id = uniqid();
-    this.map[id] = Profile.convertToEntity(id, profileDto);
+    this.map.push(Profile.convertToEntity(id, profileDto));
     return { message: 'register!' };
   }
 
