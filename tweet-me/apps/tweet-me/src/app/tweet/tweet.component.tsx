@@ -11,7 +11,7 @@ export function Tweet({profileName, text, comments, time}: TweetProps) {
     <Card variant="outlined" className={styles.tweetLayout}>
       <>
       <CardContent>
-      <FollowButton></FollowButton>
+      <FollowButton isFollowing={true}/>
       <div><span className={styles.profileName}>{profileName}</span>-<span className={styles.time}>{time}</span></div>
       <Typography className={styles.text}>{text}</Typography>
       </CardContent>
