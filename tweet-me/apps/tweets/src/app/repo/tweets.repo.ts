@@ -10,12 +10,6 @@ interface tweetsRepo {
 @Injectable()
 export class TweetsRepo {
     tweetsRepo: tweetsRepo = {};
-    
-    constructor() {
-        //this.tweetsRepo[1] = {};
-        //this.tweetsRepo[1].tweets = new Set<TweetsDto>();
-        //this.tweetsRepo[1].tweets.add({content: "My Great Tweet", id: "1", date: new Date(), parentId: undefined})
-    }
 
     public getTweets(profileId: string): Set<TweetsDto> {
         this.init(profileId);

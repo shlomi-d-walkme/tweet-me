@@ -91,4 +91,32 @@ describe('Tweets Controller', () => {
     expect(tweets[0].content).toEqual("YYY");
   });
 
+
+  it('should be multi user balagn', () => {
+    const t1 = controller.addTweet("1","X1");
+    const t2 = controller.addTweet("2","Y2");
+    const t3 = controller.addTweet("3","Z2");
+    const t4 = controller.addTweet("2","ZZZZ");
+    const t5 = controller.addTweet("1","KKKK");
+    const t6 = controller.addTweet("1","Amir");
+    
+    let u1 = controller.getTweets("1");
+    let u2 = controller.getTweets("2");
+    let u3 = controller.getTweets("3");
+    expect(u1.length).toEqual(3);
+    expect(u2.length).toEqual(2);
+    expect(u3.length).toEqual(1);
+
+    controller.deleteTweet("1", t1.id);
+    controller.updateTweet("2", t2.id, "My New Content");
+    u1 = controller.getTweets("1");
+    u2 = controller.getTweets("2");
+    u3 = controller.getTweets("3");
+    expect(u1.length).toEqual(2);
+    expect(u2.length).toEqual(2);
+    expect(u3.length).toEqual(1);
+
+    expect(u2[0].content).toEqual("My New Content");
+  });
+
 });
