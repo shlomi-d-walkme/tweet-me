@@ -11,7 +11,7 @@ export class Profile {
         profile.email=profileDto.email;
         profile.firstName=profileDto.firstName;
         profile.lastName=profileDto.lastName;
-        profile.passward=profileDto.passward;
+        profile.passward=profileDto.password;
         profile.userName=profileDto.userName;
         return profile;
     }
