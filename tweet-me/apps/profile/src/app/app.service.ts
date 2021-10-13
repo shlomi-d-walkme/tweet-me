@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Profile } from './entities/profile.entity';
-import uniqid from 'uniqid';
+import { v4 as uuidv4 } from 'uuid';
+
 import { ProfileDto } from './dto/profile.dts';
 
 @Injectable()
@@ -9,7 +10,7 @@ export class AppService {
   map:Profile[] = [];
 
   register(profileDto: ProfileDto): { id: string } {
-    const id = uniqid();
+    const id = uuidv4();
     this.map.push(Profile.convertToEntity(id, profileDto));
     return { id };
   }

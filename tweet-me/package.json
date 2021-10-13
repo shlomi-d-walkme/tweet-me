@@ -30,6 +30,7 @@
     "swagger-ui-express": "^4.1.6",
     "tslib": "^2.0.0",
     "uniqid": "^5.4.0",
+    "uuid": "^8.3.2",
     "yarn": "^1.22.15"
   },
   "devDependencies": {
