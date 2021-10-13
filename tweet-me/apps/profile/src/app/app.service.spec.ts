@@ -13,9 +13,9 @@ describe('AppService', () => {
     service = app.get<AppService>(AppService);
   });
 
-  describe('getData', () => {
-    it('should return "Welcome to profile!"', () => {
-      expect(service.getData()).toEqual({ message: 'Welcome to profile!' });
-    });
-  });
+  // describe('getData', () => {
+  //   it('should return "Welcome to profile!"', () => {
+  //     expect(service.getData()).toEqual({ message: 'Welcome to profile!' });
+  //   });
+  // });
 });

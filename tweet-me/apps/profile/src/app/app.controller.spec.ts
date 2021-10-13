@@ -8,7 +8,7 @@ import { Profile } from './entities/profile.entity';
 describe('AppController', () => {
   let app: TestingModule;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     app = await Test.createTestingModule({
       controllers: [AppController],
       providers: [AppService],
