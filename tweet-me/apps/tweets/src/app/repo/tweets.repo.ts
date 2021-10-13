@@ -17,10 +17,11 @@ export class TweetsRepo {
         //this.tweetsRepo[1].tweets.add({content: "My Great Tweet", id: "1", date: new Date(), parentId: undefined})
     }
 
-    public getTweets(profileId: string): void {
+    public getTweets(profileId: string): Set<TweetsDto> {
         this.init(profileId);
         const userTweets = this.tweetsRepo[profileId].tweets;
         console.log("getTweets Repo", userTweets);
+        return userTweets;
     }
 
     private init(profileId: string): void {
