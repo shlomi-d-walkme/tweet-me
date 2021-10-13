@@ -8,6 +8,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "esModuleInterop": true,
     "target": "es2015",
     "module": "esnext",
     "lib": ["es2017", "dom"],
@@ -15,7 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@tweet-me/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@tweet-me/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@tweet-me/sdk/profile-sdk": ["libs/sdk/profile-sdk/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

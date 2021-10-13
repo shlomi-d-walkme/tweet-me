@@ -8,7 +8,8 @@
     "test": "nx test",
     "start:follows": "nx run follows:serve",
     "openapi:feed-presentastion": "openapi-generator-cli generate -g typescript-fetch -i http://localhost:3333/api-json -o bla",
-    "openapi:follows": "openapi-generator-cli generate -g typescript-fetch -i http://localhost:5555/api-json -o follows"
+    "openapi:follows": "openapi-generator-cli generate -g typescript-fetch -i http://localhost:5555/api-json -o follows",
+    "openapi:profile": "openapi-generator-cli generate -g typescript-fetch -i http://localhost:666/swagger-json -o libs/sdk/profile-sdk"
   },
   "private": true,
   "dependencies": {
@@ -31,6 +32,7 @@
     "swagger-ui-express": "^4.1.6",
     "tslib": "^2.0.0",
     "uniqid": "^5.4.0",
+    "uuid": "^8.3.2",
     "yarn": "^1.22.15"
   },
   "devDependencies": {
