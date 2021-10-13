@@ -13,8 +13,9 @@ export class Tweets {
     @ApiOkResponse({ status: 200, type: [TweetsDto], description: 'Returns tweets by user ids'})
     getTweets(@Param('profileId') profileId: string): TweetsDto[] {
         console.log("getTweets", profileId);
-        this.repo.getTweets(profileId);
-        return [new TweetsDto()];
+        const userTweets =  this.repo.getTweets(profileId);
+        const userTweetsArr = [...userTweets];
+        return userTweetsArr;
     }
 
     @Post('/add/:profileId/')

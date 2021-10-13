@@ -17,7 +17,7 @@ describe('AppController', () => {
     it('should return "Welcome to tweets!"', () => {
       const appController = app.get<AppController>(AppController);
       expect(appController.getData()).toEqual({
-        message: 'Welcome to tweets!',
+        message: 'Welcome to Amir tweets!',
       });
     });
   });
