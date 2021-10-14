@@ -4,7 +4,7 @@ import fetch from 'cross-fetch';
 
 @Resolver(of => Tweet)
 export class TweetsResolver {
-@Query(returns => Tweet)
+@Query(returns => [Tweet])
   async tweet(@Args('id', { type: () => String }) id: string) {
 
         const requestOptions = {
@@ -16,7 +16,6 @@ export class TweetsResolver {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log("MyLog", id, result);
                     return result;
                 },
                 (error) => {
