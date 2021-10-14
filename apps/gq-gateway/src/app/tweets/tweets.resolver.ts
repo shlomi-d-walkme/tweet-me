@@ -5,6 +5,7 @@ import { Tweet } from './tweets.model'
 export class TweetsResolver {
 @Query(returns => Tweet)
   async tweet(@Args('id', { type: () => String }) id: string) {
+    return null;
     //return this.authorsService.findOneById(id);
   }
 

@@ -22,6 +22,9 @@
       "@tweet-me/api-interfaces": [
         "libs/api-interfaces/src/index.ts"
       ],
+      "@tweet-me/sdk/feed-sdk": [
+        "libs/sdk/feed-sdk/gen/index.ts"
+      ],
       "@tweet-me/sdk/profile-sdk": [
         "libs/sdk/profile-sdk/gen/index.ts"
       ]
