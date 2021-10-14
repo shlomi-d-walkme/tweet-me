@@ -24,88 +24,70 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
- * @interface Profile
+ * @interface ProfileRequest
  */
-export interface Profile {
+export interface ProfileRequest {
     /**
-     * user id
+     * 
      * @type {string}
-     * @memberof Profile
-     */
-    id: string;
-    /**
-     * user name
-     * @type {string}
-     * @memberof Profile
+     * @memberof ProfileRequest
      */
     userName: string;
     /**
-     * first name
+     * 
      * @type {string}
-     * @memberof Profile
-     */
-    firstName: string;
-    /**
-     * last name
-     * @type {string}
-     * @memberof Profile
-     */
-    lastName: string;
-    /**
-     * password
-     * @type {string}
-     * @memberof Profile
-     */
-    passward: string;
-    /**
-     * the date when the profile was created
-     * @type {string}
-     * @memberof Profile
-     */
-    creationDate: string;
-    /**
-     * user email
-     * @type {string}
-     * @memberof Profile
+     * @memberof ProfileRequest
      */
     email: string;
-}
-/**
- * 
- * @export
- * @interface ProfileDto
- */
-export interface ProfileDto {
     /**
      * 
      * @type {string}
-     * @memberof ProfileDto
-     */
-    userName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProfileDto
-     */
-    firstName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProfileDto
-     */
-    lastName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProfileDto
+     * @memberof ProfileRequest
      */
     password: string;
     /**
      * 
      * @type {string}
-     * @memberof ProfileDto
+     * @memberof ProfileRequest
+     */
+    name: string;
+}
+/**
+ * 
+ * @export
+ * @interface ProfileResponse
+ */
+export interface ProfileResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof ProfileResponse
+     */
+    userName: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProfileResponse
      */
     email: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProfileResponse
+     */
+    name: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProfileResponse
+     */
+    _id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProfileResponse
+     */
+    creationDate: string;
 }
 
 /**
@@ -116,36 +98,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * 
-         * @summary sqwagger
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        appControllerGetSwagger: async (options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/omry`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary profile of a given user by id
          * @param {string} id 
          * @param {*} [options] Override http request option.
@@ -154,7 +106,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         getProfile: async (id: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getProfile', 'id', id)
-            const localVarPath = `/api/profile/{id}`
+            const localVarPath = `/api/profiles/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -211,13 +163,13 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary register a new twitter profile.
-         * @param {ProfileDto} profileDto 
+         * @param {ProfileRequest} profileRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        register: async (profileDto: ProfileDto, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'profileDto' is not null or undefined
-            assertParamExists('register', 'profileDto', profileDto)
+        register: async (profileRequest: ProfileRequest, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'profileRequest' is not null or undefined
+            assertParamExists('register', 'profileRequest', profileRequest)
             const localVarPath = `/api/register`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -237,7 +189,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(profileDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(profileRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -256,22 +208,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary sqwagger
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async appControllerGetSwagger(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.appControllerGetSwagger(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @summary profile of a given user by id
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getProfile(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Profile>> {
+        async getProfile(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getProfile(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -281,19 +223,19 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getProfiles(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async getProfiles(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ProfileResponse>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getProfiles(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @summary register a new twitter profile.
-         * @param {ProfileDto} profileDto 
+         * @param {ProfileRequest} profileRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async register(profileDto: ProfileDto, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.register(profileDto, options);
+        async register(profileRequest: ProfileRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.register(profileRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -308,21 +250,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
-         * @summary sqwagger
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        appControllerGetSwagger(options?: any): AxiosPromise<void> {
-            return localVarFp.appControllerGetSwagger(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary profile of a given user by id
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getProfile(id: string, options?: any): AxiosPromise<Profile> {
+        getProfile(id: string, options?: any): AxiosPromise<ProfileResponse> {
             return localVarFp.getProfile(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -331,18 +264,18 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getProfiles(options?: any): AxiosPromise<void> {
+        getProfiles(options?: any): AxiosPromise<Array<ProfileResponse>> {
             return localVarFp.getProfiles(options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary register a new twitter profile.
-         * @param {ProfileDto} profileDto 
+         * @param {ProfileRequest} profileRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        register(profileDto: ProfileDto, options?: any): AxiosPromise<void> {
-            return localVarFp.register(profileDto, options).then((request) => request(axios, basePath));
+        register(profileRequest: ProfileRequest, options?: any): AxiosPromise<ProfileResponse> {
+            return localVarFp.register(profileRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -354,17 +287,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
  * @extends {BaseAPI}
  */
 export class DefaultApi extends BaseAPI {
-    /**
-     * 
-     * @summary sqwagger
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public appControllerGetSwagger(options?: any) {
-        return DefaultApiFp(this.configuration).appControllerGetSwagger(options).then((request) => request(this.axios, this.basePath));
-    }
-
     /**
      * 
      * @summary profile of a given user by id
@@ -391,13 +313,13 @@ export class DefaultApi extends BaseAPI {
     /**
      * 
      * @summary register a new twitter profile.
-     * @param {ProfileDto} profileDto 
+     * @param {ProfileRequest} profileRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public register(profileDto: ProfileDto, options?: any) {
-        return DefaultApiFp(this.configuration).register(profileDto, options).then((request) => request(this.axios, this.basePath));
+    public register(profileRequest: ProfileRequest, options?: any) {
+        return DefaultApiFp(this.configuration).register(profileRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

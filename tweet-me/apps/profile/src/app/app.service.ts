@@ -1,25 +1,23 @@
 import { Injectable } from '@nestjs/common';
-import { Profile } from './entities/profile.entity';
-import { v4 as uuidv4 } from 'uuid';
-import { ProfileDto } from './dto/profile.dts';
+import { ProfileRequest } from './dto/ProfileReqest.dto';
+import { ProfileResponse } from './dto/ProfileResponse.dto';
+import { ProfileModel } from './entities/Profile.model';
 
 @Injectable()
 export class AppService {
 
-  map:Profile[] = [];
-
-  register(profileDto: ProfileDto): { id: string } {
-    const id = uuidv4();
-    this.map.push(Profile.convertToEntity(id, profileDto));
-    return { id };
+  async register(profileDto: ProfileRequest):Promise<ProfileResponse> {
+    const profile = new ProfileModel(profileDto);
+    await profile.save();
+    return profile;
   }
 
-  getProfile(id: string): Profile {
-    return this.map.find(prof => prof.id === id);
+  getProfile(id: string) {
+    return ProfileModel.findById(id);
   }
 
-  getProfiles(): Profile[] {
-    return this.map;
+  getProfiles() {
+    return ProfileModel.find();
   }
 
   getArt(){
