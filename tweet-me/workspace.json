@@ -219,6 +219,57 @@
         }
       }
     },
+    "gq-gateway": {
+      "root": "apps/gq-gateway",
+      "sourceRoot": "apps/gq-gateway/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/gq-gateway",
+            "main": "apps/gq-gateway/src/main.ts",
+            "tsConfig": "apps/gq-gateway/tsconfig.app.json",
+            "assets": ["apps/gq-gateway/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/gq-gateway/src/environments/environment.ts",
+                  "with": "apps/gq-gateway/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "gq-gateway:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/gq-gateway/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/gq-gateway"],
+          "options": {
+            "jestConfig": "apps/gq-gateway/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "profile": {
       "root": "apps/profile",
       "sourceRoot": "apps/profile/src",
