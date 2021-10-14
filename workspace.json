@@ -324,6 +324,34 @@
         }
       }
     },
+    "sdk-follows-sdk": {
+      "root": "libs/sdk/follows-sdk",
+      "sourceRoot": "libs/sdk/follows-sdk/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/sdk/follows-sdk/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/sdk/follows-sdk"
+          ],
+          "options": {
+            "jestConfig": "libs/sdk/follows-sdk/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "sdk-profile-sdk": {
       "root": "libs/sdk/profile-sdk",
       "sourceRoot": "libs/sdk/profile-sdk/src",
