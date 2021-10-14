@@ -4,9 +4,11 @@ import { join } from 'path';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { FollowsModule } from './follows/follows.module';
 
 @Module({
   imports: [
+    FollowsModule,
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,

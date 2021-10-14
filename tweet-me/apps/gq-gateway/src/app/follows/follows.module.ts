@@ -1,4 +1,9 @@
 import { Module } from '@nestjs/common';
+import { GreetingResolver } from './greeting.resolver';
 
-@Module({})
+@Module({providers:[
+    GreetingResolver
+], exports:[
+    GreetingResolver
+]})
 export class FollowsModule {}
