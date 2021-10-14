@@ -11,6 +11,6 @@ export class Tweet {
   @Field(type => Date)
   date: Date;
 
-  @Field(type => String)
-  parentId: string;
+  // @Field(type => String)
+  // parentId: string;
 }
