@@ -321,6 +321,28 @@
         }
       }
     },
+    "sdk-profile-sdk": {
+      "root": "libs/sdk/profile-sdk",
+      "sourceRoot": "libs/sdk/profile-sdk/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/sdk/profile-sdk/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/sdk/profile-sdk"],
+          "options": {
+            "jestConfig": "libs/sdk/profile-sdk/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "tweet-me": {
       "root": "apps/tweet-me",
       "sourceRoot": "apps/tweet-me/src",

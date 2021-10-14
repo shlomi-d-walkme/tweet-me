@@ -5,11 +5,59 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "pwa-chrome",
+            "name": "Test profile",
+            "type": "node",
+            "program": "${workspaceFolder}/node_modules/nx/bin/nx",
+            "args": ["test", "profile"],
             "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}"
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "console": "internalConsole"
+        },
+        {
+            "name": "Test follows",
+            "type": "node",
+            "program": "${workspaceFolder}/node_modules/nx/bin/nx",
+            "args": ["test", "follows"],
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "console": "internalConsole"
+        },
+        {
+            "name": "Test feed-materializer",
+            "type": "node",
+            "program": "${workspaceFolder}/node_modules/nx/bin/nx",
+            "args": ["test", "feed-materializer"],
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "console": "internalConsole"
+        },
+        {
+            "name": "Test feed-presentation",
+            "type": "node",
+            "program": "${workspaceFolder}/node_modules/nx/bin/nx",
+            "args": ["test", "feed-presentation"],
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "console": "internalConsole"
+        },
+        {
+            "name": "Test tweets",
+            "type": "node",
+            "program": "${workspaceFolder}/node_modules/nx/bin/nx",
+            "args": ["test", "tweets"],
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "console": "internalConsole"
         }
     ]
 }

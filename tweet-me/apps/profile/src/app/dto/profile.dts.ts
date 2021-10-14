@@ -1,4 +1,6 @@
-import { IsDateString, IsInt, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString } from 'class-validator';
+
 
 export class ProfileDto {
 
@@ -6,22 +8,27 @@ export class ProfileDto {
     this.email = email;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.passward = passward;
+    this.password = passward;
     this.userName = userName;
   }
   
   @IsString()
+  @ApiProperty()
   readonly userName: string;
 
   @IsString()
+  @ApiProperty()
   readonly firstName: string;
 
   @IsString()
+  @ApiProperty()
   readonly lastName: string;
 
   @IsString()
-  readonly passward: string;
+  @ApiProperty()
+  readonly password: string;
 
   @IsString()
+  @ApiProperty()
   readonly email: string;
 }

@@ -9,19 +9,31 @@ interface followsRepo {
 
 @Injectable()
 export class FollowsRepo {
-    followsRepo: followsRepo = {};
+    private followsRepo: followsRepo = {};
 
-    public addFollow(userProfileId: string, profileId: string): void {
+    public addFollow(userProfileId: string, profileId: string): boolean {
         this.initFollowIfNeeded(profileId);
         this.initFollowIfNeeded(userProfileId);
 
-        this.followsRepo[profileId].followers.add(profileId);
-        this.followsRepo[userProfileId].following.add(profileId);
+        try {
+            this.followsRepo[profileId].followers.add(profileId);
+            this.followsRepo[userProfileId].following.add(profileId);
+        } catch(ex) {
+            return false;
+        }
+        
+        return true;
     }
 
-    public removeFollow(userProfileId: string, profileId: string): void {
-        this.followsRepo[profileId].followers.delete(profileId);
-        this.followsRepo[userProfileId].following.delete(profileId);
+    public removeFollow(userProfileId: string, profileId: string): boolean {
+        // Should be as a transaction
+        try {
+            this.followsRepo[profileId].followers.delete(profileId);
+            this.followsRepo[userProfileId].following.delete(profileId);
+        } catch(ex) {
+            return false;
+        }
+        return true;
     }
 
     public getFollowing(userProfileId: string): Set<string> {

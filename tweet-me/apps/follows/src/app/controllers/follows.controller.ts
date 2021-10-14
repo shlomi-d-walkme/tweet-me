@@ -4,7 +4,7 @@ import { FollowersDto } from '../dto/followers-dto';
 import { FollowingDto } from '../dto/following-dto';
 import { FollowsRepo } from '../repo/follows.repo';
 
-@Controller('api/profile')
+@Controller('api/follows')
 export class FollowsController {
 
     constructor(private repo: FollowsRepo){}

@@ -7,7 +7,9 @@
     "build": "nx build",
     "test": "nx test",
     "start:follows": "nx run follows:serve",
-    "openapi:feed-presentastion": "openapi-generator-cli generate -g typescript-fetch -i http://localhost:3333/api-json -o bla"
+    "openapi:feed-presentastion": "openapi-generator-cli generate -g typescript-fetch -i http://localhost:3333/api-json -o bla",
+    "openapi:follows": "openapi-generator-cli generate -g typescript-fetch -i http://localhost:5555/api-json -o follows",
+    "openapi:profile": "openapi-generator-cli generate -g typescript-axios -i http://localhost:666/swagger-json -o libs/sdk/profile-sdk/gen"
   },
   "private": true,
   "dependencies": {
@@ -20,17 +22,19 @@
     "@nestjs/swagger": "^5.1.0",
     "ansi-html-community": "^0.0.8",
     "apollo-server-express": "^3.4.0",
+    "axios": "^0.23.0",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
-    "core-js": "^3.6.5",
+    "core-js": "^3.18.3",
     "express": "4.17.1",
+    "formik": "^2.2.9",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "reflect-metadata": "^0.1.13",
     "regenerator-runtime": "0.13.7",
     "rxjs": "~6.6.3",
     "swagger-ui-express": "^4.1.6",
-    "tslib": "^2.0.0",
+    "tslib": "^2.3.1",
     "uniqid": "^5.4.0",
     "uuid": "^8.3.2",
     "yarn": "^1.22.15"

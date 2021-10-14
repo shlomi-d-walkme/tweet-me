@@ -15,7 +15,7 @@ describe('AppService', () => {
 
   describe('getData', () => {
     it('should return "Welcome to tweets!"', () => {
-      expect(service.getData()).toEqual({ message: 'Welcome to tweets!' });
+      expect(service.getData()).toEqual({ message: 'Welcome to Amir tweets!' });
     });
   });
 });

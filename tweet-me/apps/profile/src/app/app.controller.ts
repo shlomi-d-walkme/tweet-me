@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Header, HttpCode, Param, Post, Res } from '@nestjs/common';
-import { ApiOperation, ApiProduces, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiProduces, ApiResponse } from '@nestjs/swagger';
 
 import { AppService } from './app.service';
 import { ProfileDto } from './dto/profile.dts';
@@ -11,11 +11,10 @@ export class AppController {
 
   @Post('register')
   @ApiOperation({ summary: 'register a new twitter profile.', operationId: 'register' })
-  @ApiResponse({ status: 201, description: 'profile created succsesfully.' })
+  @ApiResponse({ status: 201, description: 'profile created succsesfully.', type: {id: String} })
   @HttpCode(201)
   register(@Body() profileDto: ProfileDto) : { id: string } {
-     const prof = this.appService.register(profileDto);
-     return prof;
+     return this.appService.register(profileDto);
   }
 
   @Get('profiles')
