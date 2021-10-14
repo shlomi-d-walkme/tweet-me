@@ -1,5 +1,5 @@
 import { Field, Form, Formik, useFormik } from 'formik';
-import { DefaultApi, ProfileResponse } from '@tweet-me/sdk/profile-sdk';
+import { DefaultApi, ProfileResponse, Configuration } from '@tweet-me/sdk/profile-sdk';
 import './register-form.module.scss';
 import { useState } from 'react';
 
@@ -14,7 +14,7 @@ const initailForm = {
   confirmPassword: '',
 }
 
-const api = new DefaultApi();
+const api = new DefaultApi(new Configuration({basePath: "http://localhost:4200"}));
 
 export function RegisterForm(props: RegisterFormProps) {
 

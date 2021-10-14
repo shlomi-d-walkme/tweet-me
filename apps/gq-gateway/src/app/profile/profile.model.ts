@@ -1,4 +1,5 @@
-import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { ObjectType, Field, ID , InputType} from '@nestjs/graphql';
+import {ProfileRequest} from '@tweet-me/sdk/profile-sdk';
 
 @ObjectType()
 export class Profile {
@@ -21,8 +22,8 @@ export class Profile {
     password: string;
 }
 
-@ObjectType()
-export class ProfileInput {
+@InputType()
+export class ProfileInput implements ProfileRequest {
     @Field()
     userName:string;
 
