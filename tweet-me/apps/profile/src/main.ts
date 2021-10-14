@@ -18,7 +18,6 @@ async function bootstrap() {
     .setTitle('Profile service APIs')
     .setDescription('becouse omry is making us do this.')
     .setVersion('1.0')
-    .addTag('omry1')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);

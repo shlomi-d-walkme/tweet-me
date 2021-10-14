@@ -1,15 +1,14 @@
 import { Field, Form, Formik, useFormik } from 'formik';
-import { DefaultApi } from '@tweet-me/sdk/profile-sdk';
+import { DefaultApi, ProfileResponse } from '@tweet-me/sdk/profile-sdk';
 import './register-form.module.scss';
-import { useState } from 'react-transition-group/node_modules/@types/react';
+import { useState } from 'react';
 
 /* eslint-disable-next-line */
 export interface RegisterFormProps {}
 
 const initailForm = {
   email: '',
-  firstName:'',
-  lastName: '',
+  name:'',
   userName: '',
   password: '',
   confirmPassword: '',
@@ -19,11 +18,11 @@ const api = new DefaultApi();
 
 export function RegisterForm(props: RegisterFormProps) {
 
-  const [registered, setRegistered] = useState(null);
+  const [user, setUser] = useState<ProfileResponse | null>(null);
 
   const submit = async (values: typeof initailForm) => {
     const {data} = await api.register(values);
-    // setRegistered(data);
+    setUser(data);
   }
 
   const {handleSubmit, getFieldProps} = useFormik({
@@ -35,6 +34,8 @@ export function RegisterForm(props: RegisterFormProps) {
       return errors;
     }
   });
+
+  if(user) return <div>Hello {user.name}</div>
   
   return (
     <div>
@@ -51,23 +52,15 @@ export function RegisterForm(props: RegisterFormProps) {
                   </label>
                 </div>
                 <div className="form-group text-left">
-                  <label>First name
+                  <label>Name
                   <input type="text" 
                         className="form-control" 
-                        {...getFieldProps('firstName')}
+                        {...getFieldProps('name')}
                         placeholder="Enter your first name"
                   />
                   </label>
                 </div>
-                <div className="form-group text-left">
-                  <label>Last name
-                  <input type="text" 
-                        className="form-control" 
-                        placeholder="Enter your last name"
-                        {...getFieldProps('lastName')}
-                  />
-                  </label>
-                </div>
+        
                 <div className="form-group text-left">
                   <label>Username
                   <input type="text" 
