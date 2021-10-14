@@ -1,57 +1,6 @@
 {
   "version": 2,
   "projects": {
-    "api": {
-      "root": "apps/api",
-      "sourceRoot": "apps/api/src",
-      "projectType": "application",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/api",
-            "main": "apps/api/src/main.ts",
-            "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "apps/api/src/environments/environment.ts",
-                  "with": "apps/api/src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "executor": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "api:build"
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/api/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/api"],
-          "options": {
-            "jestConfig": "apps/api/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "api-interfaces": {
       "root": "libs/api-interfaces",
       "sourceRoot": "libs/api-interfaces/src",
@@ -59,9 +8,13 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/api-interfaces/**/*.ts"
+            ]
           }
         }
       }
@@ -73,12 +26,16 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/feed-materializer",
             "main": "apps/feed-materializer/src/main.ts",
             "tsConfig": "apps/feed-materializer/tsconfig.app.json",
-            "assets": ["apps/feed-materializer/src/assets"]
+            "assets": [
+              "apps/feed-materializer/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -102,14 +59,20 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/feed-materializer/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/feed-materializer/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/feed-materializer"],
+          "outputs": [
+            "coverage/apps/feed-materializer"
+          ],
           "options": {
             "jestConfig": "apps/feed-materializer/jest.config.js",
             "passWithNoTests": true
@@ -124,12 +87,16 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/feed-presentation",
             "main": "apps/feed-presentation/src/main.ts",
             "tsConfig": "apps/feed-presentation/tsconfig.app.json",
-            "assets": ["apps/feed-presentation/src/assets"]
+            "assets": [
+              "apps/feed-presentation/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -153,14 +120,20 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/feed-presentation/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/feed-presentation/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/feed-presentation"],
+          "outputs": [
+            "coverage/apps/feed-presentation"
+          ],
           "options": {
             "jestConfig": "apps/feed-presentation/jest.config.js",
             "passWithNoTests": true
@@ -175,12 +148,16 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/follows",
             "main": "apps/follows/src/main.ts",
             "tsConfig": "apps/follows/tsconfig.app.json",
-            "assets": ["apps/follows/src/assets"]
+            "assets": [
+              "apps/follows/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -204,14 +181,20 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/follows/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/follows/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/follows"],
+          "outputs": [
+            "coverage/apps/follows"
+          ],
           "options": {
             "jestConfig": "apps/follows/jest.config.js",
             "passWithNoTests": true
@@ -226,12 +209,16 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/gq-gateway",
             "main": "apps/gq-gateway/src/main.ts",
             "tsConfig": "apps/gq-gateway/tsconfig.app.json",
-            "assets": ["apps/gq-gateway/src/assets"]
+            "assets": [
+              "apps/gq-gateway/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -255,14 +242,20 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/gq-gateway/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/gq-gateway/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/gq-gateway"],
+          "outputs": [
+            "coverage/apps/gq-gateway"
+          ],
           "options": {
             "jestConfig": "apps/gq-gateway/jest.config.js",
             "passWithNoTests": true
@@ -277,12 +270,16 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/profile",
             "main": "apps/profile/src/main.ts",
             "tsConfig": "apps/profile/tsconfig.app.json",
-            "assets": ["apps/profile/src/assets"]
+            "assets": [
+              "apps/profile/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -306,14 +303,20 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/profile/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/profile/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/profile"],
+          "outputs": [
+            "coverage/apps/profile"
+          ],
           "options": {
             "jestConfig": "apps/profile/jest.config.js",
             "passWithNoTests": true
@@ -328,14 +331,20 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/sdk/profile-sdk/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/sdk/profile-sdk/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/sdk/profile-sdk"],
+          "outputs": [
+            "coverage/libs/sdk/profile-sdk"
+          ],
           "options": {
             "jestConfig": "libs/sdk/profile-sdk/jest.config.js",
             "passWithNoTests": true
@@ -350,7 +359,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/tweet-me",
             "index": "apps/tweet-me/src/index.html",
@@ -362,7 +373,9 @@
               "apps/tweet-me/src/favicon.ico",
               "apps/tweet-me/src/assets"
             ],
-            "styles": ["apps/tweet-me/src/styles.scss"],
+            "styles": [
+              "apps/tweet-me/src/styles.scss"
+            ],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
           },
@@ -407,14 +420,20 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/tweet-me/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "apps/tweet-me/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/tweet-me"],
+          "outputs": [
+            "coverage/apps/tweet-me"
+          ],
           "options": {
             "jestConfig": "apps/tweet-me/jest.config.js",
             "passWithNoTests": true
@@ -442,9 +461,13 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/tweet-me-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/tweet-me-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
@@ -456,12 +479,16 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/tweets",
             "main": "apps/tweets/src/main.ts",
             "tsConfig": "apps/tweets/tsconfig.app.json",
-            "assets": ["apps/tweets/src/assets"]
+            "assets": [
+              "apps/tweets/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -485,14 +512,20 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/tweets/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/tweets/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/tweets"],
+          "outputs": [
+            "coverage/apps/tweets"
+          ],
           "options": {
             "jestConfig": "apps/tweets/jest.config.js",
             "passWithNoTests": true
