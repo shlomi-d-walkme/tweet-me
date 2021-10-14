@@ -11,14 +11,24 @@
     "esModuleInterop": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@tweet-me/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@tweet-me/sdk/profile-sdk": ["libs/sdk/profile-sdk/gen/index.ts"]
+      "@tweet-me/api-interfaces": [
+        "libs/api-interfaces/src/index.ts"
+      ],
+      "@tweet-me/sdk/profile-sdk": [
+        "libs/sdk/profile-sdk/gen/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }
