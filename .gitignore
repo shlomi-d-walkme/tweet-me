@@ -3,3 +3,6 @@ package-lock.json
 yarn-error.log
 dist
 generated
+.eslintrc.json
+.vscode
+src
