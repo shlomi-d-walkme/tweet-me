@@ -14,7 +14,6 @@ export class TweetsRepo {
     public getTweets(profileId: string): Set<TweetsDto> {
         this.init(profileId);
         const userTweets = this.tweetsRepo[profileId].tweets;
-        console.log("getTweets Repo", userTweets);
         return userTweets;
     }
 
