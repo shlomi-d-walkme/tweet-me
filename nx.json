@@ -50,6 +50,9 @@
     "profile": {
       "tags": []
     },
+    "sdk-follows-sdk": {
+      "tags": []
+    },
     "sdk-profile-sdk": {
       "tags": []
     },
