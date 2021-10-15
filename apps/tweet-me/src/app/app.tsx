@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Message } from '@tweet-me/api-interfaces';
 import {Feed} from './feed/feed.component';
 import { Tweet } from './tweet/tweet.component';
 import { RegisterForm } from './register-form/register-form.component';
 
 
 export const App = () => {
-  const [m, setMessage] = useState<Message>({ message: '' });
-
-  useEffect(() => {
-    fetch('/api')
-      .then((r) => r.json())
-      .then(setMessage);
-  }, []);
-
+ 
   return (
     <>
       <div style={{ textAlign: 'center' }}>
@@ -31,7 +23,6 @@ export const App = () => {
       <Tweet profileName='Shauli' text='Dozi is the best :)' comments={['1','2','3','1','2','3']} time='1h'></Tweet>
 
       </Feed>
-      <div>{m.message}</div>
     </>
   );
 };
