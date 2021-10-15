@@ -1,12 +1,27 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { Tweet } from './tweets.model'
+import fetch from 'cross-fetch';
 
 @Resolver(of => Tweet)
 export class TweetsResolver {
-@Query(returns => Tweet)
+@Query(returns => [Tweet])
   async tweet(@Args('id', { type: () => String }) id: string) {
-    return null;
-    //return this.authorsService.findOneById(id);
+
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        };
+
+        return fetch(`http://localhost:4444/api/tweets/${id}/`, requestOptions)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    return result;
+                },
+                (error) => {
+                    console.log("ERROR" + error);
+                }
+            );
   }
 
   //@ResolveField(of => Tweet)

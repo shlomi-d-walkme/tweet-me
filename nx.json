@@ -50,10 +50,13 @@
     "profile": {
       "tags": []
     },
-    "sdk-feed-sdk": {
+    "sdk-follows-sdk": {
       "tags": []
     },
     "sdk-profile-sdk": {
+      "tags": []
+    },
+    "sdk-feed-sdk": {
       "tags": []
     },
     "tweet-me": {

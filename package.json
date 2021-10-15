@@ -7,9 +7,10 @@
     "build": "nx build",
     "test": "nx test",
     "start:follows": "nx run follows:serve",
+    "start:feed-presentation": "nx run feed-presentation:serve",
     "openapi:feed-presentastion": "openapi-generator-cli generate -g typescript-axios -i http://localhost:3333/api-json -o libs/sdk/feed-sdk/gen",
-    "openapi:follows": "openapi-generator-cli generate -g typescript-fetch -i http://localhost:5555/api-json -o follows",
-    "openapi:profile": "openapi-generator-cli generate -i http://localhost:666/swagger-json -g typescript-axios -o libs/sdk/profile-sdk/gen "
+    "openapi:profile": "openapi-generator-cli generate -i http://localhost:666/swagger-json -g typescript-axios -o libs/sdk/profile-sdk/gen",
+    "openapi:follows": "openapi-generator-cli generate -g typescript-axios -i http://localhost:5555/api-json -o libs/sdk/follows-sdk/gen"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +29,7 @@
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "core-js": "^3.18.3",
+    "cross-fetch": "^3.1.4",
     "express": "4.17.1",
     "formik": "^2.2.9",
     "graphql": "^15.6.1",
