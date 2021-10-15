@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Header, HttpCode, Param, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, Header, HttpCode, Param, Post, Res, UseFilters } from '@nestjs/common';
 import { ApiBody, ApiOkResponse, ApiOperation, ApiProduces, ApiResponse } from '@nestjs/swagger';
 
 import { AppService } from './app.service';
+import { DtoExceptionFilter } from './dto/DtoException.filter';
 import { ProfileRequest } from './dto/ProfileReqest.dto';
 import { ProfileResponse } from './dto/ProfileResponse.dto';
 
@@ -13,7 +14,7 @@ export class AppController {
   @Post('register')
   @ApiOperation({ summary: 'register a new twitter profile.', operationId: 'register' })
   @ApiOkResponse({ status: 201, description: 'profile created succsesfully.', type: ProfileResponse })
-  // @HttpCode(201)
+  @UseFilters(new DtoExceptionFilter())
   register(@Body() profileDto: ProfileRequest) {
      return this.appService.register(profileDto);
   }

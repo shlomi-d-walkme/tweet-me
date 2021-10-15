@@ -7,9 +7,11 @@ import { AppService } from './app.service';
 import { FeedsModule } from './feeds/feeds.module';
 import { FollowsModule } from './follows/follows.module';
 import { TweetsModule } from './tweets/tweets.module';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
   imports: [
+    ProfileModule,
     FollowsModule,
     FeedsModule,
     TweetsModule,
