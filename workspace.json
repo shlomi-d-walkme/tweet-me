@@ -324,6 +324,34 @@
         }
       }
     },
+    "sdk-profile-sdk": {
+      "root": "libs/sdk/profile-sdk",
+      "sourceRoot": "libs/sdk/profile-sdk/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/sdk/profile-sdk/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/sdk/profile-sdk"
+          ],
+          "options": {
+            "jestConfig": "libs/sdk/profile-sdk/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "sdk-follows-sdk": {
       "root": "libs/sdk/follows-sdk",
       "sourceRoot": "libs/sdk/follows-sdk/src",
@@ -352,9 +380,9 @@
         }
       }
     },
-    "sdk-profile-sdk": {
-      "root": "libs/sdk/profile-sdk",
-      "sourceRoot": "libs/sdk/profile-sdk/src",
+    "sdk-feed-sdk": {
+      "root": "libs/sdk/feed-sdk",
+      "sourceRoot": "libs/sdk/feed-sdk/src",
       "projectType": "library",
       "targets": {
         "lint": {
@@ -364,17 +392,17 @@
           ],
           "options": {
             "lintFilePatterns": [
-              "libs/sdk/profile-sdk/**/*.ts"
+              "libs/sdk/feed-sdk/**/*.ts"
             ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/sdk/profile-sdk"
+            "coverage/libs/sdk/feed-sdk"
           ],
           "options": {
-            "jestConfig": "libs/sdk/profile-sdk/jest.config.js",
+            "jestConfig": "libs/sdk/feed-sdk/jest.config.js",
             "passWithNoTests": true
           }
         }
