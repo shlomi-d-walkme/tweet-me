@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Feed} from './feed/feed.component';
-import { Tweet } from './tweet/tweet.component';
+import {FeedContainer} from './feedContainer/feedContainer.component';
 import { RegisterForm } from './register-form/register-form.component';
 
 
@@ -17,12 +16,7 @@ export const App = () => {
         />
       </div>
       <RegisterForm></RegisterForm>
-
-      <Feed>
-      <Tweet profileName='Dozi' text='My first tweet!!!' comments={['1','2','3']} time='Now'></Tweet>
-      <Tweet profileName='Shauli' text='Dozi is the best :)' comments={['1','2','3','1','2','3']} time='1h'></Tweet>
-
-      </Feed>
+      <FeedContainer></FeedContainer>
     </>
   );
 };
