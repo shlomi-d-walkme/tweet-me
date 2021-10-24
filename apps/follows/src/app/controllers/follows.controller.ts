@@ -3,13 +3,13 @@ import { ApiResponse } from '@nestjs/swagger';
 import { FollowersDto } from '../dto/followers-dto';
 import { FollowingDto } from '../dto/following-dto';
 import { FollowsRepo } from '../repo/follows.repo';
-import { KafkaFollowsServerService } from '../services/kafka-follows-server.service';
+import { FollowsMessageProvider } from '../services/follows-message-provider.service';
 
 @Controller('api/follows')
 export class FollowsController {
 
     constructor(private repo: FollowsRepo,
-                private kafkaService: KafkaFollowsServerService){}
+                private followsMessageProvider: FollowsMessageProvider){}
 
     @Get('/:profileId/followers')
     @ApiResponse({ status: 200, type: FollowersDto, description: 'Returns followers by user ids' })
@@ -38,7 +38,7 @@ export class FollowsController {
     follow(@Param('profileId') profileId: string): boolean {
         console.log(`follow-profileId:${profileId}`);
         this.repo.addFollow(profileId, profileId); //TODO: get the user profile id
-        this.kafkaService.sendMessage([{ key: profileId, value: { profileId, action: "FOLLOW" }}]) ;
+        this.followsMessageProvider.followNotifier(profileId, profileId);
         return true;
     }
 
@@ -47,7 +47,7 @@ export class FollowsController {
     unfollow(@Param('profileId') profileId: string) : boolean {
         console.log(`unfollow-profileId:${profileId}`);
         this.repo.removeFollow(profileId, profileId); //TODO: get the user profile id
-        this.kafkaService.sendMessage([{ key: profileId, value: { profileId, action: "UNFOLLOW" }}]) ;
+        this.followsMessageProvider.unfollowNotifier(profileId, profileId);
         return true;
     }
 }
