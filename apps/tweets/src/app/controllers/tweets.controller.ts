@@ -3,11 +3,14 @@ import { Delete, Get, Post, Put, Param } from '@nestjs/common';
 import { ApiOkResponse } from '@nestjs/swagger';
 import { TweetsDto } from '../dto/tweets-dto';
 import { TweetsRepo } from '../repo/tweets.repo';
+import { ActionType, MessangerService } from '../services/messanger/messanger.service';
 
 @Controller('tweets')
 export class Tweets {
 
-    constructor(private repo: TweetsRepo){}
+    constructor(private repo: TweetsRepo, private messager: MessangerService){
+        this.messager.init();
+    }
 
     @Get('/:profileId')
     @ApiOkResponse({ status: 200, type: [TweetsDto], description: 'Returns tweets by user ids'})
@@ -21,6 +24,7 @@ export class Tweets {
     @ApiOkResponse({ status: 201, type: TweetsDto, description: 'Add a tweet' })
     addTweet(@Body('profileId') profileId: string, @Body('content') content: string): TweetsDto {
         const tweet = this.repo.addTweet(profileId, content);
+        this.messager.sendMsg(tweet.id, ActionType.tweetCreated, tweet).catch();
         return tweet;
     }
 
@@ -28,12 +32,14 @@ export class Tweets {
     @ApiOkResponse({ status: 204, type: Boolean, description: 'Remove a tweet' })
     deleteTweet(@Param('profileId') profileId: string, @Body('tweetId') tweetId: string) {
         this.repo.removeTweet(profileId, tweetId);
+        this.messager.sendMsg(tweetId, ActionType.tweetDeleted, undefined).catch();
     }
 
     @Put('/:profileId/')
     @ApiOkResponse({ status: 204, type: Boolean, description: 'Remove a tweet' })
     updateTweet(@Param('profileId') profileId: string, @Body('tweetId') tweetId: string, @Body('content') content: string) {
         const tweet = this.repo.updateTweet(profileId, tweetId, content);
+        this.messager.sendMsg(tweet.id, ActionType.tweetUpdate, tweet).catch();
         return tweet;
     }
 
