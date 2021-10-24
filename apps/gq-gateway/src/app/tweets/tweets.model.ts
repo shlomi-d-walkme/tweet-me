@@ -8,8 +8,8 @@ export class Tweet {
   @Field(type => String)
   content: string;
 
-  @Field(type => Date)
-  date: Date;
+  @Field(type => String)
+  date: string;
 
   @Field(type => String)
   parentId: string;

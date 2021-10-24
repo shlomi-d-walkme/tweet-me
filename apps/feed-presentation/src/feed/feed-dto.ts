@@ -1,20 +1,25 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiResponseProperty } from '@nestjs/swagger';
 
-type FeedTweet = {
+class FeedTweet {
+    @ApiResponseProperty()
     id: string;
+    @ApiResponseProperty()
     content: string;
+    @ApiResponseProperty()
     authorId: string;
+    @ApiResponseProperty()
     authorName: string;
+    @ApiResponseProperty({type: Date})
     date: Date;
 }
 
 export class FeedDto {
 
 
-    @ApiProperty()
+    @ApiResponseProperty()
     id: string;
 
-    @ApiProperty()
+    @ApiResponseProperty({type: [FeedTweet]})
     tweets: FeedTweet[];
 
   

@@ -12,8 +12,8 @@ const QUERY = gql`query {
   feed(id:"asd") {
     id
     tweets{
-      content
-      
+      date
+      content 
     }
   }
 }`;
@@ -38,11 +38,11 @@ if (loading) return <p>Loading...</p>;
     <div>
       
       <Feed>
-      {data.feed.tweets.map(({content}: any) => (<Tweet
-          profileName="Dozi"
+      {data.feed.tweets.map(({content, date}: any) => (<Tweet
+          profileName={`Dozi`} 
           text={content}
           comments={['1', '2', '3']}
-          time="Now"
+          time={date}
         ></Tweet>))}
       </Feed>
     </div>

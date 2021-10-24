@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { Kafka, logLevel, Partitioners } from "kafkajs";
 import { Tweets } from '../../controllers/tweets.controller';
 import { TweetsDto } from '../../dto/tweets-dto';
 
 @Injectable()
-export class MessangerService {
+export class MessangerService implements OnModuleInit {
     private producer;
 
     constructor() {
@@ -14,7 +14,7 @@ export class MessangerService {
         });    
     }
 
-    public async init() {
+    async onModuleInit(){
         await this.producer.connect();
     }
     
