@@ -31,45 +31,24 @@
       }
     ]
   },
-  "projects": {
-    "api-interfaces": {
-      "tags": []
-    },
-    "feed-materializer": {
-      "tags": []
-    },
-    "feed-presentation": {
-      "tags": []
-    },
-    "follows": {
-      "tags": []
-    },
-    "gq-gateway": {
-      "tags": []
-    },
-    "profile": {
-      "tags": []
-    },
-    "sdk-follows-sdk": {
-      "tags": []
-    },
-    "sdk-profile-sdk": {
-      "tags": []
-    },
-    "sdk-feed-sdk": {
-      "tags": []
-    },
-    "tweet-me": {
-      "tags": []
-    },
-    "tweet-me-e2e": {
-      "tags": [],
-      "implicitDependencies": [
-        "tweet-me"
-      ]
-    },
-    "tweets": {
-      "tags": []
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint"
+      }
     }
-  }
+  },
+  "defaultProject": "tweet-me"
 }

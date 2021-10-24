@@ -17,7 +17,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": []
     },
     "feed-materializer": {
       "root": "apps/feed-materializer",
@@ -78,7 +79,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "feed-presentation": {
       "root": "apps/feed-presentation",
@@ -139,7 +141,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "follows": {
       "root": "apps/follows",
@@ -200,7 +203,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "gq-gateway": {
       "root": "apps/gq-gateway",
@@ -261,7 +265,132 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
+    },
+    "kafclient": {
+      "root": "apps/kafclient",
+      "sourceRoot": "apps/kafclient/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/kafclient",
+            "main": "apps/kafclient/src/main.ts",
+            "tsConfig": "apps/kafclient/tsconfig.app.json",
+            "assets": [
+              "apps/kafclient/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/kafclient/src/environments/environment.ts",
+                  "with": "apps/kafclient/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "kafclient:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "apps/kafclient/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/kafclient"
+          ],
+          "options": {
+            "jestConfig": "apps/kafclient/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "kafserver": {
+      "root": "apps/kafserver",
+      "sourceRoot": "apps/kafserver/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/kafserver",
+            "main": "apps/kafserver/src/main.ts",
+            "tsConfig": "apps/kafserver/tsconfig.app.json",
+            "assets": [
+              "apps/kafserver/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/kafserver/src/environments/environment.ts",
+                  "with": "apps/kafserver/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "kafserver:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "apps/kafserver/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/kafserver"
+          ],
+          "options": {
+            "jestConfig": "apps/kafserver/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     },
     "profile": {
       "root": "apps/profile",
@@ -322,7 +451,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "sdk-profile-sdk": {
       "root": "libs/sdk/profile-sdk",
@@ -378,7 +508,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "sdk-feed-sdk": {
       "root": "libs/sdk/feed-sdk",
@@ -406,7 +537,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "tweet-me": {
       "root": "apps/tweet-me",
@@ -495,7 +627,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "tweet-me-e2e": {
       "root": "apps/tweet-me-e2e",
@@ -526,7 +659,11 @@
             ]
           }
         }
-      }
+      },
+      "tags": [],
+      "implicitDependencies": [
+        "tweet-me"
+      ]
     },
     "tweets": {
       "root": "apps/tweets",
@@ -587,27 +724,8 @@
             "passWithNoTests": true
           }
         }
-      }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/react"
-  },
-  "generators": {
-    "@nrwl/react": {
-      "application": {
-        "style": "scss",
-        "linter": "eslint",
-        "babel": true
       },
-      "component": {
-        "style": "scss"
-      },
-      "library": {
-        "style": "scss",
-        "linter": "eslint"
-      }
+      "tags": []
     }
-  },
-  "defaultProject": "tweet-me"
+  }
 }
