@@ -1,15 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { KafkaFollowsServerService } from './kafka-follows-server.service';
+import { FOLLOWS_ACTION, FollowsKafkaModel } from 'libs/api-interfaces/src/lib/follows-kafka-model';
 
 @Injectable()
 export class FollowsMessageProvider {
     constructor(private kafkaService: KafkaFollowsServerService) {}
 
-    followNotifier(profileId: string, followId: string) {
-        this.kafkaService.sendMessage([{ key: profileId, value: { profileId: followId, action: "FOLLOW" }}]);
+    followNotifier(profileId: string, followProfileId: string) {
+        const followModel = new FollowsKafkaModel(followProfileId, FOLLOWS_ACTION.FOLLOW);
+        this.kafkaService.sendMessage([{ key: profileId, value: followModel}]);
     }
 
-    unfollowNotifier(profileId: string, unfollowId: string) {
-        this.kafkaService.sendMessage([{ key: profileId, value: { profileId: unfollowId, action: "UNFOLLOW" }}]);
+    unfollowNotifier(profileId: string, unfollowProfileId: string) {
+        const followModel = new FollowsKafkaModel(unfollowProfileId, FOLLOWS_ACTION.UNFOLLOW);
+        this.kafkaService.sendMessage([{ key: profileId, value: followModel}]);
     }
 }
