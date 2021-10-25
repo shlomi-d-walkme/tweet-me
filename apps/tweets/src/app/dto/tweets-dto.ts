@@ -16,5 +16,9 @@ export class TweetsDto {
     date: Date
 
     @ApiProperty()
+    @IsNotEmpty()
+    profileId: string
+
+    @ApiProperty()
     parentId: string
 }

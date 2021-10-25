@@ -23,6 +23,7 @@ export class TweetsRepo {
         tweet.content = content;
         tweet.id = this.generateGuid();
         tweet.date = new Date();
+        tweet.profileId = profileId;
         this.tweetsRepo[profileId].tweets.add(tweet);
         return tweet;
     }
