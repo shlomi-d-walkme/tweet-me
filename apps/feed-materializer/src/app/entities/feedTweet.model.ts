@@ -2,11 +2,15 @@ import { prop, getModelForClass } from '@typegoose/typegoose'
 
 export class FeedTweet {
     @prop({
-        require: true,
-        unique: true,
+        require: true
     })
-    profileId: string;
+    feedOwnerId: string;
 
+    @prop({
+        require: true,
+    })
+    tweetId: string;
+    
     @prop()
     content: string;
 
