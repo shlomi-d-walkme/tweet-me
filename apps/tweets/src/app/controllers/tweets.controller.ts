@@ -9,7 +9,6 @@ import { ActionType, MessangerService } from '../services/messanger/messanger.se
 export class Tweets {
 
     constructor(private repo: TweetsRepo, private messager: MessangerService){
-        this.messager.init();
     }
 
     @Get('/:profileId')

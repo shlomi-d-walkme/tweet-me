@@ -11,7 +11,7 @@ export class MessangerService implements OnModuleInit {
         const kafka = new Kafka({ logLevel: logLevel.ERROR, brokers: ['localhost:9092']});
         this.producer = kafka.producer({
             createPartitioner: Partitioners.JavaCompatiblePartitioner
-        });    
+        });
     }
 
     async onModuleInit(){
