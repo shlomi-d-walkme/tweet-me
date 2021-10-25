@@ -21,8 +21,10 @@ export class Tweets {
 
     @Post('/')
     @ApiOkResponse({ status: 201, type: TweetsDto, description: 'Add a tweet' })
-    addTweet(@Body('profileId') profileId: string, @Body('content') content: string): TweetsDto {
-        const tweet = this.repo.addTweet(profileId, content);
+    addTweet(@Body('profileId') profileId: string,
+            @Body('content') content: string,
+            @Body('parentId') parentId: string) : TweetsDto {
+        const tweet = this.repo.addTweet(profileId, content, parentId);
         this.messager.sendMsg(tweet.id, ActionType.tweetCreated, tweet).catch();
         return tweet;
     }

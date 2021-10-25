@@ -17,13 +17,14 @@ export class TweetsRepo {
         return userTweets;
     }
 
-    public addTweet(profileId: string, content: string): TweetsDto {
+    public addTweet(profileId: string, content: string, parentId: string): TweetsDto {
         this.init(profileId);
         const tweet = new TweetsDto();
         tweet.content = content;
         tweet.id = this.generateGuid();
         tweet.date = new Date();
         tweet.profileId = profileId;
+        tweet.parentId = parentId;
         this.tweetsRepo[profileId].tweets.add(tweet);
         return tweet;
     }
