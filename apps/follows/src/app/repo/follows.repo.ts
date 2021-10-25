@@ -27,6 +27,8 @@ export class FollowsRepo {
 
     public removeFollow(userProfileId: string, unfollowingProfileId: string): boolean {
         // Should be as a transaction
+        this.initFollowIfNeeded(userProfileId);
+        this.initFollowIfNeeded(unfollowingProfileId);
         try {
             this.followsRepo[unfollowingProfileId].followers.delete(userProfileId);
             this.followsRepo[userProfileId].following.delete(unfollowingProfileId);
@@ -37,10 +39,12 @@ export class FollowsRepo {
     }
 
     public getFollowing(userProfileId: string): Set<string> {
+        this.initFollowIfNeeded(userProfileId);
         return this.followsRepo[userProfileId].followers;
     }
 
     public getFollowers(userProfileId: string): Set<string> {
+        this.initFollowIfNeeded(userProfileId);
         return this.followsRepo[userProfileId].followers;
     }
 
