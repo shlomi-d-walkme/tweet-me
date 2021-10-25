@@ -11,13 +11,13 @@ interface followsRepo {
 export class FollowsRepo {
     private followsRepo: followsRepo = {};
 
-    public addFollow(userProfileId: string, profileId: string): boolean {
-        this.initFollowIfNeeded(profileId);
+    public addFollow(userProfileId: string, followingProfileId: string): boolean {
+        this.initFollowIfNeeded(followingProfileId);
         this.initFollowIfNeeded(userProfileId);
 
         try {
-            this.followsRepo[profileId].followers.add(profileId);
-            this.followsRepo[userProfileId].following.add(profileId);
+            this.followsRepo[followingProfileId].followers.add(userProfileId);
+            this.followsRepo[userProfileId].following.add(followingProfileId);
         } catch(ex) {
             return false;
         }
@@ -25,11 +25,11 @@ export class FollowsRepo {
         return true;
     }
 
-    public removeFollow(userProfileId: string, profileId: string): boolean {
+    public removeFollow(userProfileId: string, unfollowingProfileId: string): boolean {
         // Should be as a transaction
         try {
-            this.followsRepo[profileId].followers.delete(profileId);
-            this.followsRepo[userProfileId].following.delete(profileId);
+            this.followsRepo[unfollowingProfileId].followers.delete(userProfileId);
+            this.followsRepo[userProfileId].following.delete(unfollowingProfileId);
         } catch(ex) {
             return false;
         }
