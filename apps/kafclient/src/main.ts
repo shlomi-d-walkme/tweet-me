@@ -10,8 +10,9 @@ const main = async() => {
     await consumer.run({
         autoCommit: true,
         eachMessage: async (payload) => {
-            const messageBody = JSON.stringify(payload.message.value);
-            console.log(`messageBody:${messageBody}`);
+            const messageBody = payload.message.value.toString();
+            const messageKey = payload.message.key.toString();
+            console.log(messageBody, messageKey);
         } 
     })
 }
