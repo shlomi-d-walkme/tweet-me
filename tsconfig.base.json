@@ -28,6 +28,9 @@
       "@tweet-me/sdk/profile-sdk": [
         "libs/sdk/profile-sdk/gen/index.ts"
       ],
+      "@tweet-me/shared/kafka-infra": [
+        "libs/shared/kafka-infra/src/index.ts"
+      ],
       "@sdk/*": [
         "libs/sdk/*"
       ]
