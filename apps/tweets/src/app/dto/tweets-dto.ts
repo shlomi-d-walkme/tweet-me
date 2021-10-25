@@ -8,16 +8,16 @@ export class TweetsDto {
 
     @ApiProperty()
     @IsNotEmpty()
+    profileId: string
+
+    @ApiProperty()
+    @IsNotEmpty()
     content: string
 
     @ApiProperty()
     @IsNotEmpty()
     @IsDate()
     date: Date
-
-    @ApiProperty()
-    @IsNotEmpty()
-    profileId: string
 
     @ApiProperty()
     parentId: string
