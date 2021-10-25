@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
-import { TweetsController } from './controllers/tweetsListener.controller';
-import { FollowersController } from './controllers/followersListener.controller';
+import { TweetsController } from './controllers/tweets.controller';
+import { FollowersController } from './controllers/followers.controller';
 
 import { AppService } from './app.service';
 import { DbModule } from '../db/db.module';
