@@ -27,6 +27,9 @@
       ],
       "@tweet-me/sdk/profile-sdk": [
         "libs/sdk/profile-sdk/gen/index.ts"
+      ],
+      "@sdk/*": [
+        "libs/sdk/*"
       ]
     }
   },
