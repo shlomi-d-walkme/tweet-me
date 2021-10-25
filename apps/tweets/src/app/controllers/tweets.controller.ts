@@ -3,7 +3,8 @@ import { Delete, Get, Post, Put, Param } from '@nestjs/common';
 import { ApiOkResponse } from '@nestjs/swagger';
 import { TweetsDto } from '../dto/tweets-dto';
 import { TweetsRepo } from '../repo/tweets.repo';
-import { ActionType, MessangerService } from '../services/messanger/messanger.service';
+import { MessangerService } from '../services/messanger/messanger.service';
+import { ActionType } from 'libs/api-interfaces/src/lib/tweets-model';
 
 @Controller('tweets')
 export class Tweets {
@@ -45,13 +46,3 @@ export class Tweets {
     }
 
 }
-//export class Tweets.Controller.TsController {}
-
-// API:
-// Tweet
-// Post
-// Delete
-// Update
-// Retweet
-// Reply
-// TweetsByUser
