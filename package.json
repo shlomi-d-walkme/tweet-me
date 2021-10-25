@@ -10,7 +10,8 @@
     "start:feed-presentation": "nx run feed-presentation:serve",
     "openapi:feed-presentastion": "openapi-generator-cli generate -g typescript-axios -i http://localhost:3333/api-json -o libs/sdk/feed-sdk/gen",
     "openapi:profile": "openapi-generator-cli generate -i http://localhost:666/swagger-json -g typescript-axios -o libs/sdk/profile-sdk/gen",
-    "openapi:follows": "openapi-generator-cli generate -g typescript-axios -i http://localhost:5555/api-json -o libs/sdk/follows-sdk/gen"
+    "openapi:follows": "openapi-generator-cli generate -g typescript-axios -i http://localhost:5555/api-json -o libs/sdk/follows-sdk/gen",
+    "openapi:tweets": "openapi-generator-cli generate -g typescript-axios -i http://localhost:4444/swagger-json -o libs/sdk/tweets-sdk/gen"
   },
   "private": true,
   "dependencies": {

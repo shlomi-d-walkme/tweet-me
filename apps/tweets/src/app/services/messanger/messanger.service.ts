@@ -2,6 +2,7 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { Kafka, logLevel, Partitioners } from "kafkajs";
 import { Tweets } from '../../controllers/tweets.controller';
 import { TweetsDto } from '../../dto/tweets-dto';
+import { ActionType as TWEETS_ACTION } from 'libs/api-interfaces/src/lib/tweets-model';
 
 @Injectable()
 export class MessangerService implements OnModuleInit {
@@ -18,19 +19,13 @@ export class MessangerService implements OnModuleInit {
         await this.producer.connect();
     }
     
-    public async sendMsg(key: string, actionType: ActionType, data?: TweetsDto) {
+    public async sendMsg(key: string, actionType: TWEETS_ACTION, data?: TweetsDto) {
         await this.producer.send({
             topic: 'tweets',
             messages: [
-                { key, value: { actionType, data } }
+                { key, value: JSON.stringify({ actionType, data }) }
             ],
             acks: -1,
         });
     }   
-}
-
-export enum ActionType {
-    tweetCreated,
-    tweetDeleted,
-    tweetUpdate
 }
