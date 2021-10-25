@@ -2,6 +2,8 @@ import { Controller } from '@nestjs/common';
 import { KafkaMessage } from 'kafkajs';
 import { EventPattern, Payload, Transport } from '@nestjs/microservices';
 import { DefaultApi as TweetDefaultApi, Configuration as TweetConfiguration, TweetsDto } from '@sdk/tweets-sdk';
+import { FOLLOWS_ACTION } from '../../../../../libs/api-interfaces/src/lib/follows-kafka-model';
+
 
 @Controller()
 export class FollowersController {
@@ -12,8 +14,20 @@ export class FollowersController {
     console.log("this is a new follow");
     console.log(JSON.stringify(message.value));
     console.log(message.key);
-    /*const { data, action } = message.value;
-    const tweets: TweetsDto[] = await (await this.tweetApi.tweetsGetTweets(message.key.toString())).data; */
+
+    const { profileId, action } = JSON.parse(JSON.stringify(message.value));
+
+    const tweets: TweetsDto[] = await (await this.tweetApi.tweetsGetTweets(profileId)).data;
+    console.log('tweets', tweets);
+
+    switch(action) {
+      case FOLLOWS_ACTION.FOLLOW:
+        this.addTweetsToFeed(tweets, message.key.toString());
+        break;
+      case FOLLOWS_ACTION.UNFOLLOW:
+        this.deleteTweetsFromFeed(tweets, message.key.toString());
+        break;
+    }
   }
 
   async addTweetsToFeed(tweets: any, feedUser: any) {
