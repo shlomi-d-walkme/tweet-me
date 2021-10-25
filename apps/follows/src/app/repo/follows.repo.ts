@@ -16,8 +16,11 @@ export class FollowsRepo {
         this.initFollowIfNeeded(userProfileId);
 
         try {
+            console.log(`user profile: ${userProfileId} is following id: ${followingProfileId}`);
             this.followsRepo[followingProfileId].followers.add(userProfileId);
+            console.log(`user profile ${followingProfileId} is followed by ${(new Array(...this.followsRepo[followingProfileId].followers).join(' '))}`);
             this.followsRepo[userProfileId].following.add(followingProfileId);
+            console.log(`user profile ${userProfileId} is following ${(new Array(...this.followsRepo[userProfileId].following).join(' '))}`);
         } catch(ex) {
             return false;
         }
@@ -40,7 +43,7 @@ export class FollowsRepo {
 
     public getFollowing(userProfileId: string): Set<string> {
         this.initFollowIfNeeded(userProfileId);
-        return this.followsRepo[userProfileId].followers;
+        return this.followsRepo[userProfileId].following;
     }
 
     public getFollowers(userProfileId: string): Set<string> {

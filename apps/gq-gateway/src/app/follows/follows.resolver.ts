@@ -1,4 +1,4 @@
-import { Args, Parent, Query, Resolver, ResolveField } from "@nestjs/graphql";
+import { Args, Parent, Query, Resolver, ResolveField, Mutation } from "@nestjs/graphql";
 import { Follow } from "./follows.model";
 
 import { FollowsService } from "./follows.service";
@@ -11,7 +11,9 @@ export class FollowsResolver {
     @ResolveField()
     async followers(@Parent() follow:Follow) {
         const { profileId } = follow
+        console.log(`In graphQL gateway profileId = ${profileId}`);
         const result = await this.followsService.api.followsControllerGetFollowersByUser(profileId);
+        console.log('In GraphQL gateway after API ${result.data.followers}');
         return result.data.followers;
     }
 
@@ -27,5 +29,18 @@ export class FollowsResolver {
         return { profileId }
     }
 
+    @Mutation(() => Boolean)
+    async followUser(@Args('profileId', { type: () => String }) profileId: string ,
+                        @Args('followProfileId', { type: () => String }) followProfileId: string)  {
+        const result = await this.followsService.api.followsControllerFollow(profileId, followProfileId);
+        return result.data;
+    }
+
+    @Mutation(() => Boolean)
+    async unfollowUser(@Args('profileId', { type: () => String }) profileId: string ,
+                    @Args('unfollowProfileId', { type: () => String }) unfollowProfileId: string)  {
+        const result = await this.followsService.api.followsControllerUnfollow(profileId, unfollowProfileId);
+        return result.data;
+    }
     
 }
