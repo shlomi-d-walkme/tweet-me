@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  kafka:
+    image: spotify/kafkaproxy
+    container_name: kafka
+    environment: 
+      - ADVERTISED_HOST=localhost
+      - ADVERTISED_PORT=9092
+      - ZK_CONNECT=kafka7zookeeper:2181/root/path
+    ports:
+    - 2181:2181
+    - 9092:9092
+    restart: unless-stopped
+  mongo:
+    image: mongo
+    container_name: my-mongo
+    volumes:
+    - ~/mongo/data:/data/db
+    ports:
+    - 27017:27017
+    networks:
+      - my-network
+    restart: unless-stopped
+
+networks:
+  my-network:
+    driver: bridge
