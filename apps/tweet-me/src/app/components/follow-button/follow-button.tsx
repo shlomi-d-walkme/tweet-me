@@ -24,7 +24,7 @@ export function FollowButton({ isFollowing }: FollowButtonProps) {
       headers: { 'Content-Type': 'application/json' }
     };
 
-    fetch(`/api/follows/1/${action}`, requestOptions)
+    fetch(`/api/follows/1/${action}/2`, requestOptions)
       .then(res => res.json())
       .then(
         (result) => {

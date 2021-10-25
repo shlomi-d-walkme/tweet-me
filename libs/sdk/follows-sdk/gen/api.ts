@@ -57,14 +57,18 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @param {string} profileId 
+         * @param {string} followProfileId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        followsControllerFollow: async (profileId: string, options: any = {}): Promise<RequestArgs> => {
+        followsControllerFollow: async (profileId: string, followProfileId: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'profileId' is not null or undefined
             assertParamExists('followsControllerFollow', 'profileId', profileId)
-            const localVarPath = `/api/follows/{profileId}/follow`
-                .replace(`{${"profileId"}}`, encodeURIComponent(String(profileId)));
+            // verify required parameter 'followProfileId' is not null or undefined
+            assertParamExists('followsControllerFollow', 'followProfileId', followProfileId)
+            const localVarPath = `/api/follows/{profileId}/follow/{followProfileId}`
+                .replace(`{${"profileId"}}`, encodeURIComponent(String(profileId)))
+                .replace(`{${"followProfileId"}}`, encodeURIComponent(String(followProfileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -156,14 +160,18 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @param {string} profileId 
+         * @param {string} unfollowProfileId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        followsControllerUnfollow: async (profileId: string, options: any = {}): Promise<RequestArgs> => {
+        followsControllerUnfollow: async (profileId: string, unfollowProfileId: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'profileId' is not null or undefined
             assertParamExists('followsControllerUnfollow', 'profileId', profileId)
-            const localVarPath = `/api/follows/{profileId}/follow`
-                .replace(`{${"profileId"}}`, encodeURIComponent(String(profileId)));
+            // verify required parameter 'unfollowProfileId' is not null or undefined
+            assertParamExists('followsControllerUnfollow', 'unfollowProfileId', unfollowProfileId)
+            const localVarPath = `/api/follows/{profileId}/follow/{unfollowProfileId}`
+                .replace(`{${"profileId"}}`, encodeURIComponent(String(profileId)))
+                .replace(`{${"unfollowProfileId"}}`, encodeURIComponent(String(unfollowProfileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -199,11 +207,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} profileId 
+         * @param {string} followProfileId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async followsControllerFollow(profileId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<boolean>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.followsControllerFollow(profileId, options);
+        async followsControllerFollow(profileId: string, followProfileId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<boolean>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.followsControllerFollow(profileId, followProfileId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -229,11 +238,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} profileId 
+         * @param {string} unfollowProfileId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async followsControllerUnfollow(profileId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<boolean>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.followsControllerUnfollow(profileId, options);
+        async followsControllerUnfollow(profileId: string, unfollowProfileId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<boolean>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.followsControllerUnfollow(profileId, unfollowProfileId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -249,11 +259,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @param {string} profileId 
+         * @param {string} followProfileId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        followsControllerFollow(profileId: string, options?: any): AxiosPromise<boolean> {
-            return localVarFp.followsControllerFollow(profileId, options).then((request) => request(axios, basePath));
+        followsControllerFollow(profileId: string, followProfileId: string, options?: any): AxiosPromise<boolean> {
+            return localVarFp.followsControllerFollow(profileId, followProfileId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -276,11 +287,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @param {string} profileId 
+         * @param {string} unfollowProfileId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        followsControllerUnfollow(profileId: string, options?: any): AxiosPromise<boolean> {
-            return localVarFp.followsControllerUnfollow(profileId, options).then((request) => request(axios, basePath));
+        followsControllerUnfollow(profileId: string, unfollowProfileId: string, options?: any): AxiosPromise<boolean> {
+            return localVarFp.followsControllerUnfollow(profileId, unfollowProfileId, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -295,12 +307,13 @@ export class DefaultApi extends BaseAPI {
     /**
      * 
      * @param {string} profileId 
+     * @param {string} followProfileId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public followsControllerFollow(profileId: string, options?: any) {
-        return DefaultApiFp(this.configuration).followsControllerFollow(profileId, options).then((request) => request(this.axios, this.basePath));
+    public followsControllerFollow(profileId: string, followProfileId: string, options?: any) {
+        return DefaultApiFp(this.configuration).followsControllerFollow(profileId, followProfileId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -328,12 +341,13 @@ export class DefaultApi extends BaseAPI {
     /**
      * 
      * @param {string} profileId 
+     * @param {string} unfollowProfileId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public followsControllerUnfollow(profileId: string, options?: any) {
-        return DefaultApiFp(this.configuration).followsControllerUnfollow(profileId, options).then((request) => request(this.axios, this.basePath));
+    public followsControllerUnfollow(profileId: string, unfollowProfileId: string, options?: any) {
+        return DefaultApiFp(this.configuration).followsControllerUnfollow(profileId, unfollowProfileId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

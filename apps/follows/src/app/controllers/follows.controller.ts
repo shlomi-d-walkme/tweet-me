@@ -33,21 +33,23 @@ export class FollowsController {
         return followingResult;
     }
 
-    @Post('/:profileId/follow')
+    @Post('/:profileId/follow/:followProfileId')
     @ApiResponse({ status: 201, type: Boolean, description: 'Adds a follower' })
-    follow(@Param('profileId') profileId: string): boolean {
-        console.log(`follow-profileId:${profileId}`);
-        this.repo.addFollow(profileId, profileId); //TODO: get the user profile id
-        this.followsMessageProvider.followNotifier(profileId, profileId);
+    follow(@Param('profileId') profileId: string, @Param('followProfileId') followProfileId: string): boolean {
+        console.log(`profileId:${profileId}`);
+        console.log(`follow-profileId:${followProfileId}`);
+        this.repo.addFollow(profileId, followProfileId);
+        this.followsMessageProvider.followNotifier(profileId, followProfileId);
         return true;
     }
-
-    @Delete('/:profileId/follow')
+ 
+    @Delete('/:profileId/follow/:unfollowProfileId')
     @ApiResponse({ status: 204, type: Boolean, description: 'Remove a follower' })
-    unfollow(@Param('profileId') profileId: string) : boolean {
-        console.log(`unfollow-profileId:${profileId}`);
-        this.repo.removeFollow(profileId, profileId); //TODO: get the user profile id
-        this.followsMessageProvider.unfollowNotifier(profileId, profileId);
+    unfollow(@Param('profileId') profileId: string, @Param('unfollowProfileId') unfollowProfileId: string) : boolean {
+        console.log(`profileId:${profileId}`);
+        console.log(`unfollow-profileId:${unfollowProfileId}`);
+        this.repo.removeFollow(profileId, unfollowProfileId); 
+        this.followsMessageProvider.unfollowNotifier(profileId, unfollowProfileId);
         return true;
     }
 }
