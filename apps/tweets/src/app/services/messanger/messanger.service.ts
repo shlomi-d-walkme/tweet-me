@@ -22,7 +22,7 @@ export class MessangerService implements OnModuleInit {
         await this.producer.send({
             topic: 'tweets',
             messages: [
-                { key, value: { actionType, data } }
+                { key, value: JSON.stringify({ actionType, data }) }
             ],
             acks: -1,
         });
