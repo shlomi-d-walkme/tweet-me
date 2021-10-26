@@ -1,16 +1,14 @@
 import { Module } from '@nestjs/common';
 
-import { AppController } from './app.controller';
-
 
 import {FeedModel} from '@tweet-me/feed-model'
-import { AppService } from './app.service';
-import { FollowersController } from './controllers/followers.controller';
-import { TweetsController } from './controllers/tweets.controller';
+import { FeedService } from './services/feed.service';
+import {MessagingService} from '@tweet-me/shared/kafka-infra';
+
 
 @Module({
-  imports: [FeedModel],
-  controllers: [AppController, TweetsController, FollowersController],
-  providers: [AppService],
+  imports: [FeedModel, MessagingService],
+  controllers: [],
+  providers: [FeedService, MessagingService],
 })
 export class AppModule {}

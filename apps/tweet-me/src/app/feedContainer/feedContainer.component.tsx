@@ -6,10 +6,11 @@ import {
   useQuery,
   gql
 } from "@apollo/client";
+import {useGetFeed} from './use.feed.hook';
 
 
-const QUERY = gql`query {
-  feed(id:"asd") {
+const QUERY = gql`query Query($profileId: String!){
+  feed(id:$profileId) {
     id
     tweets{
       date
@@ -17,6 +18,14 @@ const QUERY = gql`query {
     }
   }
 }`;
+
+interface FeedQuery {
+  feed: {
+  id: string,
+  tweets: {date: string, content: string}[]  
+  }
+}
+
 
 
 
@@ -28,17 +37,17 @@ export function FeedContainer(props: FeedContainerProps) {
 
 //  feedPresentationApi.
 
-const { loading, error, data } = useQuery(QUERY);
+const { loading, error, feed } = useGetFeed( 'moshe');
 
 if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-    console.log('ddd: ', data);
+    console.log('ddd: ', feed);
   return (
     <div>
       
       <Feed>
-      {data.feed.tweets.map(({content, date}: any) => (<Tweet
+      {feed?.tweets.map(({content, date}) => (<Tweet
           profileName={`Dozi`} 
           text={content}
           comments={['1', '2', '3']}
