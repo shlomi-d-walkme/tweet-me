@@ -25,6 +25,7 @@ export class Tweets {
     addTweet(@Body('profileId') profileId: string,
             @Body('content') content: string,
             @Body('parentId') parentId: string) : TweetsDto {
+        console.log("REST ADD", profileId, content, parentId);
         const tweet = this.repo.addTweet(profileId, content, parentId);
         this.messager.sendMsg(tweet.id, ActionType.tweetCreated, tweet).catch();
         return tweet;

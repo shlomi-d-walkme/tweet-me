@@ -8,8 +8,10 @@ ReactDOM.render(
   <ApolloProvider client={apolloClient}>
     <StrictMode>
       <App />
-    </StrictMode>{" "}
+    </StrictMode>
   </ApolloProvider>,
 
   document.getElementById("root")
 );
+
+

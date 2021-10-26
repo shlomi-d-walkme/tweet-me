@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import AmirComponent from './components/amir-component/amir-component';
+import MutationComponent from './components/mutation-component/mutation-component';
 import { FeedContainer } from './feedContainer/feedContainer.component';
 import { RegisterForm } from './register-form/register-form.component';
 
@@ -7,6 +9,10 @@ export const App = () => {
  
   return (
     <>
+      <AmirComponent></AmirComponent>
+      <div>---------------------------</div>
+      <MutationComponent></MutationComponent>
+      <div>---------------------------</div>
       <div style={{ textAlign: 'center' }}>
         <h1>Welcome to TweetMe!</h1>
         <img

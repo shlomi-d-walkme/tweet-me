@@ -19,6 +19,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@sdk/*": [
+        "libs/sdk/*"
+      ],
       "@tweet-me/sdk/feed-sdk": [
         "libs/sdk/feed-sdk/gen/index.ts"
       ],
@@ -30,9 +33,6 @@
       ],
       "@tweet-me/shared/kafka-infra": [
         "libs/shared/kafka-infra/src/index.ts"
-      ],
-      "@sdk/*": [
-        "libs/sdk/*"
       ]
     }
   },
