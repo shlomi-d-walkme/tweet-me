@@ -2,7 +2,7 @@ import { Controller } from '@nestjs/common';
 import { KafkaMessage } from 'kafkajs';
 import { EventPattern, Payload, Transport } from '@nestjs/microservices';
 import { DefaultApi as TweetDefaultApi, Configuration as TweetConfiguration, TweetsDto } from '@sdk/tweets-sdk';
-import { FOLLOWS_ACTION } from '../../../../../libs/api-interfaces/src/lib/follows-kafka-model';
+import { FOLLOWS_ACTION } from '@tweet-me/api-interfaces';
 
 
 @Controller()

@@ -1,6 +1,6 @@
 import { prop, getModelForClass } from '@typegoose/typegoose'
 
-export class FeedTweet {
+class FeedTweetEntity {
     @prop({
         required: true
     })
@@ -23,8 +23,7 @@ export class FeedTweet {
         default: () => Date.now()
     })
     creationDate: Date;
-
-
 }
 
-export const FeedTweetModel = getModelForClass(FeedTweet);
+export type FeedTweet = Pick<FeedTweetEntity, keyof FeedTweetEntity>;
+export const FeedTweetModel = getModelForClass(FeedTweetEntity);

@@ -82,6 +82,35 @@
       },
       "tags": []
     },
+    "feed-model": {
+      "root": "libs/feed-model",
+      "sourceRoot": "libs/feed-model/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/feed-model/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/feed-model"
+          ],
+          "options": {
+            "jestConfig": "libs/feed-model/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "feed-presentation": {
       "root": "apps/feed-presentation",
       "sourceRoot": "apps/feed-presentation/src",

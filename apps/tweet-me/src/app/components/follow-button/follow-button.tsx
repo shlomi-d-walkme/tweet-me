@@ -1,53 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import css from './follow-button.module.scss';
-import { useMutation, gql } from "@apollo/client";
-
-// const FOLLOW_MUTATION = gql`mutation {
-//   followUser(profileId: $profileId, followProfileId: $followProfileId)
-// }`;
-
-// const UNFOLLOW_MUTATION = gql`mutation {
-//   followUser(profileId: $profileId, followProfileId: $unfollowProfileId)
-// }`;
+import { useMutation, gql, useQuery } from "@apollo/client";
+import { useFollowUser, FollowUser } from './useFollowUser';
+import { useUnfollowUser } from './useUnfollowUser';
 
 export interface FollowButtonProps {
   isFollowing: boolean
 }
 
-export function FollowButton({ isFollowing }: FollowButtonProps) {
+export interface FollowsInput {
+  profileId: string
+}
+
+export function FollowButton({ isFollowing }: FollowButtonProps, {profileId}: FollowsInput) {
   const [isFollowingState, setIsFollowing] = useState(isFollowing);
+  const { follow, loading:followingLoading } = useFollowUser();
+  const { unfollow, loading:unfollowingLoading } = useUnfollowUser();
 
   const buttonText = isFollowingState ? "Unfollow": "Follow";
 
   function onFollowClicked() {
+    isFollowingState ? unfollow("1", "2") : follow("1", "2");
+    
     setIsFollowing(!isFollowingState);
   }
 
-  useEffect(() => {
-    if(isFollowing === isFollowingState) return; //Need to think about another workaround
-
-    // const [ data ] = useMutation(FOLLOW_MUTATION);
-
-    const action = isFollowingState ? "unfollow": "follow";
-    const method = isFollowingState ? "DELETE": "POST";
-
-    const requestOptions = {
-      method,
-      headers: { 'Content-Type': 'application/json' }
-    };
-
-    fetch(`/api/follows/1/${action}/2`, requestOptions)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-          // isFollowing = !isFollowing;
-        },
-        (error) => {
-          console.log("ERROR" + error);
-        }
-      );
-  }, [isFollowingState]);
+  if(followingLoading) return <div>Sending request...</div>
+  if(unfollowingLoading) return <div>Sending request...</div>
 
   return (
     <div>
