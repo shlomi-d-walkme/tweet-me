@@ -8,10 +8,6 @@ export const App = () => {
  
   return (
     <>
-      <AmirComponent></AmirComponent>
-      <div>---------------------------</div>
-      <MutationComponent></MutationComponent>
-      <div>---------------------------</div>
       <div style={{ textAlign: 'center' }}>
         <h1>Welcome to TweetMe!</h1>
         <img
