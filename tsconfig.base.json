@@ -19,6 +19,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@tweet-me/api-interfaces": [
+        "libs/api-interfaces/src/index.ts"
+      ],
       "@tweet-me/feed-model": [
         "libs/feed-model/src/index.ts"
       ],

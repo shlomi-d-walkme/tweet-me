@@ -5,7 +5,11 @@ import { FeedTweetModel, FeedTweet } from '..';
 @Injectable()
 export class FeedDbService {
     async onModuleInit() {
+        if (!process.env.DB_PATH ) {
+            throw new Error('Env vriable DB_PATH not defined, it should be something like "mongodb://localhost:27017/tweet-me-feed-materializer"') 
+        }
         try {
+          
             const result = await mongoose.connect(process.env.DB_PATH);
             console.log('connected to DB service');
         } catch(e) {

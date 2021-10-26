@@ -2,11 +2,13 @@ import { Controller } from '@nestjs/common';
 import { KafkaMessage, Kafka } from 'kafkajs';
 import { EventPattern, Payload, Transport } from '@nestjs/microservices';
 import { DefaultApi as FollowsDefaultApi, Configuration as FollowsConfiguration, FollowersDto } from '@tweet-me/sdk/follows-sdk';
-import { FeedTweet, FeedTweetModel } from '../entities/feedTweet.model';
-import { ActionType as TWEETS_ACTION } from '../../../../../libs/api-interfaces/src/lib/tweets-model';
+import { ActionType as TWEETS_ACTION } from '@tweet-me/api-interfaces';
+import { FeedDbService, FeedTweet } from '@tweet-me/feed-model';
 
 @Controller()
 export class TweetsController {
+  constructor(private db: FeedDbService){};
+
   followsApi = new FollowsDefaultApi(new FollowsConfiguration({basePath: "http://localhost:5555"}));
 
   @EventPattern('tweets', Transport.KAFKA)
@@ -48,6 +50,8 @@ export class TweetsController {
       feedTweets.push(newTweetInFeed);
     });
     console.log('feedTweets', feedTweets);
+    this.db.createFeedTweetes(feedTweets);
+
     //const omry = await FeedTweetModel.insertMany(feedTweets);
   }
 

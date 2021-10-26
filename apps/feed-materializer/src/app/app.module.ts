@@ -1,13 +1,15 @@
 import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
-import { TweetsController } from './controllers/tweetsListener.controller';
-import { FollowersController } from './controllers/followersListener.controller';
-import {FeedModelModule} from '@tweet-me/feed-model'
+
+
+import {FeedModel} from '@tweet-me/feed-model'
 import { AppService } from './app.service';
+import { FollowersController } from './controllers/followers.controller';
+import { TweetsController } from './controllers/tweets.controller';
 
 @Module({
-  imports: [FeedModelModule],
+  imports: [FeedModel],
   controllers: [AppController, TweetsController, FollowersController],
   providers: [AppService],
 })

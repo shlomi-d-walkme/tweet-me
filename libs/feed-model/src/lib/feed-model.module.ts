@@ -4,9 +4,9 @@ import { FeedDbService } from '../feed-db/feed-db.service';
 
 @Module({
 	controllers: [],
-	providers: [],
+	providers: [FeedDbService],
 	exports: [FeedDbService],
 })
-export class FeedModelModule {}    
+export class FeedModel {}    
 
 
