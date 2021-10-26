@@ -8,7 +8,7 @@ import { ActionType, TweetKafkaModel } from '@tweet-me/api-interfaces';
 export class FeedService {
 
   constructor(private messagingService:  MessagingService){
-
+    
   }
 
   consume(){
