@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 
 import { AppService } from './app.service';
-import { FeedTweetModel } from './entities/feedTweet.model';
+
 
 @Controller()
 export class AppController {
