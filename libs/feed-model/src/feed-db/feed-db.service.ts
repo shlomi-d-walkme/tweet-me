@@ -4,6 +4,7 @@ import { FeedTweetModel, FeedTweet } from '..';
 
 @Injectable()
 export class FeedDbService {
+    
     async onModuleInit() {
         if (!process.env.DB_PATH ) {
             throw new Error('Env vriable DB_PATH not defined, it should be something like "mongodb://localhost:27017/tweet-me-feed-materializer"') 
@@ -15,6 +16,12 @@ export class FeedDbService {
         } catch(e) {
             console.error(e);
         }
+    }
+
+    async getTweets(profileId: string): Promise<FeedTweet[]> {
+        return await FeedTweetModel.find({
+            feedOwnerId: profileId
+        });
     }
 
     async createFeedTweetes(tweets:FeedTweet[]){

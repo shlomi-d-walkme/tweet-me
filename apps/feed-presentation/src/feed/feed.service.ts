@@ -1,15 +1,30 @@
-import { Injectable } from '@nestjs/common';
-import { FeedDto } from './feed-dto';
-
+import { Injectable } from "@nestjs/common";
+import { FeedDto } from "./feed-dto";
+import { FeedDbService } from "@tweet-me/feed-model";
 
 @Injectable()
 export class FeedService {
+  constructor(private feedDbService: FeedDbService) {}
+  async findAll():Promise<FeedDto> {
+    const profileId = "Moshe";
+    return {
+      tweets:  (await this.feedDbService.getTweets(profileId)).map(d => ({
+        id: d.tweetId,
+        content: d.content,
+        authorId: 'NOT YET',
+        authorName: 'NOT YET',        
+        date: d.creationDate
+      })),
+      id: profileId,
+    };
+  }
 
-    public findAll(): FeedDto {
-        return {id: '1', tweets: [
-            {id: '1', content:'Dozi is the best!', authorId:'1', authorName: 'Dozi', date: new Date()},
-            {id: '2', content:'Dozi is de best!', authorId:'1', authorName: 'Shauli', date: new Date()},
-            {id: '3', content:'Dozi is best!', authorId:'1', authorName: 'Adi', date: new Date()},
-            {id: '4', content:'Dozi best!', authorId:'1', authorName: 'Chen', date: new Date()}]};
-    }
+
+  async seed(forProfileId:string) {
+
+      await this.feedDbService.createFeedTweetes([1,2,3,4,5].map(n => ({
+       comments: n, content: `abc ${n}`, creationDate:new Date(), feedOwnerId:forProfileId, tweetId: `${forProfileId}_${n}` 
+      })));
+
+  }
 }

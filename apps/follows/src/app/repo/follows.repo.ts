@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { DbModule } from '../db/db.module';
+import { FollowsModel } from '../models/follows.model';
 
 interface followsRepo {
     [profileId: string]: {
@@ -11,7 +13,9 @@ interface followsRepo {
 export class FollowsRepo {
     private followsRepo: followsRepo = {};
 
-    public addFollow(userProfileId: string, followingProfileId: string): boolean {
+    constructor(private db:DbModule) {}
+
+    public async addFollow(userProfileId: string, followingProfileId: string): Promise<boolean> {
         this.initFollowIfNeeded(followingProfileId);
         this.initFollowIfNeeded(userProfileId);
 
@@ -21,6 +25,11 @@ export class FollowsRepo {
             console.log(`user profile ${followingProfileId} is followed by ${(new Array(...this.followsRepo[followingProfileId].followers).join(' '))}`);
             this.followsRepo[userProfileId].following.add(followingProfileId);
             console.log(`user profile ${userProfileId} is following ${(new Array(...this.followsRepo[userProfileId].following).join(' '))}`);
+            
+            //MONGO
+            const follower = await FollowsModel.findOrCreate(userProfileId);
+            await follower.follow(followingProfileId);
+
         } catch(ex) {
             return false;
         }
@@ -28,13 +37,18 @@ export class FollowsRepo {
         return true;
     }
 
-    public removeFollow(userProfileId: string, unfollowingProfileId: string): boolean {
+    public async removeFollow(userProfileId: string, unfollowingProfileId: string): Promise<boolean> {
         // Should be as a transaction
         this.initFollowIfNeeded(userProfileId);
         this.initFollowIfNeeded(unfollowingProfileId);
         try {
             this.followsRepo[unfollowingProfileId].followers.delete(userProfileId);
             this.followsRepo[userProfileId].following.delete(unfollowingProfileId);
+
+            //MONGO
+            const follower = await FollowsModel.findOrCreate(userProfileId);
+            await follower.unfollow(unfollowingProfileId);
+
         } catch(ex) {
             return false;
         }
