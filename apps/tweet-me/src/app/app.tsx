@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { FeedContainer } from './feedContainer/feedContainer.component';
 import { RegisterForm } from './register-form/register-form.component';
 
-
 export const App = () => {
  
   return (

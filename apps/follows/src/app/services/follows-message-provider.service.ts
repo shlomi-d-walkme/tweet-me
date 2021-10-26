@@ -8,11 +8,11 @@ export class FollowsMessageProvider {
 
     followNotifier(profileId: string, followProfileId: string) {
         const followModel = new FollowsKafkaModel(followProfileId, FOLLOWS_ACTION.FOLLOW);
-        this.kafkaService.sendMessage([{ key: profileId, value: followModel}]);
+        this.kafkaService.sendMessage([{ key: profileId, value: JSON.stringify(followModel)}]);
     }
 
     unfollowNotifier(profileId: string, unfollowProfileId: string) {
         const followModel = new FollowsKafkaModel(unfollowProfileId, FOLLOWS_ACTION.UNFOLLOW);
-        this.kafkaService.sendMessage([{ key: profileId, value: followModel}]);
+        this.kafkaService.sendMessage([{ key: profileId, value: JSON.stringify(followModel)}]);
     }
 }

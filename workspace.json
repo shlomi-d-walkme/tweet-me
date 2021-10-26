@@ -569,6 +569,35 @@
         }
       }
     },
+    "shared-kafka-infra": {
+      "root": "libs/shared/kafka-infra",
+      "sourceRoot": "libs/shared/kafka-infra/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/kafka-infra/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/kafka-infra"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/kafka-infra/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "tweet-me": {
       "root": "apps/tweet-me",
       "sourceRoot": "apps/tweet-me/src",
