@@ -21,8 +21,7 @@ export class TweetsController {
     console.log('data', data);
     console.log('actionType', actionType);
     const followers = await (await this.followsApi.followsControllerGetFollowersByUser("1")).data;
-    console.log('followers', followers);
-
+    console.log('followers', followers); 
     switch(actionType) {
       case TWEETS_ACTION.tweetCreated:
         this.addTweetToFeeds(data, followers);
@@ -51,7 +50,7 @@ export class TweetsController {
     });
     console.log('feedTweets', feedTweets);
     this.db.createFeedTweetes(feedTweets);
-
+    
     //const omry = await FeedTweetModel.insertMany(feedTweets);
   }
 
