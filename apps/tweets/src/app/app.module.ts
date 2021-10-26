@@ -5,10 +5,13 @@ import { AppService } from './app.service';
 import { Tweets } from './controllers/tweets.controller';
 import { TweetsRepo } from './repo/tweets.repo';
 import { MessangerService } from './services/messanger/messanger.service';
+import {MessagingService} from '@tweet-me/shared/kafka-infra';
+
+
 
 @Module({
-  imports: [],
+  imports: [MessagingService],
   controllers: [AppController, Tweets],
-  providers: [AppService, TweetsRepo, MessangerService],
+  providers: [AppService, TweetsRepo, MessangerService, MessagingService],
 })
 export class AppModule {}
