@@ -11,7 +11,8 @@ export class ProfileResolver {
 
   @Query(() => Profile)
   async profile(@Args("id", { type: () => String }) id: string) {
-    return this.sdk.api.getProfile(id);
+    const res =  await this.sdk.api.getProfile(id);
+    return res.data
   }
 
   @Query(() => [Profile])

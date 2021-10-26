@@ -2,6 +2,20 @@ import { Field, Form, Formik, useFormik } from 'formik';
 import { DefaultApi, ProfileResponse, Configuration } from '@tweet-me/sdk/profile-sdk';
 import './register-form.module.scss';
 import { useState } from 'react';
+import { gql, useQuery } from '@apollo/client';
+import { apolloClient } from './../../apollo-client';
+
+interface ProfileQuery {
+  profile: {
+    email:string;
+    name:string;
+  }
+}
+
+interface ProfileQueryVars {
+  id: string;
+}
+
 
 /* eslint-disable-next-line */
 export interface RegisterFormProps {}
@@ -17,6 +31,19 @@ const initailForm = {
 const api = new DefaultApi(new Configuration({basePath: "http://localhost:4200"}));
 
 export function RegisterForm(props: RegisterFormProps) {
+  const { data, loading, error } = useQuery<ProfileQuery, ProfileQueryVars>(
+    gql`
+      query Query($id: String!) {
+        profile(id: $id) {
+          email 
+          name
+        }
+      }
+    `, {
+      variables: { id: "6177b3f2df843d8e3994e3ef"}
+    
+  });
+  console.log(data);
 
   const [user, setUser] = useState<ProfileResponse | null>(null);
 
@@ -35,9 +62,9 @@ export function RegisterForm(props: RegisterFormProps) {
     }
   });
 
-  if(user) return <div>Hello {user.name}</div>
   
-  return (
+  return (<div>
+    <div> Hello { data && data.profile.name }</div>
     <div>
       form:
       <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
@@ -95,6 +122,7 @@ export function RegisterForm(props: RegisterFormProps) {
                 </button>
                 </form>
         </div>
+    </div>
     </div>
   );
 }
