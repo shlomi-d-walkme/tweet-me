@@ -14,8 +14,8 @@ export interface FollowsInput {
 
 export function FollowButton({ isFollowing }: FollowButtonProps, {profileId}: FollowsInput) {
   const [isFollowingState, setIsFollowing] = useState(isFollowing);
-  const { follow, loading:followingLoading } = useFollowUser();
-  const { unfollow, loading:unfollowingLoading } = useUnfollowUser();
+  const { follow, loading: followingLoading } = useFollowUser();
+  const { unfollow, loading: unfollowingLoading } = useUnfollowUser();
 
   const buttonText = isFollowingState ? "Unfollow": "Follow";
 
