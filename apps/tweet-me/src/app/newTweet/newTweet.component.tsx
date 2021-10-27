@@ -16,11 +16,12 @@ export function NewTweet() {
       
       <TextField
           id="filled-multiline-flexible"
-          label="What's your tweet?"
+          label="What's on your mind?"
           multiline
           maxRows={4}
           //value={twettText}
           variant="filled"
+          fullWidth 
         />
       </CardContent>
       </div>
