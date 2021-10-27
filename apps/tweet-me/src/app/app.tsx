@@ -1,10 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { FeedContainer } from './feedContainer/feedContainer.component'
 import { LoginPage } from "./pages/loginPage/login.page";
 import { RegisterForm } from './register-form/register-form.component';
