@@ -28,8 +28,8 @@ export class FeedDbService {
         await FeedTweetModel.create(tweets);
     }
 
-    async updateFeedTweetes(tweetId: string,content: string){
-        await FeedTweetModel.updateMany({"tweetId": tweetId}, {"$set":{"content": content}});
+    async updateFeedTweetes(tweetId: string,content: string,comments:number){
+        await FeedTweetModel.updateMany({"tweetId": tweetId}, {"$set":{"content": content,"comments": comments}});
     }
 
     async deleteTweetFromFeeds(tweetId:string){
