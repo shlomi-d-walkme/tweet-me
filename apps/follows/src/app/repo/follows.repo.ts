@@ -6,24 +6,25 @@ import { mongoose } from '@typegoose/typegoose'
 export class FollowsRepo {
     constructor() {}
 
-    async addFollow(userProfileId: string, followingProfileId: string) {
-        const follower = await FollowsModel.findOrCreate(userProfileId);
+    async addFollow(profileId: string, followingProfileId: string) {
+        const follower = await FollowsModel.findOrCreate(profileId);
         await follower.follow(followingProfileId);
     }
 
-    async removeFollow(userProfileId: string, unfollowingProfileId: string) {
-        const follower = await FollowsModel.findOrCreate(userProfileId);
+    async removeFollow(profileId: string, unfollowingProfileId: string) {
+        const follower = await FollowsModel.findOrCreate(profileId);
         await follower.unfollow(unfollowingProfileId);
     }
 
-    async getFollowing(userProfileId: string) {
-        const profileData = await FollowsModel.findOne({userProfileId});
+    async getFollowing(profileId: string) {
+        const profileData = await FollowsModel.findOne({profileId});
         const following = profileData?.following || new mongoose.Types.Array<string>();
         return following;
     }
 
-    async getFollowers(userProfileId: string) {
-        const profileData = await FollowsModel.findOne({userProfileId});
+    async getFollowers(profileId: string) {
+        const profileData = await FollowsModel.findOne({profileId});
+        console.log(`profileId = ${profileId}, profileData = ${profileData}`);
         const followers = profileData?.followers || new mongoose.Types.Array<string>();
         return followers;
     }
