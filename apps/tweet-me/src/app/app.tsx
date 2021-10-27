@@ -36,7 +36,6 @@ export const App = () => {
 
         <Route path="/register">
           <RegisterForm></RegisterForm>
-          <SignUpButton />
         </Route>
 
         <Route path="/feed">
