@@ -25,8 +25,6 @@ export class Tweets {
     addTweet(@Body('profileId') profileId: string,
             @Body('content') content: string,
             @Body('parentId') parentId: string) : TweetsDto {
-                profileId = "1";
-                content ="this is the contentttt";
         console.log("REST ADD", profileId, content, parentId);
         const tweet = this.repo.addTweet(profileId, content, parentId);
         this.messager.sendMsg(tweet.id, ActionType.tweetCreated, tweet).catch();
@@ -35,17 +33,22 @@ export class Tweets {
 
     @Delete('/:profileId')
     @ApiOkResponse({ status: 204, type: Boolean, description: 'Remove a tweet' })
-    deleteTweet(@Param('profileId') profileId: string, @Body('tweetId') tweetId: string) {
-        this.repo.removeTweet(profileId, tweetId);
+    deleteTweet(@Param('profileId') profileId: string, @Body('tweetId') tweetId: string) : Boolean {
+        try {
+            this.repo.removeTweet(profileId, tweetId);
+        } catch {
+            return false;
+        }
+
         this.messager.sendMsg(tweetId, ActionType.tweetDeleted, undefined).catch();
+        return true;
     }
 
     @Put('/:profileId/')
-    @ApiOkResponse({ status: 204, type: Boolean, description: 'Remove a tweet' })
-    updateTweet(@Param('profileId') profileId: string, @Body('tweetId') tweetId: string, @Body('content') content: string) {
+    @ApiOkResponse({ status: 204, type: TweetsDto, description: 'Update tweet content' })
+    updateTweet(@Param('profileId') profileId: string, @Body('tweetId') tweetId: string, @Body('content') content: string) : TweetsDto {
         const tweet = this.repo.updateTweet(profileId, tweetId, content);
         this.messager.sendMsg(tweet.id, ActionType.tweetUpdate, tweet).catch();
         return tweet;
     }
-
 }
