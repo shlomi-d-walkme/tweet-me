@@ -16,6 +16,20 @@ export class Tweet {
 
         return new TweetModel({ profileId });
     }
+
+    // async addTweet(this: DocumentType<Tweet>, profileId:string) {
+    //     this.following.addToSet(followingProfileId);
+
+    //     const followee = await FollowsModel.findOrCreate(followingProfileId);
+    //     followee.followers.addToSet(this.profileId);
+
+    //     try{
+    //         await this.save();
+    //         await followee.save();
+    //     } catch(e) {
+    //         this.unfollow(followingProfileId);
+    //     }
+    // }
 }
 
 export const TweetModel = getModelForClass(Tweet);

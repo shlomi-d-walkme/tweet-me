@@ -6,6 +6,7 @@ import { TweetsRepo } from '../repo/tweets.repo';
 import { MessangerService } from '../services/messanger/messanger.service';
 import { ActionType } from '@tweet-me/api-interfaces';
 import { TweetsInputDto } from '../dto/tweets-input-dto';
+import { TweetsUpdateDto } from '../dto/tweets-update-dto';
 
 @Controller('tweets')
 export class Tweets {
@@ -32,7 +33,7 @@ export class Tweets {
 
     @Delete('/:profileId')
     @ApiOkResponse({ status: 204, type: Boolean, description: 'Remove a tweet' })
-    deleteTweet(@Param('profileId') profileId: string, @Body('tweetId') tweetId: string) : boolean {
+    deleteTweet(@Param('profileId') profileId: string, @Body() tweetId: string) : boolean {
         try {
             this.repo.removeTweet(profileId, tweetId);
         } catch {
@@ -45,8 +46,8 @@ export class Tweets {
 
     @Put('/:profileId/')
     @ApiOkResponse({ status: 204, type: TweetsDto, description: 'Update tweet content' })
-    updateTweet(@Param('profileId') profileId: string, @Body('tweetId') tweetId: string, @Body('content') content: string) : TweetsDto {
-        const tweet = this.repo.updateTweet(profileId, tweetId, content);
+    updateTweet(@Param('profileId') profileId: string, @Body() body: TweetsUpdateDto) : TweetsDto {
+        const tweet = this.repo.updateTweet(profileId, body.tweetId, body.content);
         this.messager.sendMsg(tweet.id, ActionType.tweetUpdate, tweet).catch();
         return tweet;
     }
