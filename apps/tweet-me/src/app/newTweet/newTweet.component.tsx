@@ -11,6 +11,7 @@ export function NewTweet() {
 
   function createAddTweet() {
     addTweet({content: tweetText, profileId: "1", parentId: ""});
+    setTweetText('');
   }
 
   const handleTweetChange = (event:ChangeEvent<HTMLInputElement>) => {
