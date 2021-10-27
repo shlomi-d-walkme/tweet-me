@@ -3,17 +3,10 @@ import { DefaultApi, ProfileResponse, Configuration } from '@tweet-me/sdk/profil
 import styles from './register-form.module.scss';
 import { useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
+import { apolloClient } from './../../apollo-client';
+import { useGetProfile } from './use.getProfile.hook';
 
-interface ProfileQuery {
-  profile: {
-    email:string;
-    name:string;
-  }
-}
 
-interface ProfileQueryVars {
-  id: string;
-}
 
 
 /* eslint-disable-next-line */
@@ -30,18 +23,8 @@ const initailForm = {
 const api = new DefaultApi(new Configuration({basePath: "http://localhost:4200"}));
 
 export function RegisterForm(props: RegisterFormProps) {
-  const { data, loading, error } = useQuery<ProfileQuery, ProfileQueryVars>(
-    gql`
-      query Query($id: String!) {
-        profile(id: $id) {
-          email 
-          name
-        }
-      }
-    `, {
-      variables: { id: "6177b3f2df843d8e3994e3ef"}
-    
-  });
+  const {data} = useGetProfile("6177b3f2df843d8e3994e3ef")
+  
   console.log(data);
 
   const [user, setUser] = useState<ProfileResponse | null>(null);
