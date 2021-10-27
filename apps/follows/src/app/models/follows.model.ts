@@ -1,6 +1,6 @@
 import { prop, getModelForClass, ReturnModelType, DocumentType, mongoose } from '@typegoose/typegoose'
 
-class Follows {
+export class Follows {
     @prop({
         required: true,
         unique: true,
@@ -8,10 +8,10 @@ class Follows {
     profileId: string;
 
     @prop()
-    followers: mongoose.Types.Array<{profileId: String}>;
+    followers: mongoose.Types.Array<string>;
 
     @prop()
-    following: mongoose.Types.Array<{profileId: String}>;
+    following: mongoose.Types.Array<string>;
 
     static async findOrCreate(this: ReturnModelType<typeof Follows>, profileId:string) {
         const connection = await this.findOne({profileId}).exec();

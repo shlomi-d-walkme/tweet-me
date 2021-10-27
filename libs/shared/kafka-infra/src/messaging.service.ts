@@ -26,7 +26,6 @@ export class MessagingService {
       value: JSON.stringify(message),
     })
 
-
     const producer = this.kafka.producer({
       createPartitioner: Partitioners.JavaCompatiblePartitioner
     })
@@ -52,11 +51,10 @@ export class MessagingService {
 
     await consumer.subscribe({
       topic: topic,
-//      fromBeginning: fromBeginning,
+      fromBeginning: fromBeginning,
     })
 
     consumer.run({
-      autoCommit: false,
       eachMessage: async (payload: EachMessagePayload) => {
         console.log(`Incoming message in ${topic} [${payload.partition}]`)
         const messageAsT = JSON.parse(payload.message.value.toString()) as T

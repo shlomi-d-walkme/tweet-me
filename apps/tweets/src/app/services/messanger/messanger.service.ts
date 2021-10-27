@@ -8,19 +8,11 @@ import {MessagingService} from '@tweet-me/shared/kafka-infra';
 @Injectable()
 export class MessangerService {
 
-    constructor(private messagingService : MessagingService) {
-
-    }
+    constructor(private readonly messagingService : MessagingService) { }
 
     public async sendMsg(key: string, actionType: ActionType, data?: TweetsDto) {
         console.log("is is the messenger sending a tweet");
         const {id, profileId, content, date, parentId} = data;
         await this.messagingService.produce<TweetKafkaModel>('tweets', profileId, {action: actionType, tweet: { id, profileId, content, date: date.toString(), parentId}});
-
-            // messages: [
-            //     { key, value: JSON.stringify({ actionType, data }) }
-            // ],
-            // acks: -1,
-       // });
     }
 }

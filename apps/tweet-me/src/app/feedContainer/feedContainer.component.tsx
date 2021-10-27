@@ -1,6 +1,7 @@
 import './feedContainer.module.scss';
 import { Feed } from '../feed/feed.component';
 import { Tweet } from '../tweet/tweet.component';
+import {NewTweet} from '../newTweet/newTweet.component';
 import React, { useEffect, useState } from 'react';
 import {
   useQuery,
@@ -14,7 +15,8 @@ const QUERY = gql`query Query($profileId: String!){
     id
     tweets{
       date
-      content 
+      content
+
     }
   }
 }`;
@@ -45,7 +47,7 @@ if (loading) return <p>Loading...</p>;
     console.log('ddd: ', feed);
   return (
     <div>
-      
+      <NewTweet></NewTweet>
       <Feed>
       {feed?.tweets.map(({content, date}) => (<Tweet
           profileName={`Dozi`} 

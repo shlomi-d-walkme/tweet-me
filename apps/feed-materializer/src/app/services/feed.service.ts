@@ -1,8 +1,9 @@
-import {Injectable} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import {MessagingService} from '@tweet-me/shared/kafka-infra';
-import {ActionType as TWEETS_ACTION, FollowsKafkaModel, TweetKafkaModel} from '@tweet-me/api-interfaces';
-import {TweetService} from './tweet.service';
-import {FollowService} from './follow.service';
+import { ActionType as TWEETS_ACTION, FollowsKafkaModel, TweetKafkaModel } from '@tweet-me/api-interfaces';
+import { TweetService } from './tweet.service';
+import { FollowService } from './follow.service';
+
 
 
 @Injectable()

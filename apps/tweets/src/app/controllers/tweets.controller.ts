@@ -4,7 +4,8 @@ import { ApiOkResponse } from '@nestjs/swagger';
 import { TweetsDto } from '../dto/tweets-dto';
 import { TweetsRepo } from '../repo/tweets.repo';
 import { MessangerService } from '../services/messanger/messanger.service';
-import { ActionType } from 'libs/api-interfaces/src/lib/tweets-model';
+import { ActionType } from '@tweet-me/api-interfaces';
+import { TweetsInputDto } from '../dto/tweets-input-dto';
 
 @Controller('tweets')
 export class Tweets {
@@ -22,30 +23,31 @@ export class Tweets {
 
     @Post('/')
     @ApiOkResponse({ status: 201, type: TweetsDto, description: 'Add a tweet' })
-    addTweet(@Body('profileId') profileId: string,
-            @Body('content') content: string,
-            @Body('parentId') parentId: string) : TweetsDto {
-                profileId = "1";
-                content ="this is the contentttt";
-        console.log("REST ADD", profileId, content, parentId);
-        const tweet = this.repo.addTweet(profileId, content, parentId);
+    addTweet(@Body() body: TweetsInputDto) : TweetsDto {
+                
+        const tweet = this.repo.addTweet(body.profileId, body.content, body.parentId);
         this.messager.sendMsg(tweet.id, ActionType.tweetCreated, tweet).catch();
         return tweet;
     }
 
     @Delete('/:profileId')
     @ApiOkResponse({ status: 204, type: Boolean, description: 'Remove a tweet' })
-    deleteTweet(@Param('profileId') profileId: string, @Body('tweetId') tweetId: string) {
-        this.repo.removeTweet(profileId, tweetId);
+    deleteTweet(@Param('profileId') profileId: string, @Body('tweetId') tweetId: string) : boolean {
+        try {
+            this.repo.removeTweet(profileId, tweetId);
+        } catch {
+            return false;
+        }
+
         this.messager.sendMsg(tweetId, ActionType.tweetDeleted, undefined).catch();
+        return true;
     }
 
     @Put('/:profileId/')
-    @ApiOkResponse({ status: 204, type: Boolean, description: 'Remove a tweet' })
-    updateTweet(@Param('profileId') profileId: string, @Body('tweetId') tweetId: string, @Body('content') content: string) {
+    @ApiOkResponse({ status: 204, type: TweetsDto, description: 'Update tweet content' })
+    updateTweet(@Param('profileId') profileId: string, @Body('tweetId') tweetId: string, @Body('content') content: string) : TweetsDto {
         const tweet = this.repo.updateTweet(profileId, tweetId, content);
         this.messager.sendMsg(tweet.id, ActionType.tweetUpdate, tweet).catch();
         return tweet;
     }
-
 }
