@@ -2,10 +2,6 @@ import styles from './newTweet.module.scss';
 import { Card, Button, TextField, CardActions, CardContent } from '@material-ui/core';
 import { useState } from 'react';
 
-
-/* eslint-disable-next-line */
-//export interface TweetProps { }
-
 export function NewTweet() {
   const [twettText, setTwettText] = useState('dozi');
   return (
@@ -18,7 +14,6 @@ export function NewTweet() {
             label="What's on your mind?"
             multiline
             maxRows={4}
-            //value={twettText}
             variant="filled"
             fullWidth 
           />
