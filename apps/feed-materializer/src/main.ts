@@ -10,7 +10,9 @@ async function bootstrap() {
   const app = await NestFactory.createApplicationContext(AppModule);
   
   const appService = app.get(FeedService);
+  console.log('CONSUME!!!');
   appService.consume();
+
 }
 
 bootstrap().then();

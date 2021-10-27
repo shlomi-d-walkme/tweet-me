@@ -1,5 +1,5 @@
-import {Inject, Injectable} from '@nestjs/common';
-import {Kafka, Partitioners} from "kafkajs";
+import { Injectable} from '@nestjs/common';
+import {Kafka} from "kafkajs";
 import {EachMessagePayload} from "@nestjs/microservices/external/kafka.interface";
 
 @Injectable()
@@ -10,8 +10,8 @@ export class MessagingService {
 
   constructor() {
     this.config = {
-      groupId: 'my-group',
-      clientId: 'my-service',
+      groupId: process.env.CONSUMER_GROUP || 'get-your-own-group',
+      clientId: process.env.CONSUMER_GROUP || 'get-your-own-group',
       brokers: [ 'localhost:9092' ],
     }
     const { clientId, brokers } = this.config;

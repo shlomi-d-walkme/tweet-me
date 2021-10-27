@@ -9,12 +9,12 @@ export class FollowsMessageProvider {
     constructor(private messagingService : MessagingService) {}
 
     public async followNotifier(profileId: string, followProfileId: string) {
-        const followModel = new FollowsKafkaModel(followProfileId, FOLLOWS_ACTION.FOLLOW);
+        const followModel = new FollowsKafkaModel(followProfileId, profileId, FOLLOWS_ACTION.FOLLOW);
         await this.messagingService.produce<FollowsKafkaModel>('follows', followModel, profileId);
     }
 
     public async unfollowNotifier(profileId: string, unfollowProfileId: string) {
-        const followModel = new FollowsKafkaModel(unfollowProfileId, FOLLOWS_ACTION.UNFOLLOW);
+        const followModel = new FollowsKafkaModel(unfollowProfileId, profileId, FOLLOWS_ACTION.UNFOLLOW);
         await this.messagingService.produce<FollowsKafkaModel>('follows', followModel, profileId);
     }
 }

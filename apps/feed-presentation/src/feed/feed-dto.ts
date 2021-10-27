@@ -14,13 +14,9 @@ class FeedTweet {
 }
 
 export class FeedDto {
-
-
     @ApiResponseProperty()
     id: string;
 
     @ApiResponseProperty({type: [FeedTweet]})
     tweets: FeedTweet[];
-
-  
 }

@@ -7,14 +7,7 @@ const main = async () => {
         createPartitioner: Partitioners.JavaCompatiblePartitioner
     });
 
-    await producer.connect();
-    await producer.send({
-        topic: 'tweets',
-        messages: [
-            { key: 'user1', value: 'Whats upppp' },
-            { key: 'user2', value: 'All goooooodddd' }
-        ]
-    })
+
 };
 
 main().then();
