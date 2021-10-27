@@ -16,6 +16,8 @@ import { useHistory } from "react-router-dom";
 import styles from './login.page.module.scss';
 
 import {useLogin} from './use.login.hook';
+import { SignUpButton } from '../../components/sign-up-button/sign-up-button';
+
 
 export function LoginPage() {
   
@@ -131,6 +133,7 @@ export function LoginPage() {
             </Grid>
           </Grid>
         </Grid>
+        <SignUpButton></SignUpButton>
       </div>
     );
   }
