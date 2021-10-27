@@ -1,13 +1,16 @@
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import { SignUpButton } from './components/sign-up-button/sign-up-button';
 import { FeedContainer } from './feedContainer/feedContainer.component';
 import { RegisterForm } from './register-form/register-form.component';
 
 export const App = () => {
-
-  
-  
   return (
-    <>
+    <Router>
       <div style={{ textAlign: 'center' }}>
       <img
           width="200"
@@ -25,10 +28,27 @@ export const App = () => {
           />
         </div>
       </div>
-      <RegisterForm></RegisterForm>
-      <SignUpButton />
-      <FeedContainer></FeedContainer>
-    </>
+
+      <Switch>
+        <Route path="/login">
+            
+        </Route>
+
+        <Route path="/register">
+          <RegisterForm></RegisterForm>
+          <SignUpButton />
+        </Route>
+
+        <Route path="/feed">
+          <FeedContainer></FeedContainer>
+        </Route>
+
+        <Route path="/users">
+
+        </Route>
+
+       </Switch>
+    </Router>
   );
 };
 
