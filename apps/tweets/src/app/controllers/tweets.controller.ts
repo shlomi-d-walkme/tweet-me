@@ -5,6 +5,7 @@ import { TweetsDto } from '../dto/tweets-dto';
 import { TweetsRepo } from '../repo/tweets.repo';
 import { MessangerService } from '../services/messanger/messanger.service';
 import { ActionType } from 'libs/api-interfaces/src/lib/tweets-model';
+import { TweetsInputDto } from '../dto/tweets-input-dto';
 
 @Controller('tweets')
 export class Tweets {
@@ -22,11 +23,9 @@ export class Tweets {
 
     @Post('/')
     @ApiOkResponse({ status: 201, type: TweetsDto, description: 'Add a tweet' })
-    addTweet(@Param('profileId') profileId: string,
-            @Param('content') content: string,
-            @Param('parentId') parentId: string) : TweetsDto {
-        console.log("REST ADD", profileId, content, parentId);
-        const tweet = this.repo.addTweet(profileId, content, parentId);
+    addTweet(@Body() body: TweetsInputDto) : TweetsDto {
+                
+        const tweet = this.repo.addTweet(body.profileId, body.content, body.parentId);
         this.messager.sendMsg(tweet.id, ActionType.tweetCreated, tweet).catch();
         return tweet;
     }
