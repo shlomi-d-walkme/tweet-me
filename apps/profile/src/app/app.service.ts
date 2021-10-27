@@ -16,6 +16,10 @@ export class AppService {
     return ProfileModel.findById(id);
   }
 
+  getProfileByEmail(email: string) {
+    return ProfileModel.findOne({email});
+  }
+
   getProfiles() {
     return ProfileModel.find();
   }
