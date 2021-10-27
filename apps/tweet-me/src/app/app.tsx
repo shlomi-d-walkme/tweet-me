@@ -1,4 +1,5 @@
 import { FeedContainer } from './feedContainer/feedContainer.component';
+import Profiles from './profiles/profiles';
 import { RegisterForm } from './register-form/register-form.component';
 
 export const App = () => {
@@ -24,6 +25,7 @@ export const App = () => {
           />
         </div>
       </div>
+      <Profiles></Profiles>
       <RegisterForm></RegisterForm>
       <FeedContainer></FeedContainer>
     </>
