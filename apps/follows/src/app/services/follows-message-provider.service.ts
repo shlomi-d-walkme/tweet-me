@@ -6,10 +6,7 @@ import {MessagingService} from '@tweet-me/shared/kafka-infra';
 
 @Injectable()
 export class FollowsMessageProvider {
-    // constructor(private kafkaService: KafkaFollowsServerService) {}
-    constructor(private messagingService : MessagingService) {
-
-    }
+    constructor(private messagingService : MessagingService) {}
 
     public async followNotifier(profileId: string, followProfileId: string) {
         const followModel = new FollowsKafkaModel(followProfileId, profileId, FOLLOWS_ACTION.FOLLOW);
