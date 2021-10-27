@@ -1,20 +1,6 @@
 import { useFormik } from 'formik';
-import { DefaultApi, ProfileResponse, Configuration } from '@tweet-me/sdk/profile-sdk';
 import styles from './register-form.module.scss';
-import { useState } from 'react';
-import { gql, useQuery } from '@apollo/client';
-
-interface ProfileQuery {
-  profile: {
-    email:string;
-    name:string;
-  }
-}
-
-interface ProfileQueryVars {
-  id: string;
-}
-
+import { useRegister } from './useRegister';
 
 /* eslint-disable-next-line */
 export interface RegisterFormProps {}
@@ -23,32 +9,15 @@ const initailForm = {
   email: '',
   name:'',
   userName: '',
-  password: '',
-  confirmPassword: '',
+  password: ''
 }
 
-const api = new DefaultApi(new Configuration({basePath: "http://localhost:4200"}));
-
 export function RegisterForm(props: RegisterFormProps) {
-  const { data, loading, error } = useQuery<ProfileQuery, ProfileQueryVars>(
-    gql`
-      query Query($id: String!) {
-        profile(id: $id) {
-          email 
-          name
-        }
-      }
-    `, {
-      variables: { id: "6177b3f2df843d8e3994e3ef"}
-    
-  });
-  console.log(data);
-
-  const [user, setUser] = useState<ProfileResponse | null>(null);
+  const { register, loading: registerLoading } = useRegister();
 
   const submit = async (values: typeof initailForm) => {
-    const {data} = await api.register(values);
-    setUser(data);
+    register(values.email, values.password, values.userName, values.name);
+    window.open("/login", "_self");
   }
 
   const {handleSubmit, getFieldProps} = useFormik({
@@ -56,14 +25,12 @@ export function RegisterForm(props: RegisterFormProps) {
     onSubmit: submit,
     validate: (values) => {
       const errors:any = {}
-      if(values.password !== values.confirmPassword) errors.confirmPassword = "Passwords do not match!";
       return errors;
     }
   });
 
   
   return (<div>
-    <div> Hello { data && data.profile.name }</div>
     <div>
       form:
       <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
@@ -110,7 +77,6 @@ export function RegisterForm(props: RegisterFormProps) {
                 <input type="password" 
                     className="form-control" 
                     placeholder="Confirm Password"
-                    {...getFieldProps('confirmPassword')}
                 />
                 </label>
             </div>

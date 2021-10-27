@@ -1,4 +1,4 @@
-.followButton {
+.signUpButton {
   align-items: center;
   appearance: none;
   background-color: #3EB2FD;
@@ -12,10 +12,11 @@
   cursor: pointer;
   display: inline-flex;
   font-family: CircularStd,sans-serif;
+  font-size: 1rem;
   height: auto;
   justify-content: center;
   line-height: 1.5;
-  padding: 1px 8px;
+  padding: 6px 20px;
   position: relative;
   text-align: center;
   text-decoration: none;
@@ -27,15 +28,15 @@
   white-space: nowrap;
 }
 
-.followButton:active,
-.followButton:focus {
+.signUpButton:active,
+.signUpButton:focus {
   outline: none;
 }
 
-.followButton:hover {
+.signUpButton:hover {
   background-position: -20px -20px;
 }
 
-.followButton:focus:not(:active) {
+.signUpButton:focus:not(:active) {
   box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
 }

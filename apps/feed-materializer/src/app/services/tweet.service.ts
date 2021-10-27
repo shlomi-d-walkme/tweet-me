@@ -51,6 +51,17 @@ export class TweetService {
             feedTweets.push(newTweetInFeed);
         });
 
+        const tweetInSelfFeed: FeedTweet = {
+            feedOwnerId: tweetOwnerProfile._id,
+            tweetOwnerId: tweetOwnerProfile._id,
+            tweetOwnerName: tweetOwnerProfile.name,
+            tweetId: tweet.id,
+            content: tweet.content,
+            comments: 0,
+            creationDate: new Date(tweet.date)
+        }
+        feedTweets.push(tweetInSelfFeed);
+
         console.log('feedTweets', feedTweets);
         this.db.createFeedTweetes(feedTweets);
     }

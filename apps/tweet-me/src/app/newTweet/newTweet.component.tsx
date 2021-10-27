@@ -3,7 +3,7 @@ import { Card, Button, TextField, CardActions, CardContent } from '@material-ui/
 import { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useAddTweet } from './useAddTweet';
-import { ChangeEvent } from 'react-transition-group/node_modules/@types/react';
+import { ChangeEvent } from 'react';
 
 export function NewTweet() {
   const [ tweetText, setTweetText] = useState('');
@@ -15,7 +15,7 @@ export function NewTweet() {
   }
 
   const handleTweetChange = (event:ChangeEvent<HTMLInputElement>) => {
-    setTweetText(event.target.value)
+    setTweetText(event.target.value);
   }
 
   return (

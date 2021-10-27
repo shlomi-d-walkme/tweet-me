@@ -20,21 +20,24 @@ export class FollowService {
         this.profileApi = new ProfileDefaultApi(new ProfileConfiguration({basePath: "http://localhost:666"}));
     }
 
-    async onFollow(action:FOLLOWS_ACTION, profileId: string, feedUser: string) {
-        const tweets: TweetsDto[] = await (await this.tweetApi.tweetsGetTweets(profileId)).data;
-        
+    async onFollow(action:FOLLOWS_ACTION, tweetsProfileId: string, feedUser: string) {
+      console.log('onFollow');
+      console.log('get tweets of', tweetsProfileId);
         switch(action) {
             case FOLLOWS_ACTION.FOLLOW:
-              this.addTweetsToFeed(tweets, feedUser, profileId);
+              this.addTweetsToFeed(feedUser, tweetsProfileId);
               break;
             case FOLLOWS_ACTION.UNFOLLOW:
-              this.deleteTweetsFromFeed(tweets, feedUser);
+              this.deleteTweetsFromFeed(feedUser, tweetsProfileId);
               break;
           }
     }
 
-    async addTweetsToFeed(tweets: TweetsDto[], feedUser: string, profileId: string) {
-      const tweetOwnerProfile: ProfileResponse = (await this.profileApi.getProfile(profileId)).data;
+    async addTweetsToFeed(feedUser: string, tweetsProfileId: string) {
+      const tweets: TweetsDto[] = await (await this.tweetApi.tweetsGetTweets(tweetsProfileId)).data;
+      console.log('tweets', tweets);
+
+      const tweetOwnerProfile: ProfileResponse = (await this.profileApi.getProfile(tweetsProfileId)).data;
       const feedTweets: FeedTweet[] = [];
 
       tweets.forEach(tweet => {
@@ -50,11 +53,11 @@ export class FollowService {
           feedTweets.push(newTweetInFeed);
 
         });
-
+        console.log('feedTweets', feedTweets);
         this.db.createFeedTweetes(feedTweets);
       }
     
-      async deleteTweetsFromFeed(tweets: any, feedUser: string) {
-        //delete tweets for follower
+      async deleteTweetsFromFeed(feedUser: string, tweetsProfileId: string) {
+        this.db.deleteTweetsFromFeed(feedUser, tweetsProfileId);
       }
 }
