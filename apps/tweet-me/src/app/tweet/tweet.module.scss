@@ -8,7 +8,7 @@
     width: inherit;
 }
 
-.profileName{
+.profileName {
     font-weight: 500;
     font-size: 14px;
     margin-right: 10px;
@@ -21,12 +21,12 @@
     font-weight: 300;
 }
 
-.text{
+.text {
     font-size: 12px;
     font-weight: 300;
 }
 
-.commentButton{
+.commentButton {
     background: url(http://localhost:4200/assets/comment.png);
     background-size: contain;
     background-repeat: no-repeat;
@@ -34,6 +34,10 @@
     padding: 0 0 0 28px !important;
 }
 
-.tweetCard{
+.tweetCard {
     display: flex;
+}
+
+.followButtonWrapper {
+    margin-top: 5px;
 }
