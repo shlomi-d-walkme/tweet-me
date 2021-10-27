@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { FollowsModel } from '../models/follows.model';
+import { mongoose } from '@typegoose/typegoose'
 
 @Injectable()
 export class FollowsRepo {
@@ -17,11 +18,13 @@ export class FollowsRepo {
 
     async getFollowing(userProfileId: string) {
         const profileData = await FollowsModel.findOne({userProfileId});
-        return profileData.following;
+        const following = profileData?.following || new mongoose.Types.Array<string>();
+        return following;
     }
 
     async getFollowers(userProfileId: string) {
         const profileData = await FollowsModel.findOne({userProfileId});
-        return profileData.followers;
+        const followers = profileData?.followers || new mongoose.Types.Array<string>();
+        return followers;
     }
 }

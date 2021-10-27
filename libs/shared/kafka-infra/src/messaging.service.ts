@@ -1,5 +1,5 @@
 import { Injectable} from '@nestjs/common';
-import {Kafka} from "kafkajs";
+import {Kafka, Partitioners} from 'kafkajs';
 import {EachMessagePayload} from "@nestjs/microservices/external/kafka.interface";
 
 @Injectable()
@@ -10,8 +10,7 @@ export class MessagingService {
 
   constructor() {
     this.config = {
-      groupId: process.env.CONSUMER_GROUP || 'get-your-own-group',
-      clientId: process.env.CONSUMER_GROUP || 'get-your-own-group',
+      clientId: process.env.SERVICE_NAME || 'please-set-your-service-name',
       brokers: [ 'localhost:9092' ],
     }
     const { clientId, brokers } = this.config;
@@ -21,13 +20,14 @@ export class MessagingService {
     })
   }
 
-  async produce<T>(topic: string, content: T | T[], key?: string, keyOf?: (message: T) => string, writeConcern?: WriteConcern): Promise<Closer> {
+  async produce<T>(topic: string, key: string,  content: T | T[], writeConcern?: WriteConcern): Promise<Closer> {
     const convert = (message: T) => ({
       key: key,
       value: JSON.stringify(message),
     })
 
     const producer = this.kafka.producer({
+      createPartitioner: Partitioners.JavaCompatiblePartitioner
     })
 
     await producer.connect();
@@ -44,7 +44,7 @@ export class MessagingService {
 
   async consume<T>(topic: string, processor: (message: T) => Promise<void>, fromBeginning?: boolean, onError?: (reason: any) => PromiseLike<never>): Promise<Closer> {
     const consumer = this.kafka.consumer({
-      groupId: this.config.groupId + topic
+      groupId: `${process.env.SERVICE_NAME}-${topic}`
     })
 
     await consumer.connect();
@@ -56,6 +56,7 @@ export class MessagingService {
 
     consumer.run({
       eachMessage: async (payload: EachMessagePayload) => {
+        console.log(`Incoming message in ${topic} [${payload.partition}]`)
         const messageAsT = JSON.parse(payload.message.value.toString()) as T
         await processor(messageAsT)
       },
@@ -74,9 +75,8 @@ export enum WriteConcern {
 }
 
 export class MessagingConfig {
-  brokers: [string]
   clientId: string
-  groupId: string
+  brokers: string[]
 }
 
 export interface Closer {

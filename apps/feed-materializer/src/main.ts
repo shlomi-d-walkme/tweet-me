@@ -8,9 +8,10 @@ import { FeedService } from './app/services/feed.service';
 async function bootstrap() {
 
   const app = await NestFactory.createApplicationContext(AppModule);
-  
+
   const appService = app.get(FeedService);
-  appService.consume();
+  console.log('CONSUME!!!');
+  await appService.consume();
 
 }
 
