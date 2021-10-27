@@ -6,11 +6,12 @@ import { Tweets } from './controllers/tweets.controller';
 import { TweetsRepo } from './repo/tweets.repo';
 import { MessangerService } from './services/messanger/messanger.service';
 import {MessagingService} from '@tweet-me/shared/kafka-infra';
+import { DbModule } from './db/db.module';
 
 
 
 @Module({
-  imports: [MessagingService],
+  imports: [MessagingService, DbModule],
   controllers: [AppController, Tweets],
   providers: [AppService, TweetsRepo, MessangerService, MessagingService],
 })

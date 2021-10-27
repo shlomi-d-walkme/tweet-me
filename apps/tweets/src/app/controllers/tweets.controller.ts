@@ -32,7 +32,7 @@ export class Tweets {
 
     @Delete('/:profileId')
     @ApiOkResponse({ status: 204, type: Boolean, description: 'Remove a tweet' })
-    deleteTweet(@Body('profileId') profileId: string, @Body('tweetId') tweetId: string) : boolean {
+    deleteTweet(@Param('profileId') profileId: string, @Body('tweetId') tweetId: string) : boolean {
         try {
             this.repo.removeTweet(profileId, tweetId);
         } catch {
@@ -45,7 +45,7 @@ export class Tweets {
 
     @Put('/:profileId/')
     @ApiOkResponse({ status: 204, type: TweetsDto, description: 'Update tweet content' })
-    updateTweet(@Body('profileId') profileId: string, @Body('tweetId') tweetId: string, @Body('content') content: string) : TweetsDto {
+    updateTweet(@Param('profileId') profileId: string, @Body('tweetId') tweetId: string, @Body('content') content: string) : TweetsDto {
         const tweet = this.repo.updateTweet(profileId, tweetId, content);
         this.messager.sendMsg(tweet.id, ActionType.tweetUpdate, tweet).catch();
         return tweet;
