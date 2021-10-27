@@ -37,3 +37,7 @@
 .tweetCard{
     display: flex;
 }
+
+:global(.MuiCardContent-root) {
+    width: 100%;
+}
