@@ -25,17 +25,17 @@ export class TweetService {
                 this.addTweetToFeeds(tweet, followers);
                 break;
             case TWEETS_ACTION.tweetUpdate:
-                this.updateTweetInFeeds(tweet, followers);
+                this.updateTweetInFeeds(tweet);
                 break;
             case TWEETS_ACTION.tweetDeleted:
-                this.deleteTweetFromFeeds(tweet, followers);
+                this.deleteTweetFromFeeds(tweet);
                 break;
         }
     }
 
     async addTweetToFeeds(tweet: TweetsDto, followers: FollowersDto ) {
         const tweetOwnerProfile: ProfileResponse = (await this.profileApi.getProfile(tweet.profileId)).data;
-        console.log("addTweetToFeeds");
+        console.log("addTweetToFeeds",tweetOwnerProfile,followers);
         const feedTweets: FeedTweet[] = [];
 
         followers.followers.forEach(follower => {
@@ -55,11 +55,11 @@ export class TweetService {
         this.db.createFeedTweetes(feedTweets);
     }
 
-    async updateTweetInFeeds(tweet: any, followers: FollowersDto ) {
-        //update tweet for followers
+    async updateTweetInFeeds(tweet: TweetsDto ) {
+        this.db.updateFeedTweetes(tweet.id,tweet.content,0);
     }
 
-    async deleteTweetFromFeeds(tweet: any, followers: FollowersDto ) {
-        //delete tweet for followers
+    async deleteTweetFromFeeds(tweet: TweetsDto ) {
+        this.db.deleteTweetFromFeeds(tweet.id);
     }
 }
