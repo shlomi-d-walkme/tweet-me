@@ -19,13 +19,8 @@ export class TweetsResolver {
     async addTweet(@Args('profileId', { type: () => String }) profileId: string,
                    @Args('content', { type: () => String }) content: string,
                    @Args('parentId', { type: () => String }) parentId: string)  {
-        // const result = await this.followsService.api.followsControllerFollow(profileId, followProfileId);
-        // return result.data;
-        console.log("start add tweet", content);
-        const result = await this.tweetssService.api.tweetsAddTweet({profileId, content, parentId});
-        //console.log("result", result);
-        //let data = (await result).data;
-        console.log("DATA !!! ", result.data);
+        
+        const result = await this.tweetssService.api.tweetsAddTweet({profileId, content, parentId});        
         return result.data;
     }
 }
