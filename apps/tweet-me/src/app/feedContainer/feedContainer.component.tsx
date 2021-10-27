@@ -2,11 +2,7 @@ import './feedContainer.module.scss';
 import { Feed } from '../feed/feed.component';
 import { Tweet } from '../tweet/tweet.component';
 import {NewTweet} from '../newTweet/newTweet.component';
-import React, { useEffect, useState } from 'react';
-import {
-  useQuery,
-  gql
-} from "@apollo/client";
+import { gql } from "@apollo/client";
 import {useGetFeed} from './use.feed.hook';
 
 
