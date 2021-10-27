@@ -1,9 +1,22 @@
 import styles from './newTweet.module.scss';
 import { Card, Button, TextField, CardActions, CardContent } from '@material-ui/core';
 import { useState } from 'react';
+import { gql, useMutation } from '@apollo/client';
+import { useAddTweet } from './useAddTweet';
+import { ChangeEvent } from 'react-transition-group/node_modules/@types/react';
 
 export function NewTweet() {
-  const [twettText, setTwettText] = useState('dozi');
+  const [ tweetText, setTweetText] = useState('');
+  const { addTweet, loading, newTweet } = useAddTweet();
+
+  function createAddTweet() {
+    addTweet({content: tweetText, profileId: "1", parentId: ""});
+  }
+
+  const handleTweetChange = (event:ChangeEvent<HTMLInputElement>) => {
+    setTweetText(event.target.value)
+  }
+
   return (
     <Card variant="outlined" className={styles.tweetLayout}>
       <>
@@ -12,6 +25,8 @@ export function NewTweet() {
         <TextField
             id="filled-multiline-flexible"
             label="What's on your mind?"
+            value={tweetText}
+            onChange={handleTweetChange}
             multiline
             maxRows={4}
             variant="filled"
@@ -19,10 +34,9 @@ export function NewTweet() {
           />
         </CardContent>
       </div>
-
-      <CardActions className={styles.cardActions}>
-        <Button className={styles.commentButton} size="small">Tweet</Button>
-      </CardActions>
+      <CardActions>
+      <Button className={styles.commentButton} size="small" onClick={createAddTweet}>Tweet</Button>
+    </CardActions>
     </>
     </Card>
   );
