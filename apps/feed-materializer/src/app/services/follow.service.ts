@@ -21,8 +21,10 @@ export class FollowService {
     }
 
     async onFollow(action:FOLLOWS_ACTION, profileId: string, feedUser: string) {
+      console.log('onFollow');
+      console.log('get tweets of', profileId);
         const tweets: TweetsDto[] = await (await this.tweetApi.tweetsGetTweets(profileId)).data;
-        
+        console.log('tweets', tweets);
         switch(action) {
             case FOLLOWS_ACTION.FOLLOW:
               this.addTweetsToFeed(tweets, feedUser, profileId);
@@ -50,11 +52,12 @@ export class FollowService {
           feedTweets.push(newTweetInFeed);
 
         });
-
+        console.log('feedTweets', feedTweets);
         this.db.createFeedTweetes(feedTweets);
       }
     
-      async deleteTweetsFromFeed(tweets: any, feedUser: string) {
-        //delete tweets for follower
+      async deleteTweetsFromFeed(tweets: TweetsDto[], feedUser: string) {
+        const tweetsIds = tweets.map(tweet => tweet.id);
+        this.db.deleteTweetsFromFeed(feedUser, tweetsIds);
       }
 }
