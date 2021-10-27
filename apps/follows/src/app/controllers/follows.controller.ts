@@ -13,24 +13,18 @@ export class FollowsController {
 
     @Get('/:profileId/followers')
     @ApiResponse({ status: 200, type: FollowersDto, description: 'Returns followers by user ids' })
-    getFollowersByUser(@Param('profileId') profileId: string): FollowersDto {
+    async getFollowersByUser(@Param('profileId') profileId: string) {
         console.log(`getFollowersByUser-profileId:${profileId}`);
-        const followers = this.repo.getFollowers(profileId);
-        const followersResult = new FollowersDto();
-        followersResult.followers = [...followers];
-        console.log(`getFollowersByUser-profileId:${profileId}-returns:${JSON.stringify(followersResult)}`);
-        return followersResult;
+        const followers = await this.repo.getFollowers(profileId);
+        return new FollowersDto({followers});
     }
 
     @Get('/:profileId/following')
     @ApiResponse({ status: 200, type: FollowingDto, description: 'Returns following by user ids' })
-    getFollowingByUser(@Param('profileId') profileId: string): FollowingDto {
+    async getFollowingByUser(@Param('profileId') profileId: string) {
         console.log(`getFollowingByUser-profileId:${profileId}`);
-        const following = this.repo.getFollowing(profileId);
-        const followingResult = new FollowingDto();
-        followingResult.following = [...following];
-        console.log(`getFollowersByUser-profileId:${profileId}-returns:${JSON.stringify(followingResult)}`);
-        return followingResult;
+        const following = await this.repo.getFollowing(profileId);
+        return new FollowingDto({following});
     }
 
     @Post('/:profileId/follow/:followProfileId')
