@@ -7,6 +7,7 @@ import { MessangerService } from '../services/messanger/messanger.service';
 import { ActionType } from '@tweet-me/api-interfaces';
 import { TweetsInputDto } from '../dto/tweets-input-dto';
 import { TweetsUpdateDto } from '../dto/tweets-update-dto';
+import { Tweet, TweetModel } from '../repo/tweet.model';
 
 @Controller('tweets')
 export class Tweets {
@@ -44,7 +45,7 @@ export class Tweets {
         return true;
     }
 
-    @Put('/:profileId/')
+    @Put('/:profileId')
     @ApiOkResponse({ status: 204, type: TweetsDto, description: 'Update tweet content' })
     updateTweet(@Param('profileId') profileId: string, @Body() body: TweetsUpdateDto) : TweetsDto {
         const tweet = this.repo.updateTweet(profileId, body.tweetId, body.content);
