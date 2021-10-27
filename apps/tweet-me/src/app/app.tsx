@@ -1,3 +1,4 @@
+import { SignUpButton } from './components/sign-up-button/sign-up-button';
 import { FeedContainer } from './feedContainer/feedContainer.component';
 import { RegisterForm } from './register-form/register-form.component';
 
@@ -25,6 +26,7 @@ export const App = () => {
         </div>
       </div>
       <RegisterForm></RegisterForm>
+      <SignUpButton />
       <FeedContainer></FeedContainer>
     </>
   );
