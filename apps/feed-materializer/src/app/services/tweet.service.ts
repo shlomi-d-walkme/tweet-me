@@ -1,22 +1,25 @@
-import { Injectable } from '@nestjs/common';
-import { ActionType as TWEETS_ACTION } from '@tweet-me/api-interfaces';
+import {Injectable} from '@nestjs/common';
+import {ActionType as TWEETS_ACTION} from '@tweet-me/api-interfaces';
 import {TweetsDto} from '@sdk/tweets-sdk';
-import { DefaultApi as FollowsDefaultApi, Configuration as FollowsConfiguration, FollowersDto } from '@tweet-me/sdk/follows-sdk';
-import { FeedTweet } from '@tweet-me/feed-model';
-import { FeedDbService } from '@tweet-me/feed-model';
+import {
+    Configuration as FollowsConfiguration,
+    DefaultApi as FollowsDefaultApi,
+    FollowersDto
+} from '@tweet-me/sdk/follows-sdk';
+import {FeedDbService, FeedTweet} from '@tweet-me/feed-model';
 
 @Injectable()
 export class TweetService {
     private followsApi:FollowsDefaultApi;
-    
-    constructor(private db: FeedDbService ){
+
+    constructor(private readonly  db: FeedDbService){
         this.followsApi = new FollowsDefaultApi(new FollowsConfiguration({basePath: "http://localhost:5555"}));
     }
 
     async onTweet(action:TWEETS_ACTION, tweet: TweetsDto) {
         console.log("onTweet");
         const followers =  (await this.followsApi.followsControllerGetFollowersByUser(tweet.profileId)).data;
-        
+
         switch(action) {
             case TWEETS_ACTION.tweetCreated:
                 this.addTweetToFeeds(tweet, followers);
@@ -38,9 +41,9 @@ export class TweetService {
             const newTweetInFeed: FeedTweet = {
                 feedOwnerId: follower,
                 tweetId: tweet.id,
-                content: tweet.content, 
+                content: tweet.content,
                 comments: 0,
-                creationDate: new Date(tweet.date)      
+                creationDate: new Date(tweet.date)
             }
             feedTweets.push(newTweetInFeed);
         });

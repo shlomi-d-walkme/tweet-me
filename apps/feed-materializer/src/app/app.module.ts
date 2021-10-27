@@ -11,6 +11,6 @@ import { FollowService } from './services/follow.service';
 @Module({
   imports: [FeedModel, MessagingService],
   controllers: [],
-  providers: [FeedService, MessagingService, TweetService,FollowService],
+  providers: [FeedService, MessagingService, TweetService, FollowService],
 })
 export class AppModule {}
