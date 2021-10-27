@@ -3,7 +3,7 @@ import styles from './sign-up-button.module.scss';
 export function SignUpButton() {
 
   function onSignUpClicked() {
-    window.open("/register", "_self")
+    window.open("/register", "_self");
   }
 
   return (

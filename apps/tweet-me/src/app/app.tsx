@@ -8,47 +8,41 @@ import {
 import { FeedContainer } from './feedContainer/feedContainer.component'
 import { LoginPage } from "./pages/loginPage/login.page";
 import { RegisterForm } from './register-form/register-form.component';
+import style from './app.module.scss';
 
 export const App = () => {
   return (
-    <Router>
-      <div style={{ textAlign: 'center' }}>
-      <img
-          width="200"
-          src="assets/logo.jpeg"
-          alt="TweetMe logo"
-        />
+    <div className={style.app}>
+      <header className={style.header}> 
+            <img 
+              src="assets/tweet-me-logo.jpg"
+              alt="TweetMe Logo"
+            />
+      </header>
+      <main className={style.main}>
 
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <h1>Welcome to</h1>
-          <img 
-            width="auto"
-            height="87px"
-            src="assets/tweet-me-logo.jpg"
-            alt="TweetMe"
-          />
-        </div>
-      </div>
+        <Router>
+          <Switch>
+            <Route path="/login">
+                <LoginPage></LoginPage>
+            </Route>
 
-      <Switch>
-        <Route path="/login">
-            <LoginPage></LoginPage>
-        </Route>
+            <Route path="/register">
+              <RegisterForm></RegisterForm>
+            </Route>
 
-        <Route path="/register">
-          <RegisterForm></RegisterForm>
-        </Route>
+            <Route path="/feed">
+              <FeedContainer></FeedContainer>
+            </Route>
 
-        <Route path="/feed">
-          <FeedContainer></FeedContainer>
-        </Route>
+            <Route path="/users">
 
-        <Route path="/users">
+            </Route>
 
-        </Route>
-
-       </Switch>
-    </Router>
+          </Switch>
+        </Router>
+      </main>
+    </div>
   );
 };
 
