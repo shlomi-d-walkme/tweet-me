@@ -12,21 +12,23 @@ export class FeedService {
   constructor(private messagingService:  MessagingService,private tweetService: TweetService, private followService: FollowService){}
 
     consume(){
-    this.messagingService.consume<TweetKafkaModel>('tweets',(data) =>{
-      console.log("got tweetttttt"); 
-      const { action, tweet } = data;
 
-      this.tweetService.onTweet(action, tweet);
-      return new Promise<void>(()=>{return null})
-    })
-
-    this.messagingService.consume<FollowsKafkaModel>('follows',(data) =>{
+      this.messagingService.consume<FollowsKafkaModel>('follows',async (data)  =>{
       console.log(data); 
       const { action, profileId, followerId } = data;
 
       this.followService.onFollow(action, profileId, followerId);
-      return new Promise<void>(()=>{return null})
     })
+
+    this.messagingService.consume<TweetKafkaModel>('tweets',async (data) =>{
+
+      const { action, tweet } = data;
+
+      this.tweetService.onTweet(TWEETS_ACTION.tweetCreated, tweet);
+      
+    })
+
+    
   }
 
 }
