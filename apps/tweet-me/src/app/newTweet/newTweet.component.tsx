@@ -12,18 +12,17 @@ export function NewTweet() {
     <Card variant="outlined" className={styles.tweetLayout}>
       <>
       <div className={styles.tweetCard}>
-      <CardContent>
-      
-      <TextField
-          id="filled-multiline-flexible"
-          label="What's on your mind?"
-          multiline
-          maxRows={4}
-          //value={twettText}
-          variant="filled"
-          fullWidth 
-        />
-      </CardContent>
+        <CardContent>
+        <TextField
+            id="filled-multiline-flexible"
+            label="What's on your mind?"
+            multiline
+            maxRows={4}
+            //value={twettText}
+            variant="filled"
+            fullWidth 
+          />
+        </CardContent>
       </div>
       <CardActions>
       <Button className={styles.commentButton} size="small">Tweet</Button>
