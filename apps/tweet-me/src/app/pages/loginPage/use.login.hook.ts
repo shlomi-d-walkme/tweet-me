@@ -2,6 +2,8 @@ import {
   gql,
   useLazyQuery
 } from "@apollo/client";
+import {useEffect} from 'react';
+import {useAuth} from '../../auth/use.auth.hook';
 
 const QUERY = gql`query Query($email: String!){
   profileByEmail(email: $email) {
@@ -21,12 +23,19 @@ interface LoginQuery {
 
 export function useLogin(){
   const [doLoginGql, { loading, data }] = useLazyQuery<LoginQuery>(QUERY);
+  const {setAuthed} = useAuth();
 
-const doLogin = (email:string) => {
-  doLoginGql({
-    variables: {email}
-  })
-}
+  useEffect(() => {
+    if(data) {
+      setAuthed();
+    }
+  }, [data, setAuthed]);
+
+  const doLogin = (email:string) => {
+    doLoginGql({
+      variables: {email}
+    })
+  }
 
   return {doLogin, loading, data}
 }

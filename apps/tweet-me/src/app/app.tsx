@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { PrivateRoute } from "./auth/privateRouter.component";
+
 import { FeedContainer } from './feedContainer/feedContainer.component'
 import { LoginPage } from "./pages/loginPage/login.page";
 import { RegisterForm } from './register-form/register-form.component';
@@ -25,13 +27,13 @@ export const App = () => {
               <RegisterForm></RegisterForm>
             </Route>
 
-            <Route path="/feed">
+            <PrivateRoute path="/feed">
               <FeedContainer></FeedContainer>
-            </Route>
+            </PrivateRoute>
 
-            <Route path="/users">
+            <PrivateRoute path="/users">
 
-            </Route>
+            </PrivateRoute>
 
           </Switch>
         </Router>

@@ -51,15 +51,6 @@ export function LoginPage() {
   const handleSubmit = (event: any) =>{
     event.preventDefault();
     doLogin(username);
-   
-    // if (
-    //   state.username == "admin@littech.in" &&
-    //   state.password == "secret"
-    // ) {
-    //   props.history.push("/home");
-    // } else {
-    //   alert("Incorrect Credntials!");
-    // }
   }
 
     return (
