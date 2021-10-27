@@ -25,6 +25,6 @@ export class FeedController {
   })
   @ApiOperation({ operationId: 'feed', summary: 'Feed feed' })
   async feed(): Promise<void> {
-    await this.feedService.seed('Moshe');
+    
   }
 }

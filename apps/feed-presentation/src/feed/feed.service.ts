@@ -20,11 +20,4 @@ export class FeedService {
   }
 
 
-  async seed(forProfileId:string) {
-
-      await this.feedDbService.createFeedTweetes([1,2,3,4,5].map(n => ({
-       comments: n, content: `abc ${n}`, creationDate:new Date(), feedOwnerId:forProfileId, tweetId: `${forProfileId}_${n}` 
-      })));
-
-  }
 }

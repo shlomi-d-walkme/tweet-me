@@ -33,22 +33,14 @@ export class FeedDbService {
     }
 
     async deleteTweetFromFeeds(tweetId:string){
-        const a = await FeedTweetModel.deleteMany({tweetId});
-        console.log('deleted ${} items',a)
-        //by owner ids tweet id 
+        const deletedItems = await FeedTweetModel.deleteMany({tweetId: tweetId});
+        console.log(`deleted ${deletedItems} items`)
     }
 
     async deleteTweetsFromFeed(feedOwnerId:string,tweetId:string[]){
-        //by owner ids tweet id 
+        const deletedItems = await FeedTweetModel.deleteMany({feedOwnerId: feedOwnerId,$in: tweetId});
+        console.log(`deleted ${deletedItems} items`)
     }
 
 
-
-
-    // async createFeedTweetes(feedOwnerId: string,tweetId: string,content: string){
-    //     await FeedTweetModel.create({feedOwnerId,tweetId,content})
-    // }
-
-    
-    
 }
