@@ -67,59 +67,59 @@ export function RegisterForm(props: RegisterFormProps) {
     <div>
       form:
       <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
-                <form onSubmit={handleSubmit}>
-                  <div className="form-group text-left">
-                  <label>Email address
-                  <input type="email" 
-                        className="form-control" 
-                        placeholder="Enter email"
-                        {...getFieldProps('email')}
-                  />
-                  </label>
-                </div>
-                <div className="form-group text-left">
-                  <label>Name
-                  <input type="text" 
-                        className="form-control" 
-                        {...getFieldProps('name')}
-                        placeholder="Enter your first name"
-                  />
-                  </label>
-                </div>
-        
-                <div className="form-group text-left">
-                  <label>Username
-                  <input type="text" 
-                        className="form-control" 
-                        placeholder="Enter your username"
-                        {...getFieldProps('userName')}
-                  />
-                  </label>
-                </div>            
-                <div className="form-group text-left">
-                    <label>Password
-                    <input type="password" 
-                        className="form-control" 
-                        placeholder="Password"
-                        {...getFieldProps('password')}
-                    />
-                    </label>
-                </div>
-                <div className="form-group text-left">
-                    <label>Confirm Password
-                    <input type="password" 
-                        className="form-control" 
-                        placeholder="Confirm Password"
-                        {...getFieldProps('confirmPassword')}
-                    />
-                    </label>
-                </div>
-                <button 
-                    type="submit" 
-                    className={styles.registerButton}>
-                    Register
-                </button>
-                </form>
+          <form onSubmit={handleSubmit}>
+            <div className={'form-group text-left ' + styles.formDiv }>
+              <label>Email address
+              <input type="email" 
+                    className="form-control" 
+                    placeholder="Enter email"
+                    {...getFieldProps('email')}
+              />
+              </label>
+            </div>
+            <div className="form-group text-left">
+              <label>Name
+              <input type="text" 
+                    className="form-control" 
+                    {...getFieldProps('name')}
+                    placeholder="Enter your first name"
+              />
+              </label>
+            </div>
+    
+            <div className="form-group text-left">
+              <label>Username
+              <input type="text" 
+                    className="form-control" 
+                    placeholder="Enter your username"
+                    {...getFieldProps('userName')}
+              />
+              </label>
+            </div>            
+            <div className="form-group text-left">
+                <label>Password
+                <input type="password" 
+                    className="form-control" 
+                    placeholder="Password"
+                    {...getFieldProps('password')}
+                />
+                </label>
+            </div>
+            <div className="form-group text-left">
+                <label>Confirm Password
+                <input type="password" 
+                    className="form-control" 
+                    placeholder="Confirm Password"
+                    {...getFieldProps('confirmPassword')}
+                />
+                </label>
+            </div>
+            <button 
+                type="submit" 
+                className={styles.registerButton}>
+                Register
+            </button>
+          </form>
         </div>
     </div>
     </div>
