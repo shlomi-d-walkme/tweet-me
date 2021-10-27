@@ -1,9 +1,5 @@
-
-
-
-
-
-  import { useQuery } from '@apollo/client';
+import { useFollowUser } from '../components/follow-button/useFollowUser';
+import { useAllProfiles, useGetFollowing, useLoggedInProfileId } from './profile.hooks';
 import './profiles.module.scss';
   
 
@@ -14,30 +10,30 @@ export interface ProfilesProps {
 
 
 export function Profiles(props: ProfilesProps) {
-  // const { data, loading, error } = useQuery<ProfileQuery, ProfileQueryVars>(
-  //   gql`
-  //     query Query($id: String!) {
-  //       profile(id: $id) {
-  //         email 
-  //         name
-  //       }
-  //     }
-  //   `, {
-  //     variables: { id: "6177b3f2df843d8e3994e3ef"}
-    
-  // });
-  const data = [
-    {userName: 'me'},
-    {userName: 'omty'},
-    {userName: 'roy'}
-  ]
+  const { profiles, loading, error } = useAllProfiles();
+  const {profileId} = useLoggedInProfileId();
+  const {following} = useGetFollowing(profileId)
+  const {follow} = useFollowUser();
+
+    console.log(profiles)
+    console.log(following)
+    if (loading || !profiles) return <div>Loading....</div>
+    if (error) return <div>{error}</div>
+
+    const visibleProfiles = profiles.filter(({profileId:followingProfileId})=> 
+      profileId !== followingProfileId &&
+      following
+        ? !following.includes(followingProfileId)
+        : true
+  )
+
   return (
     <div>
       <h1>Recomanded profiles!</h1>
-      {data.map((objectMapped) =>
-        <li key={`${objectMapped.userName}`}>
-            {objectMapped.userName}
-            <button type="button">Follow!</button>
+      {visibleProfiles.map(({profileId:followId, userName}) =>
+        <li key={`${userName}`}>
+            {userName}
+            <button type="button" onClick={() => follow(profileId, followId)}>Follow!</button>
         </li>
         )}
         <br/>
