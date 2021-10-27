@@ -16,7 +16,7 @@ export class FeedService {
       console.log("got tweetttttt"); 
       const { action, tweet } = data;
 
-      this.tweetService.onTweet(TWEETS_ACTION.tweetCreated, tweet);
+      this.tweetService.onTweet(action, tweet);
       return new Promise<void>(()=>{return null})
     })
 
