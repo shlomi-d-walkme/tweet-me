@@ -7,6 +7,16 @@ class FeedTweetEntity {
     feedOwnerId: string;
 
     @prop({
+        required: true
+    })
+    tweetOwnerId: string;
+
+    @prop({
+        required: true
+    })
+    tweetOwnerName: string;
+
+    @prop({
         required: true,
     })
     tweetId: string;
