@@ -1,9 +1,8 @@
-import { Field, Form, Formik, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import { DefaultApi, ProfileResponse, Configuration } from '@tweet-me/sdk/profile-sdk';
-import './register-form.module.scss';
+import styles from './register-form.module.scss';
 import { useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
-import { apolloClient } from './../../apollo-client';
 
 interface ProfileQuery {
   profile: {
@@ -117,7 +116,7 @@ export function RegisterForm(props: RegisterFormProps) {
                 </div>
                 <button 
                     type="submit" 
-                    className="btn btn-primary">
+                    className={styles.registerButton}>
                     Register
                 </button>
                 </form>

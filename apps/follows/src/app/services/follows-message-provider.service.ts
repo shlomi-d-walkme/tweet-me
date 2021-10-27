@@ -1,5 +1,5 @@
 import {Injectable} from '@nestjs/common';
-import {FOLLOWS_ACTION, FollowsKafkaModel} from 'libs/api-interfaces/src/lib/follows-kafka-model';
+import {FOLLOWS_ACTION, FollowsKafkaModel} from '@tweet-me/api-interfaces';
 import {MessagingService} from '@tweet-me/shared/kafka-infra';
 
 

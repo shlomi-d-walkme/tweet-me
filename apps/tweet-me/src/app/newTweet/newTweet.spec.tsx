@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import Tweet from './tweet.component';
+import Tweet from './newTweet.component';
 
 describe('Tweet', () => {
   it('should render successfully', () => {
