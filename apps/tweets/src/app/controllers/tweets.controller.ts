@@ -4,7 +4,7 @@ import { ApiOkResponse } from '@nestjs/swagger';
 import { TweetsDto } from '../dto/tweets-dto';
 import { TweetsRepo } from '../repo/tweets.repo';
 import { MessangerService } from '../services/messanger/messanger.service';
-import { ActionType } from 'libs/api-interfaces/src/lib/tweets-model';
+import { ActionType } from '@tweet-me/api-interfaces';
 import { TweetsInputDto } from '../dto/tweets-input-dto';
 
 @Controller('tweets')
@@ -32,7 +32,7 @@ export class Tweets {
 
     @Delete('/:profileId')
     @ApiOkResponse({ status: 204, type: Boolean, description: 'Remove a tweet' })
-    deleteTweet(@Param('profileId') profileId: string, @Body('tweetId') tweetId: string) : Boolean {
+    deleteTweet(@Param('profileId') profileId: string, @Body('tweetId') tweetId: string) : boolean {
         try {
             this.repo.removeTweet(profileId, tweetId);
         } catch {
