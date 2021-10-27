@@ -106,8 +106,42 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         getProfile: async (id: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getProfile', 'id', id)
-            const localVarPath = `/api/profiles/{id}`
+            const localVarPath = `/api/profile/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary profile of a given user by email
+         * @param {string} email 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProfileByEmail: async (email: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'email' is not null or undefined
+            assertParamExists('getProfileByEmail', 'email', email)
+            const localVarPath = `/api/profile/email/{email}`
+                .replace(`{${"email"}}`, encodeURIComponent(String(email)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -137,7 +171,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @throws {RequiredError}
          */
         getProfiles: async (options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/profiles`;
+            const localVarPath = `/api/profile`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -170,7 +204,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         register: async (profileRequest: ProfileRequest, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'profileRequest' is not null or undefined
             assertParamExists('register', 'profileRequest', profileRequest)
-            const localVarPath = `/api/register`;
+            const localVarPath = `/api/profile/register`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -219,6 +253,17 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary profile of a given user by email
+         * @param {string} email 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getProfileByEmail(email: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getProfileByEmail(email, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary return all avilable profiles.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -260,6 +305,16 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary profile of a given user by email
+         * @param {string} email 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProfileByEmail(email: string, options?: any): AxiosPromise<ProfileResponse> {
+            return localVarFp.getProfileByEmail(email, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary return all avilable profiles.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -297,6 +352,18 @@ export class DefaultApi extends BaseAPI {
      */
     public getProfile(id: string, options?: any) {
         return DefaultApiFp(this.configuration).getProfile(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary profile of a given user by email
+     * @param {string} email 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getProfileByEmail(email: string, options?: any) {
+        return DefaultApiFp(this.configuration).getProfileByEmail(email, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -15,6 +15,12 @@ export class ProfileResolver {
     return res.data
   }
 
+  @Query(() => Profile)
+  async profileByEmail(@Args("email", { type: () => String }) email: string) {
+    const res =  await this.sdk.api.getProfileByEmail(email);
+    return res.data
+  }
+
   @Query(() => [Profile])
   async allProfiles() {
     const a = await this.sdk.api.getProfiles();
