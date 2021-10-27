@@ -7,11 +7,12 @@ import { TweetsRepo } from './repo/tweets.repo';
 import { MessangerService } from './services/messanger/messanger.service';
 import {MessagingService} from '@tweet-me/shared/kafka-infra';
 import { DbModule } from './db/db.module';
+import {LoggerModule} from "@tweet-me/logger";
 
 
 
 @Module({
-  imports: [MessagingService, DbModule],
+  imports: [MessagingService, DbModule, LoggerModule],
   controllers: [AppController, Tweets],
   providers: [AppService, TweetsRepo, MessangerService, MessagingService],
 })
