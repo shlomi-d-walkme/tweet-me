@@ -6,6 +6,7 @@ import * as winston from 'winston';
 @Module({
 	imports: [
 		WinstonModule.forRoot({
+			format: winston.format.json(),
 			transports: [
 				new winston.transports.File({
 					filename: `${process.env.PWD}/logs/${process.env.SERVICE_NAME}.log`

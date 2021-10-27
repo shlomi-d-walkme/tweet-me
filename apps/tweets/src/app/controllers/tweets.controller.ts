@@ -7,16 +7,18 @@ import { MessangerService } from '../services/messanger/messanger.service';
 import { ActionType } from '@tweet-me/api-interfaces';
 import { TweetsInputDto } from '../dto/tweets-input-dto';
 import { TweetsUpdateDto } from '../dto/tweets-update-dto';
+import {LoggerService} from "@tweet-me/logger";
 
 @Controller('tweets')
 export class Tweets {
 
-    constructor(private repo: TweetsRepo, private messager: MessangerService){
+    constructor(private repo: TweetsRepo, private messager: MessangerService, private logger: LoggerService){
     }
 
     @Get('/:profileId')
     @ApiOkResponse({ status: 200, type: [TweetsDto], description: 'Returns tweets by user ids'})
     getTweets(@Param('profileId') profileId: string): TweetsDto[] {
+        this.logger.info('About to get tweets...', { profileId });
         const userTweets =  this.repo.getTweets(profileId);
         const userTweetsArr = [...userTweets];
         return userTweetsArr;
