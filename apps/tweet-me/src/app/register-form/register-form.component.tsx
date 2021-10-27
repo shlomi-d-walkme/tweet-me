@@ -48,7 +48,7 @@ export function RegisterForm(props: RegisterFormProps) {
 
   const submit = async (values: typeof initailForm) => {
     const {data} = await api.register(values);
-    setUser(data);
+    // setUser(data);
   }
 
   const {handleSubmit, getFieldProps} = useFormik({

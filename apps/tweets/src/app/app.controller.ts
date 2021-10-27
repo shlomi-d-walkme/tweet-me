@@ -6,11 +6,15 @@ import { LoggerService } from '@tweet-me/logger';
 export class AppController {
   constructor(private readonly appService: AppService,
               private logger: LoggerService) {
-    logger.info('hello world', { userId: 123456 });
+    setInterval(this.log.bind(this), 5000);
   }
 
   @Get()
   getData() {
     return this.appService.getData();
+  }
+
+  private log() {
+    this.logger.info('I\'m logged every 5 seconds', { userId: 123456, time: new Date().toString() });
   }
 }

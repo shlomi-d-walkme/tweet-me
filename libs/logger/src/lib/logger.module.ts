@@ -1,22 +1,15 @@
 import { Module } from '@nestjs/common';
 import {LoggerService} from "./logger.service";
-import {
-	utilities as nestWinstonModuleUtilities,
-	WinstonModule,
-} from 'nest-winston';
+import { WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 
 @Module({
 	imports: [
 		WinstonModule.forRoot({
 			transports: [
-				new winston.transports.File({ filename: `${process.env.PWD}/logs/winston_logs.log` }),
-				// new winston.transports.Console({
-				// 	format: winston.format.combine(
-				// 		winston.format.timestamp(),
-				// 		nestWinstonModuleUtilities.format.nestLike(),
-				// 	),
-				// })
+				new winston.transports.File({
+					filename: `${process.env.PWD}/logs/${process.env.SERVICE_NAME}.log`
+				}),
 			]})
 	],
 	controllers: [],

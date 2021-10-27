@@ -213,7 +213,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getProfile(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileResponse>> {
+        async getProfile(id: string, options?: any) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getProfile(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -223,7 +223,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getProfiles(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ProfileResponse>>> {
+        async getProfiles(options?: any) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getProfiles(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -234,7 +234,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async register(profileRequest: ProfileRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileResponse>> {
+        async register(profileRequest: ProfileRequest, options?: any) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.register(profileRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -255,7 +255,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getProfile(id: string, options?: any): AxiosPromise<ProfileResponse> {
+        getProfile(id: string, options?: any) {
             return localVarFp.getProfile(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -264,7 +264,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getProfiles(options?: any): AxiosPromise<Array<ProfileResponse>> {
+        getProfiles(options?: any) {
             return localVarFp.getProfiles(options).then((request) => request(axios, basePath));
         },
         /**
@@ -274,7 +274,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        register(profileRequest: ProfileRequest, options?: any): AxiosPromise<ProfileResponse> {
+        register(profileRequest: ProfileRequest, options?: any) {
             return localVarFp.register(profileRequest, options).then((request) => request(axios, basePath));
         },
     };

@@ -268,7 +268,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async appControllerGetData(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async appControllerGetData(options?: any) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.appControllerGetData(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -278,7 +278,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async tweetsAddTweet(tweetsInputDto: TweetsInputDto, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TweetsDto>> {
+        async tweetsAddTweet(tweetsInputDto: TweetsInputDto, options?: any) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tweetsAddTweet(tweetsInputDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -288,7 +288,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async tweetsDeleteTweet(profileId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<boolean>> {
+        async tweetsDeleteTweet(profileId: string, options?: any) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tweetsDeleteTweet(profileId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -298,7 +298,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async tweetsGetTweets(profileId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TweetsDto>>> {
+        async tweetsGetTweets(profileId: string, options?: any) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tweetsGetTweets(profileId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -308,7 +308,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async tweetsUpdateTweet(profileId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TweetsDto>> {
+        async tweetsUpdateTweet(profileId: string, options?: any) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tweetsUpdateTweet(profileId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -327,7 +327,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        appControllerGetData(options?: any): AxiosPromise<void> {
+        appControllerGetData(options?: any){
             return localVarFp.appControllerGetData(options).then((request) => request(axios, basePath));
         },
         /**
@@ -336,7 +336,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tweetsAddTweet(tweetsInputDto: TweetsInputDto, options?: any): AxiosPromise<TweetsDto> {
+        tweetsAddTweet(tweetsInputDto: TweetsInputDto, options?: any){
             return localVarFp.tweetsAddTweet(tweetsInputDto, options).then((request) => request(axios, basePath));
         },
         /**
@@ -345,7 +345,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tweetsDeleteTweet(profileId: string, options?: any): AxiosPromise<boolean> {
+        tweetsDeleteTweet(profileId: string, options?: any){
             return localVarFp.tweetsDeleteTweet(profileId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -354,7 +354,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tweetsGetTweets(profileId: string, options?: any): AxiosPromise<Array<TweetsDto>> {
+        tweetsGetTweets(profileId: string, options?: any) {
             return localVarFp.tweetsGetTweets(profileId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -363,7 +363,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tweetsUpdateTweet(profileId: string, options?: any): AxiosPromise<TweetsDto> {
+        tweetsUpdateTweet(profileId: string, options?: any) {
             return localVarFp.tweetsUpdateTweet(profileId, options).then((request) => request(axios, basePath));
         },
     };
