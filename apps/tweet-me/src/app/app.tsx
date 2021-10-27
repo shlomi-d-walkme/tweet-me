@@ -5,7 +5,8 @@ import {
   Link
 } from "react-router-dom";
 import { SignUpButton } from './components/sign-up-button/sign-up-button';
-import { FeedContainer } from './feedContainer/feedContainer.component';
+import { FeedContainer } from './feedContainer/feedContainer.component'
+import { LoginPage } from "./pages/loginPage/login.page";
 import { RegisterForm } from './register-form/register-form.component';
 
 export const App = () => {
@@ -31,12 +32,11 @@ export const App = () => {
 
       <Switch>
         <Route path="/login">
-            
+            <LoginPage></LoginPage>
         </Route>
 
         <Route path="/register">
           <RegisterForm></RegisterForm>
-          <SignUpButton />
         </Route>
 
         <Route path="/feed">

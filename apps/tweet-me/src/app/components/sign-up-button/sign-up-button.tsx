@@ -3,7 +3,7 @@ import styles from './sign-up-button.module.scss';
 export function SignUpButton() {
 
   function onSignUpClicked() {
-    alert("Hi!");
+    window.open("/register", "_self")
   }
 
   return (
