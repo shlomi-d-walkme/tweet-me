@@ -19,10 +19,10 @@ export function NewTweet() {
           />
         </CardContent>
       </div>
-      <CardActions>
-      <Button className={styles.commentButton} size="small">Tweet</Button>
-      
-    </CardActions>
+
+      <CardActions className={styles.cardActions}>
+        <Button className={styles.commentButton} size="small">Tweet</Button>
+      </CardActions>
     </>
     </Card>
   );
