@@ -44,7 +44,7 @@ export class MessagingService {
 
   async consume<T>(topic: string, processor: (message: T) => Promise<void>, fromBeginning?: boolean, onError?: (reason: any) => PromiseLike<never>): Promise<Closer> {
     const consumer = this.kafka.consumer({
-      groupId: this.config.groupId
+      groupId: this.config.groupId + topic
     })
 
     await consumer.connect();
