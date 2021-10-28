@@ -37,11 +37,12 @@ export class TweetsRepo {
         return tweet;
     }
 
-    public removeTweet(profileId: string, tweetId: string): void {
+    public removeTweet(profileId: string, tweetId: string): TweetsDto {
         this.init(profileId);
         const userTweets = this.tweetsRepo[profileId].tweets;
         const tweet = this.findTweet(userTweets, tweetId);
         userTweets.delete(tweet);
+        return tweet;
     }
 
     public updateTweet(profileId: string, tweetId: string, content: string): TweetsDto {

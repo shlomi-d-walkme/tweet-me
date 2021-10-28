@@ -42,13 +42,14 @@ export class Tweets {
     @Delete('/:profileId')
     @ApiOkResponse({ status: 204, type: Boolean, description: 'Remove a tweet' })
     deleteTweet(@Param('profileId') profileId: string, @Body() body: TweetsDeleteDto) : boolean {
+        let deletedTweet;
         try {
-            this.repo.removeTweet(profileId, body.tweetId);
+            deletedTweet = this.repo.removeTweet(profileId, body.tweetId);
         } catch {
             return false;
         }
 
-        this.messager.sendMsg(body.tweetId, ActionType.tweetDeleted, undefined).catch();
+        this.messager.sendMsg(body.tweetId, ActionType.tweetDeleted, deletedTweet).catch();
         return true;
     }
 
