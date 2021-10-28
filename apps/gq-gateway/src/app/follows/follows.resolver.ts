@@ -29,7 +29,7 @@ export class FollowsResolver {
         return { profileId }
     }
 
-    @Mutation(() => Boolean)
+    @Mutation(() => Following)
     async followUser(@Args('profileId', { type: () => String }) profileId: string ,
                         @Args('followProfileId', { type: () => String }) followProfileId: string)  {
         const result = await this.followsService.api.followsControllerFollow(profileId, followProfileId);
