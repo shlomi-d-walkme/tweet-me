@@ -17,6 +17,7 @@ import styles from './login.page.module.scss';
 
 import {useLogin} from './use.login.hook';
 import { SignUpButton } from '../../components/sign-up-button/sign-up-button';
+import { useAuth } from '../../auth/use.auth.hook';
 
 
 export function LoginPage() {
@@ -25,16 +26,13 @@ export function LoginPage() {
     const [password, setPassword] = useState('');
     const [authflag, setAuthflag] = useState(1);
    
+    const { authed } = useAuth();
     const {data, loading, doLogin}  = useLogin();
     const history = useHistory();
   
-
-    if (data){
-        
-        window.localStorage.setItem('user', JSON.stringify(data));
+    if (authed){
         history.push("/feed");
     }else{
-        console.log('No Data');
     }    
 
     const handleChangeUser = (event: any) => {

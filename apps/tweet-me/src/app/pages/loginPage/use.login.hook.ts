@@ -27,7 +27,7 @@ export function useLogin(){
 
   useEffect(() => {
     if(data) {
-      setAuthed();
+      setAuthed(data);
     }
   }, [data, setAuthed]);
 

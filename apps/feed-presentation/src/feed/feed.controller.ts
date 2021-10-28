@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { FeedService } from './feed.service';
 import { FeedDto } from './feed-dto';
@@ -14,17 +14,7 @@ export class FeedController {
     type: FeedDto,
   })
   @ApiOperation({ operationId: 'getFeed', summary: 'Get Feed' })
-  async findAll(): Promise<FeedDto> {
-    return await this.feedService.findAll()
-  }
-
-  @Post()
-  @ApiOkResponse({
-    description: 'The record has been successfully created.',
-    type: FeedDto,
-  })
-  @ApiOperation({ operationId: 'feed', summary: 'Feed feed' })
-  async feed(): Promise<void> {
-    
+  async findAll(@Param('profileId') profileId: string): Promise<FeedDto> {
+    return await this.feedService.findAll(profileId)
   }
 }
