@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { PrivateRoute } from "./auth/privateRouter.component";
+import Profiles from './profiles/profiles';
 
 import { FeedContainer } from './feedContainer/feedContainer.component'
 import { LoginPage } from "./pages/loginPage/login.page";
@@ -32,7 +33,7 @@ export const App = () => {
             </PrivateRoute>
 
             <PrivateRoute path="/users">
-
+				<Profiles></Profiles>
             </PrivateRoute>
 
           </Switch>
