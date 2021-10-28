@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { TweetsDto } from '../dto/tweets-dto';
+import { TweetsInputDto } from '../dto/tweets-input-dto';
 
 interface tweetsRepo {
     [profileId: string]: {
@@ -17,6 +18,13 @@ export class TweetsRepo {
         return userTweets;
     }
 
+    public getTweet(profileId: string, tweetId): TweetsDto {
+        this.init(profileId);
+        const userTweets = this.tweetsRepo[profileId].tweets;
+        const tweet = this.findTweet(userTweets, tweetId);
+        return tweet;
+    }
+
     public addTweet(profileId: string, content: string, parentId: string): TweetsDto {
         this.init(profileId);
         const tweet = new TweetsDto();
@@ -29,11 +37,12 @@ export class TweetsRepo {
         return tweet;
     }
 
-    public removeTweet(profileId: string, tweetId: string): void {
+    public removeTweet(profileId: string, tweetId: string): TweetsDto {
         this.init(profileId);
         const userTweets = this.tweetsRepo[profileId].tweets;
         const tweet = this.findTweet(userTweets, tweetId);
         userTweets.delete(tweet);
+        return tweet;
     }
 
     public updateTweet(profileId: string, tweetId: string, content: string): TweetsDto {

@@ -5,7 +5,7 @@ import {NewTweet} from '../newTweet/newTweet.component';
 import { gql } from "@apollo/client";
 import {useGetFeed} from './use.feed.hook';
 import { useAuth } from '../auth/use.auth.hook';
-
+import { useLoggedInProfileId } from '../profiles/profile.hooks';
 
 const QUERY = gql`query Query($profileId: String!){
   feed(id:$profileId) {
@@ -25,9 +25,6 @@ interface FeedQuery {
   }
 }
 
-
-
-
 /* eslint-disable-next-line */
 export interface FeedContainerProps {
 
@@ -36,9 +33,9 @@ export function FeedContainer(props: FeedContainerProps) {
 
 //  feedPresentationApi.
 
-const {authed} = useAuth();
+const {loggedIn, profileId} = useLoggedInProfileId();
 
-const { loading, error, feed } = useGetFeed( authed.profileByEmail['_id']);
+const { loading, error, feed } = useGetFeed( profileId);
 
 if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
@@ -51,7 +48,14 @@ if (loading) return <p>Loading...</p>;
           profileName={`Dozi`} 
           text={content}
           comments={['1', '2', '3']}
-          time={date}
+          time={new Date(Date.parse(date))}
+          // time={new Date(Date.parse(date)).toLocaleDateString('en-GB', { 
+          //   year: 'numeric', 
+          //   month: '2-digit', 
+          //   day: '2-digit', 
+          //   hour: '2-digit',
+          //   minute: '2-digit', 
+          //   second: '2-digit' })}
         ></Tweet>))}
       </Feed>
     </div>

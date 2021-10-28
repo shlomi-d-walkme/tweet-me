@@ -7,7 +7,6 @@ import { MessangerService } from '../services/messanger/messanger.service';
 import { ActionType } from '@tweet-me/api-interfaces';
 import { TweetsInputDto } from '../dto/tweets-input-dto';
 import { TweetsUpdateDto } from '../dto/tweets-update-dto';
-import { Tweet, TweetModel } from '../repo/tweet.model';
 import { TweetsDeleteDto } from '../dto/tweets-delete-dto';
 
 @Controller('tweets')
@@ -24,10 +23,16 @@ export class Tweets {
         return userTweetsArr;
     }
 
+    @Get('/:profileId/:tweetId')
+    @ApiOkResponse({ status: 200, type: [TweetsDto], description: 'Returns tweet by user id and tweet id'})
+    getTweet(@Param('profileId') profileId: string, @Param('tweetId') tweetId: string): TweetsDto {
+        const tweet =  this.repo.getTweet(profileId, tweetId);
+        return tweet;
+    }
+
     @Post('/')
     @ApiOkResponse({ status: 201, type: TweetsDto, description: 'Add a tweet' })
     addTweet(@Body() body: TweetsInputDto) : TweetsDto {
-                
         const tweet = this.repo.addTweet(body.profileId, body.content, body.parentId);
         this.messager.sendMsg(tweet.id, ActionType.tweetCreated, tweet).catch();
         return tweet;
@@ -36,13 +41,14 @@ export class Tweets {
     @Delete('/:profileId')
     @ApiOkResponse({ status: 204, type: Boolean, description: 'Remove a tweet' })
     deleteTweet(@Param('profileId') profileId: string, @Body() body: TweetsDeleteDto) : boolean {
+        let deletedTweet;
         try {
-            this.repo.removeTweet(profileId, body.tweetId);
+            deletedTweet = this.repo.removeTweet(profileId, body.tweetId);
         } catch {
             return false;
         }
 
-        this.messager.sendMsg(body.tweetId, ActionType.tweetDeleted, undefined).catch();
+        this.messager.sendMsg(body.tweetId, ActionType.tweetDeleted, deletedTweet).catch();
         return true;
     }
 
