@@ -24,10 +24,16 @@ export class Tweets {
         return userTweetsArr;
     }
 
+    @Get('/:profileId/:tweetId')
+    @ApiOkResponse({ status: 200, type: [TweetsDto], description: 'Returns tweet by user id and tweet id'})
+    getTweet(@Param('profileId') profileId: string, @Param('tweetId') tweetId: string): TweetsDto {
+        const tweet =  this.repo.getTweet(profileId, tweetId);
+        return tweet;
+    }
+
     @Post('/')
     @ApiOkResponse({ status: 201, type: TweetsDto, description: 'Add a tweet' })
     addTweet(@Body() body: TweetsInputDto) : TweetsDto {
-                
         const tweet = this.repo.addTweet(body.profileId, body.content, body.parentId);
         this.messager.sendMsg(tweet.id, ActionType.tweetCreated, tweet).catch();
         return tweet;
