@@ -21,7 +21,7 @@ const QUERY = gql`query Query($profileId: String!){
   }
 
   export function useGetFeed(profileId: string){
-    const { loading, error, data } = useQuery<FeedQuery>(QUERY, {variables: {profileId}});
+    const { loading, error, data } = useQuery<FeedQuery>(QUERY, {variables: {profileId}, pollInterval: 1000});
     const feed = data?.feed;
     return {feed, loading, error}
   }
