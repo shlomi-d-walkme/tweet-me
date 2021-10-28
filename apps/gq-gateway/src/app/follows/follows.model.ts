@@ -11,3 +11,12 @@ export class Follow {
     @Field(() => [String])
     followers: Array<string>;
 }
+
+@ObjectType()
+export class Following {
+    @Field(() => String)
+    profileId: string;
+
+    @Field(() => [String])
+    following: Array<string>;
+}

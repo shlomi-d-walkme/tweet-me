@@ -24,7 +24,7 @@ export class FollowsController {
     async getFollowingByUser(@Param('profileId') profileId: string) {
         console.log(`getFollowingByUser-profileId:${profileId}`);
         const following = await this.repo.getFollowing(profileId);
-        return new FollowingDto({following});
+        return new FollowingDto({following,profileId});
     }
 
     @Post('/:profileId/follow/:followProfileId')

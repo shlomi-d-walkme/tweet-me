@@ -1,5 +1,5 @@
 import { Args, Parent, Query, Resolver, ResolveField, Mutation } from "@nestjs/graphql";
-import { Follow } from "./follows.model";
+import { Follow, Following } from "./follows.model";
 
 import { FollowsService } from "./follows.service";
 
@@ -36,7 +36,7 @@ export class FollowsResolver {
         return result.data;
     }
 
-    @Mutation(() => Boolean)
+    @Mutation(() => Following)
     async unfollowUser(@Args('profileId', { type: () => String }) profileId: string ,
                     @Args('unfollowProfileId', { type: () => String }) unfollowProfileId: string)  {
         const result = await this.followsService.api.followsControllerUnfollow(profileId, unfollowProfileId);
