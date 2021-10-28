@@ -29,11 +29,11 @@ export class FollowsController {
 
     @Post('/:profileId/follow/:followProfileId')
     @ApiResponse({ status: 201, type: FollowingDto, description: 'Adds a follower' })
-    follow(@Param('profileId') profileId: string, @Param('followProfileId') followProfileId: string):Promise<FollowingDto> {
+    async follow(@Param('profileId') profileId: string, @Param('followProfileId') followProfileId: string):Promise<FollowingDto> {
         console.log(`profileId:${profileId}`);
         console.log(`follow-profileId:${followProfileId}`);
-        this.repo.addFollow(profileId, followProfileId);
-        this.followsMessageProvider.followNotifier(profileId, followProfileId);
+        await this.repo.addFollow(profileId, followProfileId);
+         this.followsMessageProvider.followNotifier(profileId, followProfileId);
         return this.getFollowingByUser(profileId);
     }
  
