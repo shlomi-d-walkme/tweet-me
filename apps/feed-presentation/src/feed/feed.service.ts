@@ -5,8 +5,7 @@ import { FeedDbService } from "@tweet-me/feed-model";
 @Injectable()
 export class FeedService {
   constructor(private feedDbService: FeedDbService) {}
-  async findAll():Promise<FeedDto> {
-    const profileId = "Moshe";
+  async findAll(profileId: string):Promise<FeedDto> {
     return {
       tweets:  (await this.feedDbService.getTweets(profileId)).map(d => ({
         id: d.tweetId,

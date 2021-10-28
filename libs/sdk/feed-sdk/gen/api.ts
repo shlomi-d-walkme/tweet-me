@@ -35,10 +35,47 @@ export interface FeedDto {
     id: string;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<FeedTweet>}
      * @memberof FeedDto
      */
-    tweets: Array<string>;
+    tweets: Array<FeedTweet>;
+}
+/**
+ * 
+ * @export
+ * @interface FeedTweet
+ */
+export interface FeedTweet {
+    /**
+     * 
+     * @type {string}
+     * @memberof FeedTweet
+     */
+    id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FeedTweet
+     */
+    content: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FeedTweet
+     */
+    authorId: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FeedTweet
+     */
+    authorName: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FeedTweet
+     */
+    date: string;
 }
 
 /**
@@ -79,11 +116,15 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Get Feed
+         * @param {string} profileId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFeed: async (options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/feed`;
+        getFeed: async (profileId: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'profileId' is not null or undefined
+            assertParamExists('getFeed', 'profileId', profileId)
+            const localVarPath = `/api/feed`
+                .replace(`{${"profileId"}}`, encodeURIComponent(String(profileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -128,11 +169,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get Feed
+         * @param {string} profileId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFeed(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FeedDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getFeed(options);
+        async getFeed(profileId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FeedDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFeed(profileId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -156,11 +198,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary Get Feed
+         * @param {string} profileId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFeed(options?: any): AxiosPromise<FeedDto> {
-            return localVarFp.getFeed(options).then((request) => request(axios, basePath));
+        getFeed(profileId: string, options?: any): AxiosPromise<FeedDto> {
+            return localVarFp.getFeed(profileId, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -185,12 +228,13 @@ export class DefaultApi extends BaseAPI {
     /**
      * 
      * @summary Get Feed
+     * @param {string} profileId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public getFeed(options?: any) {
-        return DefaultApiFp(this.configuration).getFeed(options).then((request) => request(this.axios, this.basePath));
+    public getFeed(profileId: string, options?: any) {
+        return DefaultApiFp(this.configuration).getFeed(profileId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -4,6 +4,7 @@ import { Tweet } from '../tweet/tweet.component';
 import {NewTweet} from '../newTweet/newTweet.component';
 import { gql } from "@apollo/client";
 import {useGetFeed} from './use.feed.hook';
+import { useAuth } from '../auth/use.auth.hook';
 
 
 const QUERY = gql`query Query($profileId: String!){
@@ -35,12 +36,13 @@ export function FeedContainer(props: FeedContainerProps) {
 
 //  feedPresentationApi.
 
-const { loading, error, feed } = useGetFeed( 'moshe');
+const {authed} = useAuth();
+
+const { loading, error, feed } = useGetFeed( authed.profileByEmail['_id']);
 
 if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-    console.log('ddd: ', feed);
   return (
     <div>
       <NewTweet></NewTweet>
