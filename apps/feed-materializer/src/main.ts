@@ -1,3 +1,4 @@
+import "./app/services/tracer"; // must come before importing any instrumented module.
 import {NestFactory} from '@nestjs/core';
 import {AppModule} from './app/app.module';
 

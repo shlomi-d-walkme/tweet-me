@@ -34,12 +34,14 @@
     "class-validator": "^0.13.1",
     "core-js": "^3.18.3",
     "cross-fetch": "^3.1.4",
+    "dd-trace": "^1.5.0",
     "express": "4.17.1",
     "formik": "^2.2.9",
     "graphql": "^15.6.1",
     "javascript-time-ago": "^2.3.10",
     "kafkajs": "^1.15.0",
     "mongoose": "^6.0.10",
+    "nest-winston": "^1.6.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-particle-effect-button": "^1.0.1",
@@ -52,6 +54,7 @@
     "tslib": "^2.3.1",
     "uniqid": "^5.4.0",
     "uuid": "^8.3.2",
+    "winston": "^3.3.3",
     "yarn": "^1.22.15"
   },
   "devDependencies": {

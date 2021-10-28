@@ -1,0 +1,1 @@
+{"action":0,"currentTraceId":"6561058446876214852","dd":{"env":"develop","service":"feed-materializer","span_id":"6561058446876214852","trace_id":"6561058446876214852","version":"0.0.0"},"level":"info","message":"onTweet 0:"}

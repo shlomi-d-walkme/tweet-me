@@ -5,19 +5,22 @@ import { DefaultApi as FollowsDefaultApi, Configuration as FollowsConfiguration,
 import { DefaultApi as ProfileDefaultApi, Configuration as ProfileConfiguration, ProfileResponse } from '@tweet-me/sdk/profile-sdk';
 import { FeedTweet } from '@tweet-me/feed-model';
 import { FeedDbService } from '@tweet-me/feed-model';
+import { LoggerService } from '@tweet-me/logger';
+
 
 @Injectable()
 export class TweetService {
     private followsApi:FollowsDefaultApi;
     private profileApi: ProfileDefaultApi;
 
-    constructor(private readonly  db: FeedDbService){
+    constructor(private readonly  db: FeedDbService,private logger: LoggerService){
         this.followsApi = new FollowsDefaultApi(new FollowsConfiguration({basePath: "http://localhost:5555"}));
         this.profileApi = new ProfileDefaultApi(new ProfileConfiguration({basePath: "http://localhost:666"}));
     }
 
     async onTweet(action:TWEETS_ACTION, tweet: TweetsDto) {
         console.log("onTweet");
+        this.logger.info(`onTweet ${action}:`,{action});
         const followers =  (await this.followsApi.followsControllerGetFollowersByUser(tweet.profileId)).data;
 
         switch(action) {
