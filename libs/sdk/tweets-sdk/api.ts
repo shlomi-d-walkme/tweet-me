@@ -24,6 +24,19 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
+ * @interface TweetsDeleteDto
+ */
+export interface TweetsDeleteDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof TweetsDeleteDto
+     */
+    tweetId: string;
+}
+/**
+ * 
+ * @export
  * @interface TweetsDto
  */
 export interface TweetsDto {
@@ -176,15 +189,15 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @param {string} profileId 
-         * @param {string} body 
+         * @param {TweetsDeleteDto} tweetsDeleteDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tweetsDeleteTweet: async (profileId: string, body: string, options: any = {}): Promise<RequestArgs> => {
+        tweetsDeleteTweet: async (profileId: string, tweetsDeleteDto: TweetsDeleteDto, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'profileId' is not null or undefined
             assertParamExists('tweetsDeleteTweet', 'profileId', profileId)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('tweetsDeleteTweet', 'body', body)
+            // verify required parameter 'tweetsDeleteDto' is not null or undefined
+            assertParamExists('tweetsDeleteTweet', 'tweetsDeleteDto', tweetsDeleteDto)
             const localVarPath = `/api/tweets/{profileId}`
                 .replace(`{${"profileId"}}`, encodeURIComponent(String(profileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -205,7 +218,44 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(tweetsDeleteDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} profileId 
+         * @param {string} tweetId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tweetsGetTweet: async (profileId: string, tweetId: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'profileId' is not null or undefined
+            assertParamExists('tweetsGetTweet', 'profileId', profileId)
+            // verify required parameter 'tweetId' is not null or undefined
+            assertParamExists('tweetsGetTweet', 'tweetId', tweetId)
+            const localVarPath = `/api/tweets/{profileId}/{tweetId}`
+                .replace(`{${"profileId"}}`, encodeURIComponent(String(profileId)))
+                .replace(`{${"tweetId"}}`, encodeURIComponent(String(tweetId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -316,12 +366,23 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} profileId 
-         * @param {string} body 
+         * @param {TweetsDeleteDto} tweetsDeleteDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async tweetsDeleteTweet(profileId: string, body: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<boolean>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tweetsDeleteTweet(profileId, body, options);
+        async tweetsDeleteTweet(profileId: string, tweetsDeleteDto: TweetsDeleteDto, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<boolean>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tweetsDeleteTweet(profileId, tweetsDeleteDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} profileId 
+         * @param {string} tweetId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tweetsGetTweet(profileId: string, tweetId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TweetsDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tweetsGetTweet(profileId, tweetId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -375,12 +436,22 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @param {string} profileId 
-         * @param {string} body 
+         * @param {TweetsDeleteDto} tweetsDeleteDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tweetsDeleteTweet(profileId: string, body: string, options?: any): AxiosPromise<boolean> {
-            return localVarFp.tweetsDeleteTweet(profileId, body, options).then((request) => request(axios, basePath));
+        tweetsDeleteTweet(profileId: string, tweetsDeleteDto: TweetsDeleteDto, options?: any): AxiosPromise<boolean> {
+            return localVarFp.tweetsDeleteTweet(profileId, tweetsDeleteDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} profileId 
+         * @param {string} tweetId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tweetsGetTweet(profileId: string, tweetId: string, options?: any): AxiosPromise<Array<TweetsDto>> {
+            return localVarFp.tweetsGetTweet(profileId, tweetId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -435,13 +506,25 @@ export class DefaultApi extends BaseAPI {
     /**
      * 
      * @param {string} profileId 
-     * @param {string} body 
+     * @param {TweetsDeleteDto} tweetsDeleteDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public tweetsDeleteTweet(profileId: string, body: string, options?: any) {
-        return DefaultApiFp(this.configuration).tweetsDeleteTweet(profileId, body, options).then((request) => request(this.axios, this.basePath));
+    public tweetsDeleteTweet(profileId: string, tweetsDeleteDto: TweetsDeleteDto, options?: any) {
+        return DefaultApiFp(this.configuration).tweetsDeleteTweet(profileId, tweetsDeleteDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} profileId 
+     * @param {string} tweetId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public tweetsGetTweet(profileId: string, tweetId: string, options?: any) {
+        return DefaultApiFp(this.configuration).tweetsGetTweet(profileId, tweetId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
