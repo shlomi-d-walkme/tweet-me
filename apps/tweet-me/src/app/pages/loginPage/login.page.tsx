@@ -127,7 +127,6 @@ export function LoginPage() {
             </Grid>
           </Grid>
         </Grid>
-        
       </div>
     );
   }
