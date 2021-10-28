@@ -11,9 +11,7 @@ export interface FollowUser {
     
 const FOLLOW_USER = gql`
 mutation FollowUser($profileId: String!, $followProfileId: String!) {
-    followUser(profileId: $profileId, followProfileId: $followProfileId) {
-        
-    }
+    followUser(profileId: $profileId, followProfileId: $followProfileId)
 }
 `;
     

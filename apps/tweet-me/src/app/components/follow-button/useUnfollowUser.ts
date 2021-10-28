@@ -11,7 +11,7 @@ export interface UnfollowUser {
     
 const UNFOLLOW_USER = gql`
 mutation UnfollowUser($profileId: String!, $unfollowProfileId: String!) {
-unfollowUser(profileId: $profileId, unfollowProfileId: $unfollowProfileId)
+    unfollowUser(profileId: $profileId, unfollowProfileId: $unfollowProfileId)
 }
 `;
     

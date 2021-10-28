@@ -33,7 +33,7 @@ export const App = () => {
             </PrivateRoute>
 
             <PrivateRoute path="/users">
-				<Profiles></Profiles>
+				      <Profiles></Profiles>
             </PrivateRoute>
 
           </Switch>
