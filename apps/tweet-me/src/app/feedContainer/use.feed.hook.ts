@@ -5,7 +5,7 @@ import {
   
 const QUERY = gql`query Query($profileId: String!){
     feed(id:$profileId) {
-      id
+
       tweets{
         date
         content 
@@ -15,7 +15,7 @@ const QUERY = gql`query Query($profileId: String!){
   
   interface FeedQuery {
     feed: {
-    id: string,
+
     tweets: {date: string, content: string}[]  
     }
   }

@@ -14,9 +14,15 @@ mutation FollowUser($profileId: String!, $followProfileId: String!) {
     followUser(profileId: $profileId, followProfileId: $followProfileId)
 }
 `;
+
+
     
 export function useFollowUser() {
-    const [followUser, { data, loading, error }] = useMutation<FollowUser, FollowUserVars>(FOLLOW_USER);
+    const [followUser, { data, loading, error }] = useMutation<FollowUser, FollowUserVars>(FOLLOW_USER,{
+        update(cache, data){
+            console.log("update data:",data);
+        }
+    });
 
     const follow = (profileId: string, followProfileId: string) => {
         followUser({

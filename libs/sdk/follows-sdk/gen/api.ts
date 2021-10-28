@@ -211,7 +211,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async followsControllerFollow(profileId: string, followProfileId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<boolean>> {
+        async followsControllerFollow(profileId: string, followProfileId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FollowingDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.followsControllerFollow(profileId, followProfileId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -242,7 +242,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async followsControllerUnfollow(profileId: string, unfollowProfileId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<boolean>> {
+        async followsControllerUnfollow(profileId: string, unfollowProfileId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FollowingDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.followsControllerUnfollow(profileId, unfollowProfileId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -263,7 +263,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        followsControllerFollow(profileId: string, followProfileId: string, options?: any): AxiosPromise<boolean> {
+        followsControllerFollow(profileId: string, followProfileId: string, options?: any): AxiosPromise<FollowingDto> {
             return localVarFp.followsControllerFollow(profileId, followProfileId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -291,7 +291,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        followsControllerUnfollow(profileId: string, unfollowProfileId: string, options?: any): AxiosPromise<boolean> {
+        followsControllerUnfollow(profileId: string, unfollowProfileId: string, options?: any): AxiosPromise<FollowingDto> {
             return localVarFp.followsControllerUnfollow(profileId, unfollowProfileId, options).then((request) => request(axios, basePath));
         },
     };

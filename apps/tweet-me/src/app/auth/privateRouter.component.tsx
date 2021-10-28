@@ -7,7 +7,7 @@ export function PrivateRoute(props:RouteProps) {
   
     if(!authed) return <Redirect
       to="/login"
-      push={true}
+      
     />;
 
     return <Route {...props}/>;

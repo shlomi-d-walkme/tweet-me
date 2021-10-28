@@ -9,7 +9,7 @@ export class FeedsService {
         this.feedPresentationApi = new FeedPresentationApi(new Configuration({basePath: 'http://localhost:3333'}));
     }
 
-    async getFeed(){
-        return this.feedPresentationApi.getFeed();
+    async getFeed(profileId: string ){
+        return this.feedPresentationApi.getFeed(profileId);
     }
 }

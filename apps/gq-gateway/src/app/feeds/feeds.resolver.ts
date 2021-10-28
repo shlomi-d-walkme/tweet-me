@@ -11,7 +11,7 @@ export class FeedsResolver {
 
       @Query(returns => Feed)
       async feed(@Args('id') id: string ) {
-        const res =  await this.feedsService.getFeed()
+        const res =  await this.feedsService.getFeed(id)
         return res.data;
       }
     
