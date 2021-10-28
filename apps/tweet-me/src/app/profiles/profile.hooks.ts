@@ -35,5 +35,5 @@ export const useLoggedInProfileId = () => {
     const {authed} = useAuth();
     if (!authed) return {loggedIn:false};
 
-    return {loggedIn:true, profileId:authed.profileByEmail['_id']};
+    return {loggedIn:true, userName: authed.name ,profileId:authed.profileByEmail['_id']};
 }

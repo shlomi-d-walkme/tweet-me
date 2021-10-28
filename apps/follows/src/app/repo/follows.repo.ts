@@ -25,7 +25,7 @@ export class FollowsRepo {
     async getFollowers(profileId: string) {
         const profileData = await FollowsModel.findOne({profileId});
         console.log(`profileId = ${profileId}, profileData = ${profileData}`);
-        const followers = profileData?.followers || new mongoose.Types.Array<string>();
+        const followers = profileData?.followers || new Array<string>();// new mongoose.Types.Array<string>();
         return followers;
     }
 }

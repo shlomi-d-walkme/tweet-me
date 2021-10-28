@@ -33,7 +33,7 @@ export function FeedContainer(props: FeedContainerProps) {
 
 //  feedPresentationApi.
 
-const {loggedIn, profileId} = useLoggedInProfileId();
+const {loggedIn, profileId, userName} = useLoggedInProfileId();
 
 const { loading, error, feed } = useGetFeed( profileId);
 
@@ -45,7 +45,7 @@ if (loading) return <p>Loading...</p>;
       <NewTweet></NewTweet>
       <Feed>
       {feed?.tweets.map(({content, date}) => (<Tweet
-          profileName={`Dozi`} 
+          profileName={'Dozi'} 
           text={content}
           comments={['1', '2', '3']}
           time={new Date(Date.parse(date))}

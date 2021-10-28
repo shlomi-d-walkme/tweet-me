@@ -123,7 +123,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         getFeed: async (profileId: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'profileId' is not null or undefined
             assertParamExists('getFeed', 'profileId', profileId)
-            const localVarPath = `/api/feed`
+            const localVarPath = `/api/feed/{profileId}`
                 .replace(`{${"profileId"}}`, encodeURIComponent(String(profileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
