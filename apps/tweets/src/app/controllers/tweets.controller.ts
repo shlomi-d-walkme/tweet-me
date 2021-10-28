@@ -7,7 +7,6 @@ import { MessangerService } from '../services/messanger/messanger.service';
 import { ActionType } from '@tweet-me/api-interfaces';
 import { TweetsInputDto } from '../dto/tweets-input-dto';
 import { TweetsUpdateDto } from '../dto/tweets-update-dto';
-import { Tweet, TweetModel } from '../repo/tweet.model';
 import { TweetsDeleteDto } from '../dto/tweets-delete-dto';
 
 @Controller('tweets')
