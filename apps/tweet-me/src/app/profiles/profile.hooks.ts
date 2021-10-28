@@ -1,5 +1,6 @@
 import {gql, useMutation, useQuery } from "@apollo/client";
 import { profile } from "console";
+import { useAuth } from "../auth/use.auth.hook";
 
 
 
@@ -29,4 +30,10 @@ export const useGetFollowing = (profileId: string) => {
 }
 
 
-export const useLoggedInProfileId = () => ({loggedIn:true, profileId:'617906f36b0f9277c25a8fb8'})
+export const useLoggedInProfileId = () => {
+    
+    const {authed} = useAuth();
+    if (!authed) return {loggedIn:false};
+
+    return {loggedIn:true, profileId:authed.profileByEmail['_id']};
+}
