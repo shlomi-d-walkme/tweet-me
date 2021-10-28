@@ -4,13 +4,15 @@ import { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useAddTweet } from './useAddTweet';
 import { ChangeEvent } from 'react';
+import { useLoggedInProfileId } from '../profiles/profile.hooks';
 
 export function NewTweet() {
   const [ tweetText, setTweetText] = useState('');
   const { addTweet, loading, newTweet } = useAddTweet();
+  const { profileId} = useLoggedInProfileId();
 
   function createAddTweet() {
-    addTweet({content: tweetText, profileId: "1", parentId: ""});
+    addTweet({content: tweetText, profileId, parentId: ""});
     setTweetText('');
   }
 
