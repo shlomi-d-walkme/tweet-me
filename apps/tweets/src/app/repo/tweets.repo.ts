@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { TweetsDto } from '../dto/tweets-dto';
 import { TweetsInputDto } from '../dto/tweets-input-dto';
+import { TweetModel } from './tweet.model';
 
 interface tweetsRepo {
     [profileId: string]: {
@@ -12,36 +13,33 @@ interface tweetsRepo {
 export class TweetsRepo {
     tweetsRepo: tweetsRepo = {};
 
-    public getTweets(profileId: string): Set<TweetsDto> {
-        this.init(profileId);
-        const userTweets = this.tweetsRepo[profileId].tweets;
-        return userTweets;
+    public async getTweets(profileId: string): Promise<Array<TweetsDto>> {
+        const profile = await TweetModel.findOrCreate(profileId);
+        return profile.tweets;
     }
 
-    public getTweet(profileId: string, tweetId): TweetsDto {
-        this.init(profileId);
-        const userTweets = this.tweetsRepo[profileId].tweets;
-        const tweet = this.findTweet(userTweets, tweetId);
+    public async getTweet(profileId: string, tweetId): Promise<TweetsDto> {
+        const profile = await TweetModel.findOrCreate(profileId);
+        const tweet = profile.getTweet(tweetId);
         return tweet;
     }
 
-    public addTweet(profileId: string, content: string, parentId: string): TweetsDto {
-        this.init(profileId);
+    public async addTweet(profileId: string, content: string, parentId: string): Promise<TweetsDto> {
         const tweet = new TweetsDto();
         tweet.content = content;
         tweet.id = this.generateGuid();
         tweet.date = new Date();
         tweet.profileId = profileId;
         tweet.parentId = parentId;
-        this.tweetsRepo[profileId].tweets.add(tweet);
+        
+        const profile = await TweetModel.findOrCreate(profileId);
+        await profile.addTweet(tweet);
         return tweet;
     }
 
-    public removeTweet(profileId: string, tweetId: string): TweetsDto {
-        this.init(profileId);
-        const userTweets = this.tweetsRepo[profileId].tweets;
-        const tweet = this.findTweet(userTweets, tweetId);
-        userTweets.delete(tweet);
+    public async removeTweet(profileId: string, tweetId: string): Promise<TweetsDto> {
+        const profile = await TweetModel.findOrCreate(profileId);
+        const tweet = await profile.removeTweet(tweetId);
         return tweet;
     }
 

@@ -17,33 +17,32 @@ export class Tweets {
 
     @Get('/:profileId')
     @ApiOkResponse({ status: 200, type: [TweetsDto], description: 'Returns tweets by user ids'})
-    getTweets(@Param('profileId') profileId: string): TweetsDto[] {
-        const userTweets =  this.repo.getTweets(profileId);
-        const userTweetsArr = [...userTweets];
-        return userTweetsArr;
+    async getTweets(@Param('profileId') profileId: string): Promise<TweetsDto[]> {
+        const userTweets =  await this.repo.getTweets(profileId);
+        return [...userTweets];
     }
 
     @Get('/:profileId/:tweetId')
     @ApiOkResponse({ status: 200, type: [TweetsDto], description: 'Returns tweet by user id and tweet id'})
-    getTweet(@Param('profileId') profileId: string, @Param('tweetId') tweetId: string): TweetsDto {
-        const tweet =  this.repo.getTweet(profileId, tweetId);
+    async getTweet(@Param('profileId') profileId: string, @Param('tweetId') tweetId: string): Promise<TweetsDto> {
+        const tweet =  await this.repo.getTweet(profileId, tweetId);
         return tweet;
     }
 
     @Post('/')
     @ApiOkResponse({ status: 201, type: TweetsDto, description: 'Add a tweet' })
-    addTweet(@Body() body: TweetsInputDto) : TweetsDto {
-        const tweet = this.repo.addTweet(body.profileId, body.content, body.parentId);
+    async addTweet(@Body() body: TweetsInputDto) : Promise<TweetsDto> {
+        const tweet = await this.repo.addTweet(body.profileId, body.content, body.parentId);
         this.messager.sendMsg(tweet.id, ActionType.tweetCreated, tweet).catch();
         return tweet;
     }
 
     @Delete('/:profileId')
     @ApiOkResponse({ status: 204, type: Boolean, description: 'Remove a tweet' })
-    deleteTweet(@Param('profileId') profileId: string, @Body() body: TweetsDeleteDto) : boolean {
+    async deleteTweet(@Param('profileId') profileId: string, @Body() body: TweetsDeleteDto) : Promise<boolean> {
         let deletedTweet;
         try {
-            deletedTweet = this.repo.removeTweet(profileId, body.tweetId);
+            deletedTweet = await this.repo.removeTweet(profileId, body.tweetId);
         } catch {
             return false;
         }
