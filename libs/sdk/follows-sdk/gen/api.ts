@@ -46,6 +46,12 @@ export interface FollowingDto {
      * @memberof FollowingDto
      */
     following: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof FollowingDto
+     */
+    profileId: string;
 }
 
 /**
