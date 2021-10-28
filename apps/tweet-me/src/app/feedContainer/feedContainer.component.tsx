@@ -5,6 +5,7 @@ import {NewTweet} from '../newTweet/newTweet.component';
 import { gql } from "@apollo/client";
 import {useGetFeed} from './use.feed.hook';
 import { useAuth } from '../auth/use.auth.hook';
+import { useLoggedInProfileId } from '../profiles/profile.hooks';
 
 const QUERY = gql`query Query($profileId: String!){
   feed(id:$profileId) {
@@ -32,9 +33,9 @@ export function FeedContainer(props: FeedContainerProps) {
 
 //  feedPresentationApi.
 
-const {authed} = useAuth();
+const {loggedIn, profileId} = useLoggedInProfileId();
 
-const { loading, error, feed } = useGetFeed( authed.profileByEmail['_id']);
+const { loading, error, feed } = useGetFeed( profileId);
 
 if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
