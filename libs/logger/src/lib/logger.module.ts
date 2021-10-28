@@ -9,7 +9,7 @@ import * as winston from 'winston';
 			format: winston.format.json(),
 			transports: [
 				new winston.transports.File({
-					filename: `${process.env.PWD}/logs/${process.env.SERVICE_NAME}.log`
+					filename: `logs/${process.env.SERVICE_NAME}.log`
 				}),
 			]})
 	],

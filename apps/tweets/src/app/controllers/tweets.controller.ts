@@ -8,11 +8,12 @@ import { ActionType } from '@tweet-me/api-interfaces';
 import { TweetsInputDto } from '../dto/tweets-input-dto';
 import { TweetsUpdateDto } from '../dto/tweets-update-dto';
 import { TweetsDeleteDto } from '../dto/tweets-delete-dto';
+import { LoggerService } from '@tweet-me/logger';
 
 @Controller('tweets')
 export class Tweets {
 
-    constructor(private repo: TweetsRepo, private messager: MessangerService){
+    constructor(private repo: TweetsRepo, private messager: MessangerService, private logger: LoggerService){
     }
 
     @Get('/:profileId')
@@ -34,6 +35,7 @@ export class Tweets {
     async addTweet(@Body() body: TweetsInputDto) : Promise<TweetsDto> {
         const tweet = await this.repo.addTweet(body.profileId, body.content, body.parentId);
         this.messager.sendMsg(tweet.id, ActionType.tweetCreated, tweet).catch();
+        this.logger.info(`${body.profileId} tweets:`,{tweet});
         return tweet;
     }
 

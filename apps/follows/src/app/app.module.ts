@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { LoggerModule } from '@tweet-me/logger';
 import { MessagingService } from '@tweet-me/shared/kafka-infra';
 
 import { FollowsController } from './controllers/follows.controller';
@@ -8,7 +9,7 @@ import { FollowsMessageProvider } from './services/follows-message-provider.serv
 import { KafkaFollowsServerService } from './services/kafka-follows-server.service';
 
 @Module({
-  imports: [DbModule],
+  imports: [DbModule, LoggerModule],
   controllers: [FollowsController],
   providers: [FollowsRepo, KafkaFollowsServerService, FollowsMessageProvider, MessagingService],
 })
