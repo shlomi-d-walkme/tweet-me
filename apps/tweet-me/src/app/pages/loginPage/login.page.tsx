@@ -120,11 +120,15 @@ export function LoginPage() {
                     Forgot Password?
                   </Link>
                 </Grid>
+                
               </Paper>
+              <div className={styles["signUpWrapper"]}>
+                  <SignUpButton></SignUpButton>
+                </div>
             </Grid>
           </Grid>
         </Grid>
-        <SignUpButton></SignUpButton>
+        
       </div>
     );
   }
