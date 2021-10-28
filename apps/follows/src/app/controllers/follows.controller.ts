@@ -16,6 +16,7 @@ export class FollowsController {
     async getFollowersByUser(@Param('profileId') profileId: string) {
         console.log(`getFollowersByUser-profileId:${profileId}`);
         const followers = await this.repo.getFollowers(profileId);
+        //@ts-ignore
         return new FollowersDto({followers});
     }
 
